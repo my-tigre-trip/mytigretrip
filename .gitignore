@@ -34,5 +34,6 @@ wp-content/themes/*
 !wp-content/themes/gotravel-child/
 
 !mytigretrip/
+!tests/*
 
 tests/secrets.php

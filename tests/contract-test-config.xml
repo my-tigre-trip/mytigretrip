@@ -1,0 +1,35 @@
+<phpunit 
+    colors="true"
+    bootstrap="../vendor/autoload.php"
+    verbose="true"
+    forceCoversAnnotation="false"
+> 
+<logging>
+  <log type="coverage-html" target="../test-results/report" lowUpperBound="35"
+       highLowerBound="70"/>
+  <log type="coverage-clover" target="../test-results/coverage.xml"/>
+  <log type="coverage-php" target="../test-results/coverage.serialized"/>
+  <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+  <log type="junit" target="../test-results/logfile.xml"/>
+  <log type="testdox-html" target="../test-results/testdox.html"/>
+  <log type="testdox-text" target="../test-results/testdox.txt"/>
+</logging>
+
+  <testsuites>
+  <testsuite name="My Tigre Trip">    
+    <file>contract/ZohoDealTest.php</file>
+    <!-- <file>CheckoutValidatorTest.php</file> -->
+  </testsuite>
+</testsuites>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory  suffix=".php">../wp-content/themes/gotravel-child/App</directory>
+      <exclude>
+        <directory suffix=".php">../wp-content/themes/gotravel-child/App/Cache</directory>
+        <directory suffix=".php">../wp-content/themes/gotravel-child/App/Views</directory>
+        <directory suffix=".php">../wp-content/themes/gotravel-child/App/tests</directory>
+        <file>../wp-content/themes/gotravel-child/App/tests/checkout/MyTripPageTest.php</file>        
+      </exclude>
+    </whitelist>
+  </filter>
+</phpunit>
