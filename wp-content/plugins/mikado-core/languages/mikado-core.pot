@@ -1,0 +1,655 @@
+# Copyright (C) 2016 Mikado Core
+# This file is distributed under the same license as the Mikado Core package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mikado Core 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mikado-core\n"
+"POT-Creation-Date: 2016-11-16 09:09:35+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: import/class.wordpress-importer.php:143
+#: import/class.wordpress-importer.php:194
+#: import/class.wordpress-importer.php:198
+#: import/class.wordpress-importer.php:207
+msgid "Sorry, there has been an error."
+msgstr ""
+
+#: import/class.wordpress-importer.php:178
+msgid "All done."
+msgstr ""
+
+#: import/class.wordpress-importer.php:178
+msgid "Have fun!"
+msgstr ""
+
+#: import/class.wordpress-importer.php:179
+msgid "Remember to update the passwords and roles of imported users."
+msgstr ""
+
+#: import/class.wordpress-importer.php:199
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr ""
+
+#: import/class.wordpress-importer.php:215
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr ""
+
+#: import/class.wordpress-importer.php:240
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr ""
+
+#: import/class.wordpress-importer.php:266
+msgid "Assign Authors"
+msgstr ""
+
+#: import/class.wordpress-importer.php:267
+msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
+msgstr ""
+
+#: import/class.wordpress-importer.php:269
+msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
+msgstr ""
+
+#: import/class.wordpress-importer.php:279
+msgid "Import Attachments"
+msgstr ""
+
+#: import/class.wordpress-importer.php:282
+msgid "Download and import file attachments"
+msgstr ""
+
+#: import/class.wordpress-importer.php:299
+msgid "Import author:"
+msgstr ""
+
+#: import/class.wordpress-importer.php:310
+msgid "or create new user with login name:"
+msgstr ""
+
+#: import/class.wordpress-importer.php:313
+msgid "as a new user:"
+msgstr ""
+
+#: import/class.wordpress-importer.php:321
+msgid "assign posts to an existing user:"
+msgstr ""
+
+#: import/class.wordpress-importer.php:323
+msgid "or assign posts to an existing user:"
+msgstr ""
+
+#: import/class.wordpress-importer.php:324
+msgid "- Select -"
+msgstr ""
+
+#: import/class.wordpress-importer.php:374
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr ""
+
+#: import/class.wordpress-importer.php:426
+msgid "Failed to import category %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:470
+msgid "Failed to import post tag %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:520
+#: import/class.wordpress-importer.php:744
+msgid "Failed to import %s %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:610
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:647
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr ""
+
+#: import/class.wordpress-importer.php:709
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr ""
+
+#: import/class.wordpress-importer.php:875
+msgid "Menu item skipped due to missing menu slug"
+msgstr ""
+
+#: import/class.wordpress-importer.php:882
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:945
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: import/class.wordpress-importer.php:958
+msgid "Invalid file type"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1002
+msgid "Remote server did not respond"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1008
+msgid "Remote server returned error response %1$d %2$s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1015
+msgid "Remote file is incorrect size"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1020
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1026
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1127
+msgid "Import WordPress"
+msgstr ""
+
+#: import/class.wordpress-importer.php:1134
+msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
+msgstr ""
+
+#: import/class.wordpress-importer.php:1149
+msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
+msgstr ""
+
+#: import/class.wordpress-importer.php:1150
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr ""
+
+#: import/mkd-import.php:41 import/mkd-import.php:58
+msgid "Content imported successfully"
+msgstr ""
+
+#: import/mkd-import.php:55
+msgid "An Error Occurred During Import"
+msgstr ""
+
+#: import/mkd-import.php:70
+msgid "Widgets imported successfully"
+msgstr ""
+
+#: import/mkd-import.php:89
+msgid "Custom sidebars imported successfully"
+msgstr ""
+
+#: import/mkd-import.php:95
+msgid "Options imported successfully"
+msgstr ""
+
+#: import/parsers.php:42 import/parsers.php:78 import/parsers.php:86
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: import/parsers.php:43
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr ""
+
+#: import/parsers.php:90 import/parsers.php:95 import/parsers.php:285
+#: import/parsers.php:474
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: lib/helpers/helpers.php:61
+msgid "Position"
+msgstr ""
+
+#: lib/helpers/helpers.php:62
+msgid "Instagram"
+msgstr ""
+
+#: lib/helpers/helpers.php:63
+msgid "Twitter"
+msgstr ""
+
+#: lib/helpers/helpers.php:64
+msgid "Pinterest"
+msgstr ""
+
+#: lib/helpers/helpers.php:65
+msgid "Tumbrl"
+msgstr ""
+
+#: lib/helpers/helpers.php:66
+msgid "Facebook"
+msgstr ""
+
+#: lib/helpers/helpers.php:67
+msgid "Google Plus"
+msgstr ""
+
+#: lib/helpers/helpers.php:68
+msgid "Linkedin"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:56
+#: post-types/carousels/carousel-register.php:57
+#: post-types/carousels/shortcodes/carousel.php:36
+msgid "Mikado Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:58
+msgid "Carousel Items"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:59
+#: post-types/carousels/carousel-register.php:62
+msgid "Add New Carousel Item"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:60
+msgid "Carousel Item"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:61
+msgid "New Carousel Item"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:63
+msgid "Edit Carousel Item"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:83
+#: post-types/carousels/carousel-register.php:93
+msgid "Carousels"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:84
+msgid "Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:85
+msgid "Search Carousels"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:86
+msgid "All Carousels"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:87
+msgid "Parent Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:88
+msgid "Parent Carousel:"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:89
+msgid "Edit Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:90
+msgid "Update Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:91
+msgid "Add New Carousel"
+msgstr ""
+
+#: post-types/carousels/carousel-register.php:92
+msgid "New Carousel Name"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:38
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:44
+#: post-types/testimonials/shortcodes/testimonials.php:38
+msgid "by MIKADO"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:44
+msgid "Carousel Slider"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:51
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:73
+msgid "Order By"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:54
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:80
+msgid "Title"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:55
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:76
+msgid "Date"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:60
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:86
+msgid "Order"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:63
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:89
+msgid "ASC"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:64
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:90
+msgid "DESC"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:69
+msgid "Number of Items Showing"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:82
+msgid "Image Animation"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:85
+msgid "Image Change"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:86
+msgid "Image Zoom"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:89
+msgid "Note: Only on \"Image Change\" zoom image will be used"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:93
+msgid "Show Navigation?"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:96
+#: post-types/carousels/shortcodes/carousel.php:117
+#: post-types/testimonials/shortcodes/testimonials.php:92
+#: post-types/testimonials/shortcodes/testimonials.php:102
+#: post-types/testimonials/shortcodes/testimonials.php:112
+msgid "Yes"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:97
+#: post-types/carousels/shortcodes/carousel.php:116
+#: post-types/testimonials/shortcodes/testimonials.php:93
+#: post-types/testimonials/shortcodes/testimonials.php:103
+#: post-types/testimonials/shortcodes/testimonials.php:113
+msgid "No"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:103
+msgid "Number of Rows"
+msgstr ""
+
+#: post-types/carousels/shortcodes/carousel.php:113
+msgid "Enable Boxed Layout?"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:54
+#: post-types/masonry-gallery/masonry-gallery-register.php:55
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:42
+msgid "Mikado Masonry Gallery"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:56
+msgid "Masonry Gallery Items"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:57
+msgid "Masonry Gallery Item"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:58
+msgid "New Masonry Gallery Item"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:59
+msgid "Add New Masonry Gallery Item"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:60
+msgid "Edit Masonry Gallery Item"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:80
+#: post-types/masonry-gallery/masonry-gallery-register.php:90
+msgid "Masonry Gallery Categories"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:81
+msgid "Masonry Gallery Category"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:82
+msgid "Search Masonry Gallery Categories"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:83
+msgid "All Masonry Gallery Categories"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:84
+msgid "Parent Masonry Gallery Category"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:85
+msgid "Parent Masonry Gallery Category:"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:86
+msgid "Edit Masonry Gallery Category"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:87
+msgid "Update Masonry Gallery Category"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:88
+msgid "Add New Masonry Gallery Category"
+msgstr ""
+
+#: post-types/masonry-gallery/masonry-gallery-register.php:89
+msgid "New Masonry Gallery Category Name"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:51
+msgid "Number of Items"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:55
+msgid "Space Between Items"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:58
+msgid "Normal"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:59
+msgid "Small"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:60
+msgid "Tiny"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:61
+msgid "No Space"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:68
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:240
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:268
+#: post-types/testimonials/shortcodes/testimonials.php:77
+msgid "Category"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:69
+msgid "Enter one category slug (leave empty for showing all categories)"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:77
+msgid "Menu Order"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:78
+msgid "Random"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:79
+msgid "Slug"
+msgstr ""
+
+#: post-types/masonry-gallery/shortcodes/masonry-gallery.php:187
+#: post-types/testimonials/shortcodes/testimonials.php:192
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:36
+#: post-types/testimonials/testimonials-register.php:53
+#: post-types/testimonials/testimonials-register.php:54
+msgid "Mikado Testimonials"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:45
+msgid "Choose Testimonial Type"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:48
+msgid "Testimonials Grid"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:49
+msgid "Testimonials Slider"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:55
+msgid "Set Dark/Light Type"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:58
+msgid "Dark"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:59
+msgid "Light"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:65
+msgid "Number of Columns"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:68
+msgid "Two"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:69
+msgid "Three"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:70
+msgid "Four"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:79
+msgid "Category Slug (leave empty for all)"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:83
+msgid "Number"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:85
+msgid "Number of Testimonials"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:89
+msgid "Show Title"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:99
+msgid "Show Author"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:109
+msgid "Show Author Job Position"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:120
+msgid "Animation Speed"
+msgstr ""
+
+#: post-types/testimonials/shortcodes/testimonials.php:122
+msgid "Speed of slide animation in miliseconds"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:55
+msgid "Testimonial"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:56
+msgid "New Testimonial"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:57
+msgid "Add New Testimonial"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:58
+msgid "Edit Testimonial"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:78
+#: post-types/testimonials/testimonials-register.php:88
+msgid "Testimonials Categories"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:79
+msgid "Testimonial Category"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:80
+msgid "Search Testimonials Categories"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:81
+msgid "All Testimonials Categories"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:82
+msgid "Parent Testimonial Category"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:83
+msgid "Parent Testimonial Category:"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:84
+msgid "Edit Testimonials Category"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:85
+msgid "Update Testimonials Category"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:86
+msgid "Add New Testimonials Category"
+msgstr ""
+
+#: post-types/testimonials/testimonials-register.php:87
+msgid "New Testimonials Category Name"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "Mikado Core"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Plugin that adds all post types needed by our theme"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Mikado Themes"
+msgstr ""

@@ -1,0 +1,39 @@
+<?php
+
+/*** Child Theme Function  ***/
+
+function gotravel_mikado_child_theme_enqueue_scripts() {
+
+	$parent_style = 'gotravel_mikado_modules';
+	wp_enqueue_script( 'mytigretrip', get_stylesheet_directory_uri() . '/mytigretrip.js', array ( 'jquery' ), rand(111,9999), true);
+	wp_enqueue_style('mytigretrip-css', get_stylesheet_directory_uri() . '/style.css', array($parent_style), rand(111,9999), 'all');
+}
+
+add_action( 'wp_enqueue_scripts', 'gotravel_mikado_child_theme_enqueue_scripts' );
+
+function theme_js() {
+
+}
+
+// fix vc
+function change_frontend_editor_iframe_url($url) {
+    return str_replace("http://", "https://", $url);
+}
+add_filter('vc_frontend_editor_iframe_url', 'change_frontend_editor_iframe_url');
+
+
+//----
+include('definitions.php');
+include('bootstrap.php');
+//require_once('MyTrip.php');
+//require_once('Tour.php');
+require_once('Translation.php');
+include('functions-calculator.php');
+include('functions-jose.php');
+include('functions-info-section.php');
+include('functions-tour-options.php');
+//include('functions-contact-form.php');
+//include('functions-contact-zoho.php');
+include('functions-zoho-form.php');
+include('functions-api.php');
+

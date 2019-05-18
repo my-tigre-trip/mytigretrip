@@ -1,0 +1,103 @@
++Price Calculator
+
+
++Adults -minimum 2
++Children
+
+
+
+More than 5 people?  Click here  esto debería aparecer sólo en la primera vez que te pregunta cuántas personas son, ya después lo sacaría (si se puede)
+
+
+y que al clickear aparezcan esos cuadrados con textos explicativos diciendo:
+
+
+
+My Tigre Trip is a private boat tour for a maximum of 4 passengers per trip. However, if you place a request before checkout, we will admit a maximum of 5 passengers on a single trip. If you are a group of 5 to 25 people, you can also check our Yacht Trips.
+
+""Are you part of a bigger group? Contact us for details our yatch tours!""
+
+
++BOTON; Calculate
+
+
+———
+
+Luxury        Children -not admitted
++Luxury         I´d like to make use of Lodge´s facilities (swimming pool, pedal boats)
+
+Ranch         I´d rather have lunch, participate on one activity and skip tea.
+
+
+————————-
+
+CALCULADORA texto auto -que tengan que si o si elegir uno:
+
+
+Meet us at Tigre´s Public Pier -2 blocks from the train station.
+
+Include a private car for pick up and drop off to our hotel.
+Car return time is flexible -to stay a little longer in Tigre.
+
+
+
+CALCULADORA texto: “quiero pagar en las islas o pago antes” (que este clickeado de antemano para que paguen todo antes)
+
+
+PARA LAS OPCIONES LUNCH de Relaxing Break  y de Hippy Chic Revelation
+
++I do not want to pay for my island expenses in advance.
+I´d rather self- pay for my own food and activities in Tigre, going “à la carte” instead of asking for a “3 course lunch menu”.
+
+
+PARA LAS TODAS LAS OTRAS OPCIONES
+
++I do not want to pay for my island expenses in advance.
++I´d rather self- pay for my own food and activities in Tigre.
+
+
+
+
+Speedboat Cost
+-described food or activities not included.
+
+Estimated Island Experience Cost
+-to be paid at your own expense.
+
+
+You have chosen not to be charged for any food activity on the islands.
+It is VERY IMPORTANT that you remember to have cash to pay for your own expenses in Tigre.
+
+
+
+
+Final Price
+I have paid selected activities and food in advance, and all described items will be included in my trip.
+
+
+
++BOTON; Yes! This is My Tigre Trip!
+
+
++BOTON; Select This Trip!
+
+———————-
+
+Calculadora link desde google -primera o segunda parada, dice lo mismo
+
+Please note that this activity is a suggested as a hop-off destination of a larger, tailor-made trip. To plan your trip from scratch, please click here   (y que lo lleve al home, a donde están los 3 tipos de tours)
+
+
+Formulario:
+
+
+##
+Your Tigre Trip is almost ready!
+Please submit the form to create an amazing tailor-made Tigre Day.
+
+##
+Botón del formulario: BOOK NOW!!
+
+Your email has been successfully sent!
+If you do not get an answer, please check your Spam folder.
+We will check availability, take care of all your trip arrangements and contact you as soon as possible.

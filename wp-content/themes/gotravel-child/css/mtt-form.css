@@ -1,0 +1,204 @@
+html {
+  font-size: 0.95rem;
+
+}
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+{{'@'}}include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.1rem;
+  }
+}
+
+{{'@'}}include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+
+{{'@'}}include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.5rem;
+  }
+}
+footer {
+  background-color: #282828;
+  color:#808285;
+}
+
+
+.btn-mtt-checkout {
+  background: #007d55;
+  text-transform: uppercase;
+  font-size: 1.3em;
+}
+
+.btn-mtt-checkout:hover {
+  background-color: #282828;
+}
+
+.mtt-color {
+  background: #007d55 !important;
+  color: #fff;
+}
+
+.mtt-color:hover {
+  background: #007d55 !important;
+  color: #000;
+}
+
+input[data-toggle="datepicker"]{
+  display: none;
+}
+
+.datepicker-container.datepicker-inline {
+  font-size: 0.8em;
+}
+
+.mtt-loading { 
+  text-align: center;
+}
+
+td.mtt-not-available{
+ /* text-decoration: line-through; */
+}
+
+.mtt-not-available span{
+  /*color:#999 !important;*/
+}
+
+/*cancel trip*/
+#mtt-cancel-trip {
+  /* position:relative; */
+  /* top:30px; */
+  margin:auto;
+  text-align:center;
+}
+#mtt-cancel-trip button{
+  display:block;
+  margin:auto;
+  background-color:#fff;
+  border: none;
+  cursor: pointer;
+}
+
+.datepicker {
+      
+/* width: 100%; */
+}
+
+.datepicker {
+
+}
+
+.datepicker .ui-widget.ui-widget-content {
+  width: 60%;
+  margin:auto;
+}
+
+.datepicker .ui-widget.ui-widget-content td a, 
+.datepicker .ui-widget.ui-widget-content td span{
+   height: 50px;     
+   font-weight:bold;
+   opacity: 1;
+   background-color: #fff;
+   color: #000;
+}
+
+
+.datepicker .ui-widget.ui-widget-content td.ui-datepicker-unselectable span{
+  background-color: #000;
+  color: #000;
+  opacity: 1;
+}
+
+.datepicker .ui-widget.ui-widget-content td.mtt-not-available span{
+  background-color: #ebebeb;
+  color: #000;    
+}
+
+.datepicker .ui-widget.ui-widget-content td.airbnb span{
+  background-color: #ff5a5f;
+  color: #000;    
+}
+
+.datepicker .ui-widget.ui-widget-content td.not-confirmed.mtt-not-available span{
+  background-color: #C1FDC3 !important;
+  color: #000;    
+}
+
+.datepicker a.ui-state-default.ui-state-active{
+  background-color:#fffca1 !important;
+  border:solid #000  1px;
+}
+
+
+/*.datepicker .ui-widget.ui-widget-content td.mtt-available.airbnb.mtt-morning a{
+  background: linear-gradient(to right bottom, #f6f6f6 49%, #ff5a5f 50%);  
+}
+.datepicker .ui-widget.ui-widget-content td.airbnb.mtt-evening a{
+  background: linear-gradient(to right bottom, #ff5a5f 49%, #f6f6f6 50%);  
+}
+*/
+.datepicker .ui-widget.ui-widget-content td.mtt-not-available,
+.datepicker .ui-widget.ui-widget-content td.airbnb {
+opacity: 1;
+}
+
+ul.mtt-cal-notes span{
+  padding: 5px 10px;
+  color: #000;
+  font-weight: bold;
+  
+}
+
+ul.mtt-cal-notes li{
+  border: none;
+}
+
+#mtt-cal-available span{
+   background: #fff;
+   border: solid #aaa 1px;
+}
+
+#mtt-cal-selected span{
+   background: #fffca1;   
+}
+
+#mtt-cal-airbnb span{
+   background: #ff5a5f;   
+}
+
+#mtt-cal-not-confirmed span{
+   background: #C1FDC3;   
+}
+
+#mtt-cal-not-available span{
+   background: #ebebeb;   
+}
+
+a.clear-confirm{
+  float: right;
+}
+
+
+@media(max-width: 780px) {
+  .datepicker .ui-widget.ui-widget-content {
+    width: 100%;
+  }
+
+  .datepicker .ui-widget.ui-widget-content td a, 
+  .datepicker .ui-widget.ui-widget-content td span{
+    
+
+  }
+
+  a.clear-confirm{
+    display:block;
+    text-align:center;
+    width: 100%;
+    margin:auto;    
+  }
+}

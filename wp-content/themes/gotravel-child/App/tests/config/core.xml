@@ -1,0 +1,16 @@
+<phpunit colors="true" bootstrap="vendor/autoload.php"> 
+  <testsuites>
+    <testsuite name="MTT testing">
+      <file>wp-content/themes/gotravel-child/App/tests/checkout/TripFormatterTest.php</file>
+    </testsuite>
+  </testsuites>
+ 
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory  suffix=".php">./wp-content/themes/gotravel-child/App</directory>
+      <exclude>
+        <directory suffix=".php">wp-content/themes/gotravel-child/App/Cache</directory>        
+      </exclude>
+    </whitelist>
+  </filter>
+</phpunit>
