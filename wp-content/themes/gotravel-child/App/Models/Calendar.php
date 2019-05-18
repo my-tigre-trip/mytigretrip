@@ -23,11 +23,11 @@ abstract class Calendar {
 
     # classes
     protected $available = 'mtt-available';
-    protected $notAvailable = 'mtt-not-avaiable';
+    protected $notAvailable = 'mtt-not-available';
     protected $notConfirmed = 'mtt-not-confirmed';
     protected $shared = 'mtt-shared';
     
-
+    
     /**
      * Creates a new array with  the processed events
      * each type of calendar filter as its own wish
@@ -44,6 +44,7 @@ abstract class Calendar {
         $this->calendarHandler = $calendarHandler; // this help us to mock or stub
         //$this->events = $this->calendarHandler->fetchEvents();
         $this->date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
+        $this->schedule = $schedule;
     }
 
     /**
@@ -66,7 +67,7 @@ abstract class Calendar {
      * @param Array $eventDate an event
      * @return Boolean false if the event is a past day
      */
-    public function isValidDate($eventDate) {
+    public function isValidDate($event) {
       $e = new DateTime($event['Start_DateTime']);
       return $e > $this->date ? true : false ;
     }

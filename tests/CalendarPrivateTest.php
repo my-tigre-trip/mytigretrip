@@ -18,9 +18,6 @@ class CaldendarPrivateTest extends TestCase {
   //private $stubZohoCalendar;
    
   public static function setUpBeforeClass () {
-    // ZohoHandler::getInstance()->auth();
-   
-    // $this->stubZohoCalendar = $stubZohoCalendar;
   }
   
   /**
@@ -35,13 +32,41 @@ class CaldendarPrivateTest extends TestCase {
   }
 
   /**
+   * assert not available
+   */
+  public function assertNotAvailable($e) {
+    $this->assertEquals($e['eventId'], 'fake id');
+    $this->assertEquals($e['classes'], 'mtt-not-available');
+    $this->assertEquals($e['people'], '');
+  }
+
+  /**
+   * assert classes
+   */
+  public function assertClasses() {
+    
+  }
+
+  /**
+   * @testdox should return true for future dates and false for past dates
+   * @group CalendarPrivate
+   * @covers  \App\Models\CalendarPrivate::isValidDate
+   */
+  public function testIsValidDate() {
+    $calendar = new CalendarPrivate(null, MORNING);
+    $eValid =  ['Start_DateTime' => '2029-01-23T09:00:00+03:00'];
+    $eNotValid =  ['Start_DateTime' => '2012-01-23T09:00:00+03:00'];
+    $this->assertEquals($calendar->isValidDate($eValid), true);
+    $this->assertEquals($calendar->isValidDate($eNotValid), false);
+  }
+
+  /**
    * @testdox should process the events array according to morning rules
    * @group CalendarPrivate
    * @covers  \App\Models\CalendarPrivate::processMorning
    */
   public function testProcessMorningEvent() {
-    $stubZohoCalendar = $this->getCalendarMock();
-    $calendar = new CalendarPrivate($stubZohoCalendar, MORNING);   
+    $calendar = new CalendarPrivate(null, MORNING);   
     $e =  [
       'Id' => 'fake id',
       'Schedule' => MORNING_ES,
@@ -53,9 +78,7 @@ class CaldendarPrivateTest extends TestCase {
     $events = $calendar->getProcessedEvents();
     //$calendar->events;
     $this->assertEquals(is_array($events), true);
-    $this->assertEquals($events[0]['eventId'], 'fake id');
-    $this->assertEquals($events[0]['classes'], 'mtt-not-available');
-    $this->assertEquals($events[0]['people'], '');
+    $this->assertNotAvailable($events[0]);
   }
   
   /**
@@ -63,9 +86,8 @@ class CaldendarPrivateTest extends TestCase {
    * @group CalendarPrivate
    * @covers  \App\Models\CalendarPrivate::processAfternoon
    */
-  public function testProcessAfternoonEvent() {
-    $stubZohoCalendar = $this->getCalendarMock();
-    $calendar = new CalendarPrivate($stubZohoCalendar, AFTERNOON);   
+  public function testProcessAfternoonEvent() {    
+    $calendar = new CalendarPrivate(null, AFTERNOON);   
     $e =  [
       'Id' => 'fake id',
       'Schedule' => AFTERNOON_ES,
@@ -77,9 +99,46 @@ class CaldendarPrivateTest extends TestCase {
     $events = $calendar->getProcessedEvents();
     //$calendar->events;
     $this->assertEquals(is_array($events), true);
-    $this->assertEquals($events[0]['eventId'], 'fake id');
-    $this->assertEquals($events[0]['classes'], 'mtt-not-available');
-    $this->assertEquals($events[0]['people'], '');
+    $this->assertNotAvailable($events[0]);
+  }
+
+    /**
+   * @testdox should process the events array according to afternoon rules
+   * @group CalendarPrivate
+   * @covers  \App\Models\CalendarPrivate::processFullDay
+   */
+  public function testProcessFullDayEvent() {
+    $calendar = new CalendarPrivate(null, FULL_DAY);   
+    $e =  [
+      'Id' => 'fake id',
+      'Schedule' => MORNING_ES,
+      'Type' => PRIVATE_TRIP_ES,
+      'Start_DateTime' => '2020-01-23T15:00:00+03:00',
+      'People' => ''
+    ];
+    $calendar->processFullDay($e);
+    $events = $calendar->getProcessedEvents();
+    //$calendar->events;
+    $this->assertEquals(is_array($events), true);
+    $this->assertNotAvailable($events[0]);
+  }
+
+  # Map events - the most important method
+  # 1 tests for morning against the mock data
+  # 1 tests for afternoon against the mock data
+  # 1 tests for full day against the mock data
+  /**
+   * @testdox  Should resturn a proper array of events for a private morning trip 
+   */
+  public function testMapEventsMorning() {
+    $stubZohoCalendar = $this->getCalendarMock();
+    $calendar = new CalendarPrivate($stubZohoCalendar, FULL_DAY);
+    $calendar->fetchEvents();
+    $calendar->mapEvents();
+    $events = $calendar->getProcessedEvents();
+    $this->assertEquals(is_array($events), true);
+    $this->assertEquals(count($events), 6); // should filter only a past date
+    #check classes
   }
 
 

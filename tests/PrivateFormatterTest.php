@@ -31,20 +31,6 @@ class PrivateFormatterTest extends TestCase
   }
   
   /**
-   * 
-   */
-  // public function testAllPrivateFieldsIncluded() {
-
-  // }
-
-  /**
-   * 
-   */
-  // public function testFieldsLoaded() {
-      
-  // }
-
-  /**
    * @testdox should set the properly date format for zoho crm
    * @group PrivateFormatter
    * @covers  \App\Models\ZohoHelpers\PrivateFormatter::setGoogleDate

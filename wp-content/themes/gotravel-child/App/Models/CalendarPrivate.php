@@ -34,7 +34,6 @@ class CalendarPrivate extends Calendar {
       $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);
     }
   }
-
   
   /**
    * use when current schedule is full day
@@ -49,12 +48,9 @@ class CalendarPrivate extends Calendar {
     }
   }
 
-
-
-  protected function mapEvents() {
-    $newEvents = [];
+  public function mapEvents() {
     foreach ($this->events as $event) {
-      if ($this->isValidDate()) {
+      if ($this->isValidDate($event)) {
         if($this->schedule === MORNING_CLASS) {
           $this->processMorning($event);
         } elseif ($this->schedule === AFTERNOON_CLASS) {
