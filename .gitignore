@@ -35,5 +35,6 @@ wp-content/themes/*
 
 !mytigretrip/
 !tests/*
+!composer.json
 
 tests/secrets.php
