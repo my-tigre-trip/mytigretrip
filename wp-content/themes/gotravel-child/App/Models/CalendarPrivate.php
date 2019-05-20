@@ -14,11 +14,11 @@ class CalendarPrivate extends Calendar {
    */
   public function processMorning($event) {
      if ($event['Schedule'] === MORNING_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);
     } elseif($event['Schedule'] === AFTERNOON_ES) {
       // filtered. it means "available" 
     } elseif($event['Schedule'] === SCH_FULL_DAY_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);
     }   
   }
 
@@ -29,9 +29,9 @@ class CalendarPrivate extends Calendar {
     if ($event['Schedule'] === MORNING_ES) {
       // filtered. it means "available" 
     } elseif($event['Schedule'] === AFTERNOON_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);      
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);      
     } elseif($event['Schedule'] === SCH_FULL_DAY_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);
     }
   }
   
@@ -40,14 +40,17 @@ class CalendarPrivate extends Calendar {
    */
   public function processFullDay($event) {
     if ($event['Schedule'] === MORNING_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);      
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);      
     } elseif($event['Schedule'] === AFTERNOON_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);      
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);      
     } elseif($event['Schedule'] === SCH_FULL_DAY_ES) {
-      $this->processedEvents[] = $this->setEventArray($event['Id'], $this->notAvailable);
+      $this->processedEvents[] = $this->setEventArray($event, $this->notAvailable);
     }
   }
 
+  /**
+   * process the events according to the selected calendar schedule
+   */
   public function mapEvents() {
     foreach ($this->events as $event) {
       if ($this->isValidDate($event)) {

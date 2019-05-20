@@ -28,7 +28,7 @@ define('MORNING', 'Morning');
 define('AFTERNOON', 'Afternoon');
 define('MORNING_ES', 'Mañana');
 define('AFTERNOON_ES', 'Tarde');
-define('SCH_FULL_DAY_ES', 'Día completo');
+define('SCH_FULL_DAY_ES', 'Día Completo');
 
 define('MORNING_CLASS', 'morning');
 define('AFTERNOON_CLASS', 'afternoon');

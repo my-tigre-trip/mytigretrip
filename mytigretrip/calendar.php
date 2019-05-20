@@ -1,11 +1,27 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
 require '../wp-load.php';
-use App\Controllers\CalendarController as ZohoCalendar;
+use App\Controllers\CalendarController;
 use App\Models\ZohoHelpers\ZohoHandler;
+use App\Models\ZohoHelpers\CalendarHandler;
 
-$ZC = new ZohoCalendar();
+use App\Models\CalendarPrivate;
+
+# validate schedule before all or full day
+
+$schedule = ($_GET['schedule'] === MORNING_CLASS || $_GET['schedule'] === AFTERNOON_CLASS ) ? $_GET['schedule'] : FULL_DAY;
+
+$ZC = new CalendarHandler();
 ZohoHandler::getInstance()->auth();
+$calendar = new CalendarPrivate($ZC, $schedule);
+$calendar->fetchEvents();
+$calendar->mapEvents();
+$events = $calendar->getProcessedEvents();
+echo jsonResponse($events);
+
+die();
+// the following is deprecated
+
 error_reporting(E_ERROR | E_PARSE);
 //$t = new Translator('en_US');
 //$t->addLoader('array', new ArrayLoader());
