@@ -61,20 +61,23 @@
           </p>
         </div>
       </section>
-
+      @if(count($results) > 0)
       <div class="album py-5 bg-light">
+
         <div class="container">
 
           <div class="row">            
-            @include('trip-search.results.main')
-            @include('trip-search.results.main')
-            @include('trip-search.results.main')
-            @include('trip-search.results.main')            
+          @foreach ($results as $result)
+            @include('trip-search.results.main')               
+          @endforeach  
+            
           </div>
             
         </div>
       </div>
-
+      @else
+        <p class="text-center">please tell us how many people you are</p>
+      @endif
     </main>
 
     <footer class="text-muted">

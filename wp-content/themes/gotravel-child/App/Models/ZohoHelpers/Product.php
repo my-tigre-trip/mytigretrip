@@ -2,8 +2,6 @@
 
 namespace App\Models\ZohoHelpers;
 use App\Models\ZohoHelpers\ZohoHandler;
-use DateTime;
-use DateTimeZone;
 
 class Product {
   public static function getInstance() {
@@ -11,18 +9,42 @@ class Product {
   }  
 
   /**
-   * @param $sku String identifier of the product
+   * fetch one or more products
+   * @param $value String identifier of the product sku by default
+   * @todo improve the foreach transforming all data only if match
    */
-  public function find($sku) {
+  public function findResults($value, $criteria = 'sku') {
     //$date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
     $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
-    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("(sku:equals:$sku)");
+    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
+    $recordsArray = $bulkAPIResponse->getData();
+    //$data = $recordsArray->getData();
+    $tours = [];
+    foreach  ($recordsArray as $d) {
+      $data = $d->getData();
+      if ($data[$criteria] === $value) {
+        $tours[] = $data;        
+      }
+    }
+    return $tours;                                            
+  }
+
+
+  /**
+   * fetch one product
+   * @param $value String identifier of the product sku by default
+   * @todo improve the foreach transforming all data only if match
+   */
+  public function find($value, $criteria = 'sku') {
+    //$date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
+    $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
+    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
     $recordsArray = $bulkAPIResponse->getData();
     //$data = $recordsArray->getData();
     $tour = null;
     foreach  ($recordsArray as $d) {
       $data = $d->getData();
-      if ($data['sku'] === $sku) {
+      if ($data[$criteria] === $value) {
         $tour = $data;
         break;
       }

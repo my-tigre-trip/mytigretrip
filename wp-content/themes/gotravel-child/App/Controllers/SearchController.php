@@ -17,10 +17,14 @@ class SearchController {
   /** 
   * Returns the trip search screen 
   */
-  public function tripSearchPage($req, $WP, $calculator) {
+  public function tripSearchPage($req, $WP, $calculator, $product) {
     $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
-
-    return $blade->make('trip-search.main', ['myTrip' => $myTrip, 'myBoat' => $myBoat]);
+    $category = $req['type'] ? $req['type'] : 'recommended'; 
+    $results = [];
+    if (intval($req['adults']) >= 2) {
+      $results = $product->findResults($category, 'categoryId');
+    }
+    return $blade->make('trip-search.main', ['results' => $results]);
   }
     
   public function search($query, $products) {
