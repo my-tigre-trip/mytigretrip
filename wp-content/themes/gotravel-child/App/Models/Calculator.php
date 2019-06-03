@@ -88,63 +88,63 @@ class Calculator {
     return intval($prices[$index]['price']) * intval($children);
   }
 
-    /**
-    * tourPrice Calcula los precios de las paradas
-    * @param array mood1 (y mood2)
-    * @return array
-    */
-    public function tourPrice($mood1, $mood2 = null) {
-        $price = 0;
-        $price1 = $mood1->getPrice();
-        $price = $price1['price'];
-        $mood1PriceAdults = $price1['priceAdults'];
-        $mood1PriceChildren = $price1['priceChildren'];
-        $mood2PriceAdults = 0;
-        $mood2PriceChildren = 0;
+  /**
+  * tourPrice Calcula los precios de las paradas
+  * @param array mood1 (y mood2)
+  * @return array
+  */
+  public function tourPrice($mood1, $mood2 = null) {
+      $price = 0;
+      $price1 = $mood1->getPrice();
+      $price = $price1['price'];
+      $mood1PriceAdults = $price1['priceAdults'];
+      $mood1PriceChildren = $price1['priceChildren'];
+      $mood2PriceAdults = 0;
+      $mood2PriceChildren = 0;
 
-        //flyboard o ski
-        $specialActivity = '';
-        $specialActivityPrice = 0;
-        $specialActivityPeople = 0;
-        if ($mood1->isWaterSport()) {
-            $specialActivity = $mood1->product['Special_Activity_Name'];;
-            $specialActivityPeople = $mood1->specialActivityPeople;
-            $specialActivityPrice = $price1['priceActivity'];
-        }
+      //flyboard o ski
+      $specialActivity = '';
+      $specialActivityPrice = 0;
+      $specialActivityPeople = 0;
+      if ($mood1->isWaterSport()) {
+          $specialActivity = $mood1->product['Special_Activity_Name'];;
+          $specialActivityPeople = $mood1->specialActivityPeople;
+          $specialActivityPrice = $price1['priceActivity'];
+      }
 
-        //mood 2
-        $mood2Name = '';
-        if ($mood2 !== null) {
-            $mood2Name = $mood2->name;
-            $price2 = $mood2->getPrice();
-            
-            $price += $price2['price'];
-            $mood2PriceAdults = $price2['priceAdults'];
-            $mood2PriceChildren = $price2['priceChildren'];
-            if ($mood2->isWaterSport()) {
-                $specialActivity = $mood2->waterSport;
-                $specialActivityPeople = $mood2->specialActivityPeople;
-                $specialActivityPrice = $price2['priceActivity'];
-            }
-        }
+      //mood 2
+      $mood2Name = '';
+      if ($mood2 !== null) {
+          $mood2Name = $mood2->name;
+          $price2 = $mood2->getPrice();
+          
+          $price += $price2['price'];
+          $mood2PriceAdults = $price2['priceAdults'];
+          $mood2PriceChildren = $price2['priceChildren'];
+          if ($mood2->isWaterSport()) {
+              $specialActivity = $mood2->waterSport;
+              $specialActivityPeople = $mood2->specialActivityPeople;
+              $specialActivityPrice = $price2['priceActivity'];
+          }
+      }
 
-        return [
-          'status' => "valid",
-          'mood1' => $mood1->name,
-          'mood1PriceAdults' => $mood1PriceAdults,
-          'mood1PriceChildren' => $mood1PriceChildren,
+      return [
+        'status' => "valid",
+        'mood1' => $mood1->name,
+        'mood1PriceAdults' => $mood1PriceAdults,
+        'mood1PriceChildren' => $mood1PriceChildren,
 
-          'mood2' => $mood2Name,
-          'mood2PriceAdults' => $mood2PriceAdults,
-          'mood2PriceChildren' => $mood2PriceChildren,
+        'mood2' => $mood2Name,
+        'mood2PriceAdults' => $mood2PriceAdults,
+        'mood2PriceChildren' => $mood2PriceChildren,
 
-          'specialActivity' => "$specialActivity",
-          'specialActivityPrice' => $specialActivityPrice,
-          'specialActivityPeople' => $specialActivityPeople,
+        'specialActivity' => "$specialActivity",
+        'specialActivityPrice' => $specialActivityPrice,
+        'specialActivityPeople' => $specialActivityPeople,
 
-          'additionalConsiderations' => "$additionalConsiderations",
-          'price' => $price
-        ];
+        'additionalConsiderations' => "$additionalConsiderations",
+        'price' => $price
+      ];
     }
 
     /**
@@ -157,7 +157,7 @@ class Calculator {
         if ($boat->boat === HALF_DAY) {
           $tourPrice = $this->tourPrice($boat->mood1);
         } elseif ($boat->boat === FULL_DAY) {
-            $tourPrice = self::tourPrice($boat->mood1, $boat->mood2);
+            $tourPrice = $this->tourPrice($boat->mood1, $boat->mood2);
         }
 
         $finalPrice = $boatPrice['price'];
@@ -193,4 +193,56 @@ class Calculator {
            'estimatedIslandExpenses' => $estimatedIslandExpenses
         ];
     }
+
+  /**
+  * uses the query
+  *
+  */
+  public function calculatePriceFromQuery($req, $boat, $myTrip = null) {
+    $boatName = $req['duration'];
+    $mood1 = $req['mood1'];
+    $mood2 = isset($req['mood2']) ? $req['mood2'] : null;
+    $car = isset($req['car']) ? $req['car'] : null;
+
+    $boatPrice = $this->boatPrice($boat);
+    // if has stops
+    if ($boat->boat === HALF_DAY) {
+      $tourPrice = $this->tourPrice($boat->mood1);
+    } elseif ($boat->boat === FULL_DAY) {
+        $tourPrice = $this->tourPrice($boat->mood1, $boat->mood2);
+    }
+
+    $finalPrice = $boatPrice['price'];
+    $priceAdults = $boatPrice['priceAdults'];
+    $priceChildren = $boatPrice['priceChildren'];
+    $priceSpecialActivity = 0;
+    $estimatedIslandExpenses = $tourPrice['price'];;
+
+    $payAdvance = $myTrip !== null? !$myTrip->payOnIsland: true;
+    if ($payAdvance) {
+        $finalPrice += $tourPrice['price'];
+        $priceAdults += $tourPrice['mood1PriceAdults'] + $tourPrice['mood2PriceAdults'];
+        $priceChildren += $tourPrice['mood1PriceChildren'] + $tourPrice['mood2PriceChildren'];
+        //$priceSpecialActivity = $priceSpecialActivity;
+        $estimatedIslandExpenses = 0;
+    }
+
+    //car
+    $priceCar = 0;
+    if ($myTrip !== null && $myTrip->car) {
+        $priceCar = $this->P->find('car');
+        $finalPrice += $priceCar['price'];
+    }
+
+    return [
+        'boatDetail' => $boatPrice,
+        'tourDetail' => $tourPrice,
+        'priceAdults' => $priceAdults,
+        'priceChildren' => $priceChildren,
+        'priceSpecialActivity' => $priceSpecialActivity,
+        'priceCar' => $priceCar['price'],
+        'finalPrice' => $finalPrice,
+        'estimatedIslandExpenses' => $estimatedIslandExpenses
+    ];
+} 
 }
