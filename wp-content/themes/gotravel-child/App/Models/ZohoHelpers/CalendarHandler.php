@@ -14,13 +14,14 @@ class CalendarHandler {
   /**
    * fecth the zoho Events. Previously auth is required
    * @return Array events array
-   * @todo retrieve only future events 
+   * @todo retrieve events between two dates
    */
-  public function fetchEvents() {
+  public function fetchEvents($previous, $following) {
     $zh = ZohoHandler::getInstance();
     // $zh->auth();
     $zcrmModuleIns = $zh->getModuleInstance('Events');
-    $bulkAPIResponse = $zcrmModuleIns->getRecords();
+    //$bulkAPIResponse = $zcrmModuleIns->getRecords();
+    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($previous:equals:$following)");
     $recordsArray = $bulkAPIResponse->getData();
     return $recordsArray; 
   }

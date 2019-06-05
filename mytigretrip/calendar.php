@@ -14,9 +14,9 @@ $schedule = ($_GET['schedule'] === MORNING_CLASS || $_GET['schedule'] === AFTERN
 $ZC = new CalendarHandler();
 ZohoHandler::getInstance()->auth();
 $calendar = new CalendarPrivate($ZC, $schedule);
-$calendar->fetchEvents();
-$calendar->mapEvents();
-$events = $calendar->getProcessedEvents();
+$events = $calendar->fetchEvents();
+//$calendar->mapEvents();
+//$events = $calendar->getProcessedEvents();
 echo jsonResponse($events);
 
 die();
