@@ -203,7 +203,7 @@ function price_calculator_shortcode($atts)
 
 }#fin shortcode
 
-add_shortcode( 'calculadora', 'price_calculator_shortcode' );
+add_shortcode( 'calculadoraDepr', 'price_calculator_shortcode' );
 
 
 function addBiggerGroupLink(){
