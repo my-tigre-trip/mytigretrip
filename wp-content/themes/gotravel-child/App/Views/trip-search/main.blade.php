@@ -5,7 +5,7 @@
  
   </div>
 
-	<form id="mkdf-tour-booking-form" method="post" action="" class="mtt-form">
+	<form id="mkdf-tour-booking-form" method="post" action="" class="mtt-form vc_col-12">
   
    
       @include('trip-search.form')

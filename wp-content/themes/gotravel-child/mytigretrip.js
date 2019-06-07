@@ -18,9 +18,7 @@ jQuery(document).ready(function($){
 		}
 	})
 
-	function scrollLabel(limit)
-	{
-		//console.log($(window).scrollTop() +" - "+limit )
+	function scrollLabel(limit) {
 		if ($(window).scrollTop() > limit) {
       $("#mtt-scroll-down").hide()
 		} else {
@@ -30,14 +28,14 @@ jQuery(document).ready(function($){
 
   /*collapse good to know*/
 	$('.mtt-collapse').click(function(e){
-		  e.preventDefault();
-		  var collapse = $(this).data('collapse');
-			$('#'+collapse).toggle(200);
-			if (!$(this).hasClass('collapsed')) {
-				 $(this).addClass('collapsed');
-			} else {
-				 $(this).removeClass('collapsed');
-			}
+    e.preventDefault();
+    var collapse = $(this).data('collapse');
+    $('#'+collapse).toggle(200);
+    if (!$(this).hasClass('collapsed')) {
+      $(this).addClass('collapsed');
+    } else {
+      $(this).removeClass('collapsed');
+    }
 	});
 	//console.log(jQuery('input[name="adults"]').val());
 	validatePassengers();
@@ -68,8 +66,6 @@ jQuery(document).ready(function($){
 		calculatorRequest();
 	// toogleCalculate();
 	});
-
-
 
 	jQuery('#mtt-get-my-trip').on('click',function(e){
 		e.preventDefault();
@@ -174,19 +170,18 @@ function waterSportLimit(){
 	return false;
 }
 
-function validatePassengers(){
+function validatePassengers() {
   var error = 0;
 	var message = "";
 	erasePassengersLimitMessage();
 
-  if( !areThereAdults()){
+  if (!areThereAdults()) {
 	//	message = "<p><br>How many guest will join in?</p>";
-
 		error++;
-	}else	if(passengersLimit()){
+	} else	if (passengersLimit()) {
 		message = "<p>Private speedboat trips have been designed for a minimum of 2 passengers and a maximum of 5 passengers per trip. However, if you place a request before checkout we will admit up to 6 passengers on a single trip. If you are part of a group of 6 to 25 people, please check our Cruise or Yacht Trips</p>";
 		error++;
-	}else if( waterSportLimit() ){
+	} else if ( waterSportLimit() ){
 		message = "<p>Error. Please double-check the number of people skiing/flyboard</p>";
 		error++;
 	}
@@ -214,25 +209,22 @@ function toogleCalculate(){
 }
 
 //////
-function isEmpty( el ){
-		return !jQuery.trim(el.html())
+function isEmpty(el) {
+	return !jQuery.trim(el.html())
 }
 
-function erasePriceDetails()
-{
-		jQuery('#mtt-price-detail').empty();
+function erasePriceDetails() {
+	jQuery('#mtt-price-detail').empty();
 }
 
-function erasePassengersLimitMessage()
-{
-		jQuery('#mtt-large-group-message').empty();
+function erasePassengersLimitMessage() {
+  jQuery('#mtt-large-group-message').empty();
 }
 
-function areThereAdults()
-{
-		var i = false;
-		if(jQuery('select[name="adults"]').val() !== ''){
-				i = true;
-		}
-		return i;
+function areThereAdults() {
+  var i = false;
+  if(jQuery('select[name="adults"]').val() !== ''){
+    i = true;
+  }
+  return i;
 }
