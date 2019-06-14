@@ -4,7 +4,7 @@ namespace App\Models;
 use DateTime;
 use DateTimeZone;
 
-abstract class Calendar {
+class Calendar {
     
     /** @var Object service for fetching events array*/
     protected $calendarHandler;
@@ -33,7 +33,7 @@ abstract class Calendar {
      * each type of calendar filter as its own wish
      * @return Array filtered Events
      */
-    abstract protected function mapEvents(); 
+  //  abstract protected function mapEvents(); 
 
     /**
      * 
@@ -96,5 +96,16 @@ abstract class Calendar {
         'type' => $event['Trip_Type'],
         'availability' => '' // 
       ];
+    }
+
+    /**
+     * just get if the day is available and returns an array:
+     * [  'full-day' => NOT_AVAILABLE | AVAILABLE | ON_HOLD
+     *    'half-day_morning' => NOT_AVAILABLE | AVAILABLE | ON_HOLD
+     *    'half-day_afternoon' => NOT_AVAILABLE | AVAILABLE | ON_HOLD
+     * ]
+     */
+    public function checkAvailability($date) {
+
     }
 }

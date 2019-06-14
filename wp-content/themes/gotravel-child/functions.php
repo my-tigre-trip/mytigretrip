@@ -5,6 +5,10 @@
 function gotravel_mikado_child_theme_enqueue_scripts() {
 
 	$parent_style = 'gotravel_mikado_modules';
+	if(is_front_page()) {
+		wp_enqueue_script( 'mtt-utils', get_stylesheet_directory_uri() . '/js/utils.js', array ( 'jquery' ), rand(111,9999), true);
+	}
+	
 	wp_enqueue_script( 'mytigretrip', get_stylesheet_directory_uri() . '/mytigretrip.js', array ( 'jquery' ), rand(111,9999), true);
 	wp_enqueue_style('mytigretrip-css', get_stylesheet_directory_uri() . '/style.css', array($parent_style), rand(111,9999), 'all');
 }

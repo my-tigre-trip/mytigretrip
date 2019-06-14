@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function($) {
 	 $(".clear-option").click(function (e) {
 		   e.preventDefault()
 			 if (confirm('Your trip options will be deleted. Are you sure to restart?')) {
@@ -39,6 +39,7 @@ jQuery(document).ready(function($){
 	});
 	//console.log(jQuery('input[name="adults"]').val());
 	validatePassengers();
+	
 	//checkTerms();
   //si tiene un opcional horario de pick
 	//pickOptions();
@@ -153,7 +154,9 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
 	}, 1500);
 });
 
-});
+  // check date availability
+  checkAvailability();
+}); // ready
 
 function passengersLimit(){
 	var limit = 5;
@@ -227,4 +230,40 @@ function areThereAdults() {
     i = true;
   }
   return i;
+}
+
+/**
+ * handles the trip search submit
+ */
+function checkAvailability () {
+	jQuery('#mtt-trip-search-home').on('submit', function(e) {
+		e.preventDefault();
+    
+    // check required fields
+
+		formElement = document.getElementById("mtt-trip-search-home");
+  	var formData = new FormData( formElement );
+		standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
+  });
+  
+  var successCb = function (response) {
+    var data = response.data;
+    if (data.available) {
+      // redirect if available is true
+      displayMessage('Redirecting')
+    } else {
+      displayMessage(data.message);
+    }
+    console.log('response', data);
+  }
+
+  var errorCb = function (err) {
+    console.error('error', err);
+    displayMessage('An error ocurred during search. Please try again')
+  }
+
+  function displayMessage(message) {
+    jQuery('#mtt-validator-messages').empty();
+    jQuery('#mtt-validator-messages').html('<p style="color:red">'+message+'</p>');
+  } 
 }
