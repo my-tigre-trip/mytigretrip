@@ -3,6 +3,7 @@ namespace App\Models;
 
 use DateTime;
 use DateTimeZone;
+use App\Helpers\Calendar as CalendarMockData;
 
 class Calendar {
     
@@ -40,11 +41,11 @@ class Calendar {
      * @param  \App\Models\ZohoHelpers\CalendarHanlder $calendarHandler
      * @param String current trip schedule
      */
-    public function __construct($calendarHandler, $schedule) {
+    public function __construct($calendarHandler) {
         $this->calendarHandler = $calendarHandler; // this help us to mock or stub
         //$this->events = $this->calendarHandler->fetchEvents();
-        $this->date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
-        $this->schedule = $schedule;
+        //$this->date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
+        //$this->schedule = $schedule;
     }
 
     /**
@@ -60,6 +61,14 @@ class Calendar {
         }
         $this->events = $eventsArray;
     }
+
+    /**
+     * retrieve mock events
+     * @return Array the event data
+     */
+    public function fetchMockEvents() {
+      $this->events = CalendarMockData::calendarDataThisWeek();
+  }
 
     public function getEvents() {
       return $this->events;
@@ -105,7 +114,17 @@ class Calendar {
      *    'half-day_afternoon' => NOT_AVAILABLE | AVAILABLE | ON_HOLD
      * ]
      */
-    public function checkAvailability($date) {
+    public function checkAvailabilityFullDay($date) {
+      $available = true;
+      foreach($this->events as $event) {
+        if (strpos($event['Start_DateTime'], $date) !== false) {
+          $available = false;
+          if(true) { // todo  check status
+            return ['message' => 'There is no availability for this day', 'available' => $available];
+          }
+        }
+      }
 
+      return ['message' => '', 'available' => $available];
     }
 }

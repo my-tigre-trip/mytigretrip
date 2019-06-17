@@ -5,6 +5,7 @@ use App\Models\ZohoHelpers\ZohoHandler;
 use DateTime;
 use DateTimeZone;
 use App\Controllers\Controller;
+use App\Helpers\Calendar as CalendarMockData;
 
 class CalendarController extends Controller{
   /**
@@ -33,17 +34,18 @@ class CalendarController extends Controller{
    * @param String $duration [full-day, half-day_morning, half-day_afternoon]
    */
   public function availability($ZC, $req) {
+    $ZC->fetchMockEvents();
+    $events = $ZC->getEvents();
     $message = '';
     $available = true;
     // if the frontend receives a available true should redirect
     // otherwise should print a message
     switch($req['duration']) {
       case FULL_DAY:
-        //check availabilityFullDay($date)
-        if(!false) {
-          $message = 'There is no availability for this day';
-          $available = false;
-        }
+        $date = $ZC->checkAvailabilityFullDay($req['date']);
+        $message = $date['message'];
+        $available = $date['available'];
+      
         break;
       case 'half-day_morning':
         //check availabilityHalfDayMorning($date)

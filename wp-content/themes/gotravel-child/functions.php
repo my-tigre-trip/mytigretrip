@@ -11,6 +11,7 @@ function gotravel_mikado_child_theme_enqueue_scripts() {
 	
 	wp_enqueue_script( 'mytigretrip', get_stylesheet_directory_uri() . '/mytigretrip.js', array ( 'jquery' ), rand(111,9999), true);
 	wp_enqueue_style('mytigretrip-css', get_stylesheet_directory_uri() . '/style.css', array($parent_style), rand(111,9999), 'all');
+	wp_enqueue_style('datepicker', get_stylesheet_directory_uri() . '/css/datepicker.min.css', array($parent_style), rand(111,9999), 'all');
 }
 
 add_action( 'wp_enqueue_scripts', 'gotravel_mikado_child_theme_enqueue_scripts' );

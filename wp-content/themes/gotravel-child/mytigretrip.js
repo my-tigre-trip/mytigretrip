@@ -154,6 +154,23 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
 	}, 1500);
 });
 
+  const  today = new Date();
+  var  tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1); 
+	jQuery("#datepicker").datepicker({
+      defaultDate: null,
+      minDate: tomorrow,
+      maxDate: "+1y +1m",
+      altFormat: "yy-mm-dd",
+      altField: "#date", 
+      onSelect: function() {
+        //console.log(jQuery("#datepicker").datepicker("option", "altField"));
+        // console.log(jQuery.datepicker.parseDate("yy-mm-dd", date ));
+        //jQuery("#date").val(jQuery("#datepicker").datepicker("option", "altFormat"));
+      }
+	  }
+	);	
+
   // check date availability
   checkAvailability();
 }); // ready
@@ -173,6 +190,9 @@ function waterSportLimit(){
 	return false;
 }
 
+/**
+ * @todo separate the logic of cvalculator from trip search
+ */
 function validatePassengers() {
   var error = 0;
 	var message = "";
@@ -188,13 +208,17 @@ function validatePassengers() {
 		message = "<p>Error. Please double-check the number of people skiing/flyboard</p>";
 		error++;
 	}
-
+  console.log("err "+error+ " men "+message);
 	if (error > 0) {
-		jQuery('#mtt-large-group-message').append(message);
+    
+    displayMessage(message); 
+    jQuery('#mtt-large-group-message').append(message);
 		jQuery('#calculate').hide();
-		erasePriceDetails();
+    erasePriceDetails();
+    error = 0;
 	} else {
-		jQuery('#calculate').show();
+    jQuery('#calculate').show();
+    displayMessage("");
 	}
 
 }
@@ -232,38 +256,53 @@ function areThereAdults() {
   return i;
 }
 
+
+function displayMessage(message) {
+  jQuery('#mtt-validator-messages').empty();
+  jQuery('#mtt-validator-messages').html('<p style="color:red">'+message+'</p>');
+}
+
 /**
  * handles the trip search submit
  */
 function checkAvailability () {
 	jQuery('#mtt-trip-search-home').on('submit', function(e) {
 		e.preventDefault();
-    
-    // check required fields
-
-		formElement = document.getElementById("mtt-trip-search-home");
-  	var formData = new FormData( formElement );
-		standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
+    if (validateRequest()) {
+      formElement = document.getElementById("mtt-trip-search-home");
+  	  var formData = new FormData( formElement );
+		  standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
+    }
   });
   
   var successCb = function (response) {
-    var data = response.data;
+	var data = response.data;
+	console.log('response', data);
     if (data.available) {
       // redirect if available is true
       displayMessage('Redirecting')
     } else {
       displayMessage(data.message);
     }
-    console.log('response', data);
+    
   }
 
   var errorCb = function (err) {
     console.error('error', err);
     displayMessage('An error ocurred during search. Please try again')
-  }
+  }  
 
-  function displayMessage(message) {
-    jQuery('#mtt-validator-messages').empty();
-    jQuery('#mtt-validator-messages').html('<p style="color:red">'+message+'</p>');
-  } 
+  function validateRequest() {
+    var adults = jQuery("#adults").val();
+    var children = jQuery("#children").val();
+    var date = jQuery("#date").val();
+    var duration = jQuery("#duration").val();
+
+    if (!adults || !children || !date || !duration) {
+      displayMessage("All fields are required");
+      return false;
+    }
+
+    return true;
+  }
 }

@@ -7,7 +7,7 @@
       @include('trip-search.form')
       {{-- @include('calculator.snippets.prices')
       @include('calculator.snippets.buttons') --}}    
-  <div id="mtt-validator-messages"></div>
+  <div id="mtt-validator-messages" class="vc_col-12"></div>
   <div><button type="submit">Check availability</button></div>
   </form>
 </div>

@@ -4,11 +4,14 @@ require '../wp-load.php';
 use App\Controllers\CalendarController;
 use App\Models\ZohoHelpers\ZohoHandler;
 use App\Models\ZohoHelpers\CalendarHandler;
+use App\Models\Calendar;
 
 
-$ZC = new CalendarHandler();
+
 ZohoHandler::getInstance()->auth();
-$calendar = new CalendarController($ZC, $schedule);
-$response = $calendar->availability($ZC, $_GET);
+$ZC = new CalendarHandler(); // fetch zoho
+$calendar = new Calendar($ZC); // calendar worker
+$calendarController = new CalendarController(); // controller
+$response = $calendarController->availability($calendar, $_GET);
 echo $response;
 die();
