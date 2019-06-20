@@ -48,18 +48,14 @@ class CalendarController extends Controller{
       
         break;
       case 'half-day_morning':
-        //check availabilityHalfDayMorning($date)
-        if(!false) {
-          $message = 'There is available trips only in the afternoon for this day';
-          $available = false;
-        }
+        $date = $ZC->checkAvailabilityHalfDayMorning($req['date']);
+        $message = $date['message'];
+        $available = $date['available'];
         break;
       case 'half-day_afternoon':
-        //check availabilityHalfDayAfternoon($date)
-        if(!false) {
-          $message = 'There is available trips only in the morning for this day';
-          $available = false;
-        }
+        $date = $ZC->checkAvailabilityHalfDayAfternoon($req['date']);
+        $message = $date['message'];
+        $available = $date['available'];
         break;
       default:
         $available = false;

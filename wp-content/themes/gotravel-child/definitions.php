@@ -95,6 +95,10 @@ define('DOLAR', 'u$d');
 # advance
 define('NOT_PAID_NOT_CONFIRMED', 'No Pago  -Salida Sin Confirmar');
 
+define('ADVANCE_ON_HOLD_ES', 'No Pago  (sin confirmar)');
+define('ADVANCE_PAYED_NOT_CONFIRMED_ES', 'No Pago  (salida confirmada)');
+define('ADVANCE_PAYED_ES', 'Pago Seña');
+define('ADVANCE_PAYED_FULL_TRIP_ES', 'Pago Salida Completa');
 
 #email
 define('PENDING', 'Pendiente');

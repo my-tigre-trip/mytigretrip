@@ -79,7 +79,8 @@ class Calendar {
         'Schedule' => MORNING_ES,
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrow.$morning,
-        'People' => ''
+        'People' => '',
+        'Advance_Status' => ADVANCE_ON_HOLD_ES//ADVANCE_PAYED_ES
       ],
       // 2 following share the same day
       [
@@ -87,7 +88,8 @@ class Calendar {
         'Schedule' => MORNING_ES,
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusOne.$morning,
-        'People' => ''
+        'People' => '',
+        'Advance_Status' => ADVANCE_PAYED_ES
       ],
 
       [
@@ -95,7 +97,8 @@ class Calendar {
         'Schedule' => AFTERNOON_ES,
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusOne.$afternoon,
-        'People' => ''
+        'People' => '',
+        'Advance_Status' => ADVANCE_PAYED_ES
       ],
       // full day
       [
@@ -103,7 +106,8 @@ class Calendar {
         'Schedule' => SCH_FULL_DAY_ES,
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusTwo.$morning,
-        'People' => ''
+        'People' => '',
+        'Advance_Status' => ADVANCE_PAYED_ES
       ],
       // group
       [
@@ -111,7 +115,8 @@ class Calendar {
         'Schedule' => AFTERNOON_ES,
         'Type' => GROUP_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusThree.$afternoon,
-        'People' => '3'
+        'People' => '3',
+        'Advance_Status' => ADVANCE_ON_HOLD_ES
       ],
 
       [
@@ -119,7 +124,8 @@ class Calendar {
         'Schedule' => MORNING_ES,
         'Type' => GROUP_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusFour.$morning,
-        'People' => '5'
+        'People' => '5',
+        'Advance_Status' => ADVANCE_PAYED_ES
       ],
       // past event
       [

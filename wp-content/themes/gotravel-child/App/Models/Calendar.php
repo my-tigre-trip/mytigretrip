@@ -119,12 +119,28 @@ class Calendar {
       foreach($this->events as $event) {
         if (strpos($event['Start_DateTime'], $date) !== false) {
           $available = false;
-          if(true) { // todo  check status
+          if($event['Advance_Status'] === ADVANCE_ON_HOLD_ES) {
+            return ['message' => 'There is a noy yet confirmed trip for this day. Please send an email to agus@mytigretrip.com', 'available' => $available];
+          } else { // todo  check status
             return ['message' => 'There is no availability for this day', 'available' => $available];
           }
         }
       }
 
       return ['message' => '', 'available' => $available];
+    }
+
+    /**
+     * if no availability in morning check if afternoon has and return a message
+     */
+    public function checkAvailabilityHalfDayMorning() {
+
+    }
+
+    /**
+     * if no availability in morning check if morning has and return a message
+     */
+    public function checkAvailabilityHalfDayAfternoon() {
+      
     }
 }
