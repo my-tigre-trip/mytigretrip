@@ -115,26 +115,40 @@ class Calendar {
      * ]
      */
     public function checkAvailabilityFullDay($date) {
+      $dateEvents = $this->getEventsForDate($date);
       $available = true;
-      foreach($this->events as $event) {
-        if (strpos($event['Start_DateTime'], $date) !== false) {
-          $available = false;
-          if($event['Advance_Status'] === ADVANCE_ON_HOLD_ES) {
-            return ['message' => 'There is a noy yet confirmed trip for this day. Please send an email to agus@mytigretrip.com', 'available' => $available];
-          } else { // todo  check status
-            return ['message' => 'There is no availability for this day', 'available' => $available];
-          }
+      if (!$this->isEmptyEventArray($dateEvents)) {
+        $available = false;
+        // if events exists there is still a hope the event/events is/are not confirmed yet 
+        if($this->isFullDayOnHold($dateEvents) || $this->isHalfDayOnHold($dateEvents)) {
+          return ['message' => 'There is a noy yet confirmed trip for this day. Please send an email to agus@mytigretrip.com', 'available' => $available];
+        } else { // todo  check status
+          return ['message' => 'There is no availability for this day', 'available' => $available];
         }
       }
-
       return ['message' => '', 'available' => $available];
     }
 
     /**
      * if no availability in morning check if afternoon has and return a message
      */
-    public function checkAvailabilityHalfDayMorning() {
-
+    public function checkAvailabilityHalfDayMorning($date) {
+      $dateEvents = $this->getEventsForDate($date);
+      $available = true;
+      if (!$this->isEmptyEventArray($dateEvents) && $dateEvents['morning'] !== null) {
+        $available = false;
+        // if events exists there is still a hope the event/events is/are not confirmed yet
+        if($this->isMorningOnHold($dateEvents) && $dateEvents['afternoon'] !== null) {
+          return ['message' => 'There is a noy yet confirmed trip for this day. Please send an email to agus@mytigretrip.com.', 'available' => $available];
+        } elseif ($this->isMorningOnHold($dateEvents) && $dateEvents['afternoon'] === null) {
+          return ['message' => 'There is a noy yet confirmed trip for this day. Please send an email to agus@mytigretrip.com. There is also a place in the afternoon', 'available' => $available];
+        } elseif (!$this->isMorningOnHold($dateEvents) && $dateEvents['afternoon'] === null) {
+          return ['message' => 'There is no availability for this day in thye morning but there is in the afternoon', 'available' => $available];
+        } else { // todo  check status
+          return ['message' => 'There is no availability for this day', 'available' => $available];
+        }
+      }
+      return ['message' => '', 'available' => $available];
     }
 
     /**
@@ -143,4 +157,73 @@ class Calendar {
     public function checkAvailabilityHalfDayAfternoon() {
       
     }
+
+    /**
+     * for half days. returns an array with the events for the required date.
+     * sort by schedule
+     */
+    public function getEventsForDate ($date) {
+      $morning = null;
+      $afternoon = null;
+      $fullDay = null;
+      $result = [];
+
+      foreach($this->events as $event) {
+        if (strpos($event['Start_DateTime'], $date) !== false) {
+          if ($event['Schedule'] === MORNING_ES) {
+            $morning = $event;
+          } elseif($event['Schedule'] === AFTERNOON_ES) {
+            $afternoon = $event;
+          } elseif($event['Schedule'] === FULL_DAY_ES) {
+            $fullDay = $event;
+          }
+        }
+      }
+
+      return [
+        'morning' => $morning,
+        'afternoon' => $afternoon,
+        'full-day' => $fullDay
+      ]; 
+    }
+
+    public function isEmptyEventArray($eventsArray) {
+      if($eventsArray['morning'] === null && $eventsArray['afternoon'] === null && $eventsArray['full-day'] === null) {
+        return true;
+      }
+      return false;
+    }
+    
+    /**
+     * there is a hope if both  morning and afternoon are on hold /
+     * morning is and afternoon null /
+     * morning null and afternoon is
+     */
+    public function isHalfDayOnHold($eventsArray) {
+      if ($this->isMorningOnHold($eventsArray) && $this->isAfternoonOnHold($eventsArray)) {
+        return true;
+      } else if($this->isMorningOnHold($eventsArray) && $eventsArray['afternoon'] === null) {
+        return true;
+      } else if ($this->isAfternoonOnHold($eventsArray) && $eventsArray['morning'] === null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function isMorningOnHold($eventsArray) {
+      return $eventsArray['morning'] !== null && $eventsArray['morning']['Advance_Status'] === ADVANCE_ON_HOLD_ES;
+    }
+
+    public function isAfternoonOnHold($eventsArray) {
+      return $eventsArray['afternoon'] !== null && $eventsArray['afternoon']['Advance_Status'] === ADVANCE_ON_HOLD_ES;
+    }
+
+    public function isFullDayOnHold($eventsArray) {
+      return $eventsArray['full-day'] !== null && $eventsArray['full-day']['Advance_Status'] === ADVANCE_ON_HOLD_ES;
+    }
+
+    
+
+
 }

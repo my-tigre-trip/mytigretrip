@@ -80,7 +80,7 @@ class Calendar {
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrow.$morning,
         'People' => '',
-        'Advance_Status' => ADVANCE_ON_HOLD_ES//ADVANCE_PAYED_ES
+        'Advance_Status' => ADVANCE_PAYED_ES //ADVANCE_ON_HOLD_ES
       ],
       // 2 following share the same day
       [
@@ -89,7 +89,7 @@ class Calendar {
         'Type' => PRIVATE_TRIP_ES,
         'Start_DateTime' => $tomorrowPlusOne.$morning,
         'People' => '',
-        'Advance_Status' => ADVANCE_PAYED_ES
+        'Advance_Status' => ADVANCE_ON_HOLD_ES
       ],
 
       [

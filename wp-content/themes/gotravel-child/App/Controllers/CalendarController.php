@@ -44,8 +44,7 @@ class CalendarController extends Controller{
       case FULL_DAY:
         $date = $ZC->checkAvailabilityFullDay($req['date']);
         $message = $date['message'];
-        $available = $date['available'];
-      
+        $available = $date['available'];      
         break;
       case 'half-day_morning':
         $date = $ZC->checkAvailabilityHalfDayMorning($req['date']);
