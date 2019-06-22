@@ -59,8 +59,27 @@ class CalendarController extends Controller{
       default:
         $available = false;
         $message = 'Wrong Data';
-    }    
+    }
+
+    $redirect = null;
+    if ($available) {
+      //Convert the date string into a unix timestamp
+      //Get the day of the week using PHP's date function.      
+      $dow = date("l", strtotime($req['date']));
+      $query = [
+        'date' => $req['date'],
+        'dow' => $dow,
+        'duration' => $req['duration'],
+        'adults' => $req['adults'],
+        'children' => $req['children']
+      ];
+      $redirect = http_build_query($query);
+    }
     
-    return $this->jsonResponse(['message' => $message, 'available' => $available]);
+    return $this->jsonResponse([
+      'message' => $message,
+      'available' => $available,
+      'redirect' => $redirect
+    ]);
   }
 }
