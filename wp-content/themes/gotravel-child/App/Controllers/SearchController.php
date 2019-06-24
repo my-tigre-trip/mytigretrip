@@ -17,16 +17,56 @@ class SearchController {
   /** 
   * Returns the trip search screen 
   */
-  public function tripSearchPage($req, $WP, $calculator, $product) {
-    $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
-    $category = $req['type'] ? $req['type'] : 'recommended'; 
-    $results = [];
-    if (intval($req['adults']) >= 2) {
-      $results = $product->findResults($category, 'categoryId');
+  public function tripSearchPage($req, $product) {
+    //$blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
+    //$category = $req['type'] ? $req['type'] : 'recommended'; 
+    //$results = [];
+    if ($this->validateRequest($req)) {
+      //$results = $product->findResults($category, 'categoryId');
+      $results = $product->findMockResults();
+      $results = $this->filterResults($req, $results);
+    } else {
+      // render error page
     }
-    return $blade->make('trip-search.main', ['results' => $results]);
+    //return $blade->make('trip-search.main', ['results' => $results]);
   }
-    
+  
+  /**
+   * uses a valid request to find the proper results
+   */
+  public function filterResults($req, $results) {
+    $filteredResults = [];   
+    if(isset($req['mood1'])) {
+      $results = $this->secondOptions($req);
+    } else {
+      // obtain filters
+      $duration = explode('_', $req['duration']);
+      $duration = $duration[0];
+      $schedule = $duration[1];
+      foreach ($results as $result) {
+        $isValid = false;
+        if ($result['validIn'] === $duration) {
+          $isValid = true;
+        }
+
+        if ($isValid && $duration!== 'full-day' && $result['schedule'] === $schedule) {
+          $isValid = true;
+        }
+
+        if ($isValid) {
+          $filteredResults = $result;
+        }
+      }
+      
+    }
+
+    return $filteredResults;
+  }
+
+  public function secondOptions() {
+
+  }
+
   public function search($query, $products) {
     if(isset($query['stops'])) {
       $trip = null;
@@ -53,5 +93,29 @@ class SearchController {
 
   public function calculatePrices($products, $query, $trip) {
 
+  }
+
+  /**
+   * check if the query is valid
+   */
+  public function validateRequest($req) {
+    // adults
+    if (!isset($req['adults']) && intval($req['adults']) < 2) {
+      return false;
+    }
+    //date
+    if (!isset($req['date'])) {
+      return false;
+    }
+    // day of week
+    if (!isset($req['dow'])) {
+      return false;
+    }
+    // duration
+    if (!isset($req['duration'])) {
+      return false;
+    }
+
+    return true;
   }
 }

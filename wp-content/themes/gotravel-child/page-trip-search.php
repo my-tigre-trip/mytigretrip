@@ -8,4 +8,4 @@ use App\Models\ZohoHelpers\ZohoHandler;
 ZohoHandler::getInstance()->auth();
 $c = new SearchController();
 //renders the trip seach page
-echo $c->tripSearchPage($_GET, Wordpress::getInstance(), new Calculator(ZohoProduct::getInstance()), ZohoProduct::getInstance());
+echo $c->tripSearchPage($_GET, ZohoProduct::getInstance());

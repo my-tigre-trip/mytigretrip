@@ -29,6 +29,10 @@ class Product {
     return $tours;                                            
   }
 
+  public function findMockResults() {
+    return \App\Helpers\Product::products();
+  }
+
 
   /**
    * fetch one product
