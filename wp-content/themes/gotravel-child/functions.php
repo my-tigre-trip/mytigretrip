@@ -42,3 +42,8 @@ include('functions-tour-options.php');
 include('functions-zoho-form.php');
 include('functions-api.php');
 
+// products array file
+$folder = __DIR__.'/zoho-products';
+$files = scandir($folder, SCANDIR_SORT_DESCENDING);
+$newest_file = $folder.'/'.$files[0];
+include($newest_file);
