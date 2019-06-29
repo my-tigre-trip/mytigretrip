@@ -46,4 +46,7 @@ include('functions-api.php');
 $folder = __DIR__.'/zoho-products';
 $files = scandir($folder, SCANDIR_SORT_DESCENDING);
 $newest_file = $folder.'/'.$files[0];
+//global $zohoProductsArray;
 include($newest_file);
+global $zohoProductsArray;
+$zohoProductsArray = $zohoProductsArray;

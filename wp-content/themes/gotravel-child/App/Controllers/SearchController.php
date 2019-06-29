@@ -18,16 +18,27 @@ class SearchController {
   * Returns the trip search screen 
   */
   public function tripSearchPage($req, $product) {
-    //$blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
+    $found = [];
+    $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
     //$category = $req['type'] ? $req['type'] : 'recommended'; 
-    //$results = [];
+    $results = [];
     if ($this->validateRequest($req)) {
       //$results = $product->findResults($category, 'categoryId');
-      $results = $product->findMockResults();
-      $results = $this->filterResults($req, $results);
+      
+      if (isset($req['mood1'])) {
+        $results = $this->secondOptions($req);
+      } else {
+        // find products returns array
+        $results = $product->find('half-day', 'validIn', true);
+        $results = $this->filterResults($req, $results);
+       
+      }
+      
     } else {
       // render error page
     }
+
+    return $results;
     //return $blade->make('trip-search.main', ['results' => $results]);
   }
   
@@ -35,29 +46,49 @@ class SearchController {
    * uses a valid request to find the proper results
    */
   public function filterResults($req, $results) {
-    $filteredResults = [];   
-    if(isset($req['mood1'])) {
-      $results = $this->secondOptions($req);
-    } else {
-      // obtain filters
-      $duration = explode('_', $req['duration']);
-      $duration = $duration[0];
-      $schedule = $duration[1];
-      foreach ($results as $result) {
+    $filteredResults = [];
+    $dayOfWeek = [
+      'sunday' => 'Domingo',
+      'monday' => 'Lunes',
+      'tuesday' => 'Martes',
+      'wednesday' => 'Miércoles',
+      'thursday' => 'Jueves',
+      'friday' => 'Viernes',
+      'saturday' => 'Sábado'
+    ];
+    
+    // obtain filters
+    $_duration = explode('_', $req['duration']);
+    $duration = $_duration[0];
+    $schedule = $_duration[1];
+
+    // translate schedule string
+    if ($schedule === strtolower(MORNING)) {
+      $schedule = MORNING_ES;
+    } elseif ($schedule === strtolower(AFTERNOON)) {
+      $schedule = AFTERNOON_ES;
+    }
+
+    foreach ($results as $result) {
+      $isValid = true;      
+
+      // schedule in half day
+      if ($isValid && $duration !== 'full-day' && $result['schedule'] === $schedule) {
+        $isValid = true;
+      } else {
         $isValid = false;
-        if ($result['validIn'] === $duration) {
-          $isValid = true;
-        }
-
-        if ($isValid && $duration!== 'full-day' && $result['schedule'] === $schedule) {
-          $isValid = true;
-        }
-
-        if ($isValid) {
-          $filteredResults = $result;
-        }
       }
-      
+
+      // day of week
+      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$req['dow']], $result['dow']))) {
+        $isValid = true;
+      } else {
+        $isValid = false;
+      }
+
+      if ($isValid) {
+        $filteredResults[] = $result;
+      }
     }
 
     return $filteredResults;

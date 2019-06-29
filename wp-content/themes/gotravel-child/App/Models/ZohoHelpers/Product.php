@@ -35,25 +35,30 @@ class Product {
 
 
   /**
-   * fetch one product
-   * @param $value String identifier of the product sku by default
-   * @todo improve the foreach transforming all data only if match
+   * fetch one product/tour using products array $zohoProductsArray
+   * @param $value String identifier of the product
+   * @param $criteria sku by default
+   * @param $multi if true return an array of occuerrences else return the firs occurence
    */
-  public function find($value, $criteria = 'sku') {
-    //$date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
-    $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
-    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
-    $recordsArray = $bulkAPIResponse->getData();
-    //$data = $recordsArray->getData();
-    $tour = null;
-    foreach  ($recordsArray as $d) {
-      $data = $d->getData();
-      if ($data[$criteria] === $value) {
-        $tour = $data;
-        break;
+  public function find($value, $criteria = 'sku', $multi = false) {    
+    // $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
+    // $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
+    // $recordsArray = $bulkAPIResponse->getData();    
+    $tour = null;    
+    $zohoProductsArray = $GLOBALS['zohoProductsArray']; // improve this
+    //$zohoProductsArray = getZohoProductsArray();
+    foreach ($zohoProductsArray as $product) {
+      // $data = $d->getData();
+      if ($product[$criteria] === $value) {
+        if($multi) {
+          $tour[] = $product;
+        } else {          
+          $tour = $product;
+          break;
+        }        
       }
     }
-    return $tour;                                            
+    return $tour;                                       
   }
 
   public function findBoatPrices($boat) {
