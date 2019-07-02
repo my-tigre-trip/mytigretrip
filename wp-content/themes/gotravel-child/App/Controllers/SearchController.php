@@ -15,23 +15,22 @@ class SearchController {
   }
   
   /** 
-  * Returns the trip search screen 
+  * Returns the trip search results or second option results
   */
   public function tripSearchPage($req, $product) {
     $found = [];
-    $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
+    //$blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
     //$category = $req['type'] ? $req['type'] : 'recommended'; 
     $results = [];
     if ($this->validateRequest($req)) {
       //$results = $product->findResults($category, 'categoryId');
       
-      if (isset($req['mood1'])) {
-        $results = $this->secondOptions($req);
+      if (isset($req['mood1'])) {        
+        $results = $this->secondOptions($req['mood1'], $product);
       } else {
         // find products returns array
         $results = $product->find('half-day', 'validIn', true);
-        $results = $this->filterResults($req, $results);
-       
+        $results = $this->filterResults($req, $results);       
       }
       
     } else {
@@ -94,8 +93,16 @@ class SearchController {
     return $filteredResults;
   }
 
-  public function secondOptions() {
-
+  public function secondOptions($mood1, $product) {
+    $tour = $product->find($mood1);
+    
+    $results = [];
+    foreach ($tour['secondOption'] as $option) {
+      $results [] = $product->find($option);
+    }
+    
+    $secondOptions = count($results) > 0;
+    return $secondOptions ? $results: false;
   }
 
   public function search($query, $products) {
