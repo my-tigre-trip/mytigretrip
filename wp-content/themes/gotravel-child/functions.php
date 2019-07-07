@@ -34,6 +34,7 @@ include('bootstrap.php');
 //require_once('Tour.php');
 require_once('Translation.php');
 include('functions-calculator.php');
+include('functions-trip-search.php');
 include('functions-jose.php');
 include('functions-info-section.php');
 include('functions-tour-options.php');

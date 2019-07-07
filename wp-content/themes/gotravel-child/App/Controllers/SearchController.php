@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Jenssegers\Blade\Blade;
+use App\Utils\QueryHelper;
 
 class SearchController {
 	/**
@@ -72,9 +73,9 @@ class SearchController {
     ];
  
     // obtain filters
-    $_duration = explode('_', $req['duration']);
-    $duration = $_duration[0];
-    $schedule = $_duration[1];
+    $_duration = QueryHelper::parseDuration($req);
+    $duration = $_duration->duration;
+    $schedule = $_duration->schedule;
 
     // filters by date
     $time = strtotime($req['date']);
