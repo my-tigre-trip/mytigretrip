@@ -31,7 +31,7 @@
 
 <div class="vc_col-md-4  vc_col-sm-12" >
   <label for="datepicker">Date</label>
-  <input id="datepicker" class="form-control" name="datepicker" required>
+  <input id="datepicker" class="form-control" name="datepicker" required autocomplete="off">
   <input id="date" type="hidden" name="date">
 </div>
 

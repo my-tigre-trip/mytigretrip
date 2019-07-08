@@ -73,7 +73,7 @@ class CalendarController extends Controller{
         'adults' => $req['adults'],
         'children' => $req['children']
       ];
-      $redirect = http_build_query($query);
+      $redirect = home_url().'/trip-search/?'.http_build_query($query);
     }
     
     return $this->jsonResponse([

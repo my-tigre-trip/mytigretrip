@@ -147,12 +147,12 @@ function calculatorUpdate(res) {
 	}
 }
 
-jQuery("#rev_slider_26_1_wrapper").click(function(e){
-	console.log(jQuery("#plan-your-trip").scrollTop());
-	jQuery('html, body').animate({
-		scrollTop:  jQuery("#plan-your-trip").offset().top
-	}, 1500);
-});
+	jQuery("#rev_slider_26_1_wrapper").click(function(e){
+		console.log(jQuery("#plan-your-trip").scrollTop());
+		jQuery('html, body').animate({
+			scrollTop:  jQuery("#plan-your-trip").offset().top
+		}, 1500);
+	});
 
   const  today = new Date();
   var  tomorrow = new Date();
@@ -162,14 +162,13 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
       minDate: tomorrow,
       maxDate: "+1y +1m",
       altFormat: "yy-mm-dd",
-      altField: "#date", 
-      onSelect: function() {
-        //console.log(jQuery("#datepicker").datepicker("option", "altField"));
-        // console.log(jQuery.datepicker.parseDate("yy-mm-dd", date ));
-        //jQuery("#date").val(jQuery("#datepicker").datepicker("option", "altFormat"));
-      }
-	  }
-	);	
+      altField: "#date"
+  });
+  // autocomplete off
+  $('#datepicker').on('click', function(e) {
+    e.preventDefault();
+    $(this).attr("autocomplete", "off");  
+ });
 
   // check date availability
   checkAvailability();
@@ -280,7 +279,8 @@ function checkAvailability () {
 	console.log('response', data);
     if (data.available) {
       // redirect if available is true
-      displayMessage('Redirecting')
+	  displayMessage('Redirecting');
+	  window.location = data.redirect;
     } else {
       displayMessage(data.message);
     }

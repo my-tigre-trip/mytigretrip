@@ -55,11 +55,31 @@ class SearchController {
       'friday' => 'Viernes',
       'saturday' => 'Sábado'
     ];
-    
+
+    $months = [
+      'January' => 'Enero',
+      'February' => 'Febrero',
+      'March' => 'Marzo',
+      'April' => 'Abril',
+      'May' => 'Mayo',
+      'June' => 'Junio',
+      'July' => 'Julio',
+      'August' => 'Agosto',
+      'September' => 'Septiembre',
+      'October' => 'Octubre',
+      'November' => 'Noviembre',
+      'December' => 'Diciembre'
+    ];
+ 
     // obtain filters
     $_duration = explode('_', $req['duration']);
     $duration = $_duration[0];
     $schedule = $_duration[1];
+
+    // filters by date
+    $time = strtotime($req['date']);
+    $dow = date("l", $time);
+    $month = date("F", $time);
 
     // translate schedule string
     if ($schedule === strtolower(MORNING)) {
@@ -73,6 +93,13 @@ class SearchController {
 
       // schedule in half day
       if ($isValid && $duration !== 'full-day' && $result['schedule'] === $schedule) {
+        $isValid = true;
+      } else {
+        $isValid = false;
+      }
+
+      // Month
+      if ($isValid && (count($result['month']) === 0 || in_array($months[$month], $result['month']))) {
         $isValid = true;
       } else {
         $isValid = false;
