@@ -30,16 +30,12 @@ add_filter('vc_frontend_editor_iframe_url', 'change_frontend_editor_iframe_url')
 //----
 include('definitions.php');
 include('bootstrap.php');
-//require_once('MyTrip.php');
-//require_once('Tour.php');
 require_once('Translation.php');
 include('functions-calculator.php');
 include('functions-trip-search.php');
 include('functions-jose.php');
 include('functions-info-section.php');
 include('functions-tour-options.php');
-//include('functions-contact-form.php');
-//include('functions-contact-zoho.php');
 include('functions-zoho-form.php');
 include('functions-api.php');
 
@@ -47,7 +43,6 @@ include('functions-api.php');
 $folder = __DIR__.'/zoho-products';
 $files = scandir($folder, SCANDIR_SORT_DESCENDING);
 $newest_file = $folder.'/'.$files[0];
-//global $zohoProductsArray;
 include($newest_file);
 global $zohoProductsArray;
 $zohoProductsArray = $zohoProductsArray;

@@ -18,13 +18,18 @@ class CalculatorController {
    */
   public function calculator($req, $ZP, $T, $B) {
     #validate query
+    $tour = new Tour(basename(get_permalink()), $ZP);
 
     return $B->make('calculator.calculator', [
         'myTrip' => null,
         'adults' => $req['adults'],
         'children' => $req['children'],
         'specialActivityPeople' => $req['specialActivityPeople'],
-        'tourBoat' => QueryHelper::parseDuration($req)->duration 
+        'tourBoat' => QueryHelper::parseDuration($req)->duration,
+        'goBack' => home_url().'/?'.$_SERVER['QUERY_STRING'],
+        'tour' => $tour,
+        'currentTour' => $tour, // backward compatibility
+        'valid' => true // backward compatibility
       ]);
   }
 

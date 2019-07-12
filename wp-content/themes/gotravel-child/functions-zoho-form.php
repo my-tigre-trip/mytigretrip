@@ -113,11 +113,13 @@ function renderSummary()
 * @param $calculator
 * @param $productHandler
 */
-function renderPriceResult($boat, $calculator) {
+function renderPriceResult($req, $boat, $calculator) {
 
     $blade = new Blade(__DIR__.'/App/Views', __DIR__.'/App/Cache');
     $myTrip = unserialize($_SESSION['myTrip']);
-
+    
+    // $myTrip = \App\Utils\QueryHelper::toMyTrip($req);
+    # construc myTrip from query
     $currentBoat = $myTrip->getBoat($boat);
   
     $price = $calculator->calculatePrice($currentBoat);

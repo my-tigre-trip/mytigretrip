@@ -92,11 +92,12 @@ class PriceController {
         $response['nextStepText'] = 'Select & Continue';
       }
 
-      $session->setMyTrip($myTrip);
+      # don't use session
+      // $session->setMyTrip($myTrip);
       # enviamos response    
       $response['valid'] = true;
       $response['nextStep'] = home_url().'/'.$nextStep;
-      $response['view'] = renderPriceResult($tour->boat, $calculator);
+      $response['view'] = renderPriceResult($req, $tour->boat, $calculator);
       echo jsonResponse($response);
     } else {    
       http_response_code(500);

@@ -62,17 +62,16 @@ class Product {
   }
 
   public function findBoatPrices($boat) {
-    try {
-      $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
-      $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("(sku:equals:$boat)");
-      $recordsArray = $bulkAPIResponse->getData();
-    } catch (Exception $e) {
-      return [];
+
+    $boatPrices = [];    
+    $zohoProductsArray = $GLOBALS['zohoProductsArray'];
+    
+    foreach($zohoProductsArray as $p) {
+      if (strpos($p['sku'], $boat) !== false) {
+        $boatPrices[] = $p;
+      }      
     }
-    foreach($recordsArray as $i => $r) {
-      $recordsArray[$i] = $r->getData();
-    }
-    return $recordsArray;
+    return $boatPrices;
   }
 
   public function response() {
