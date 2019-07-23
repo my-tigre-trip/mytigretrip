@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Tour;
 use App\Models\MyTrip;
+use App\Utils\QueryHelper;
 
 /**
  * wrapper of pricing functions
@@ -20,8 +21,8 @@ class PriceController {
     $response = [  ];
     if ($req['_token'] === $session->id()) {
       $tour = new Tour($req['tourSlug'], $zohoProduct);
-      $myTrip = $session->getMyTrip();
-
+      //$myTrip = $session->getMyTrip();
+      $myTrip = QueryHelper::queryToMyTrip($_GET, $zohoProduct);
       #si no existe myTrip lo creamos
       if ($myTrip === false) {
         $myTrip = new MyTrip($session->id());
@@ -59,7 +60,8 @@ class PriceController {
       }
       #evaluamos el tipo de bote correspondiente al tour y lo asignamos
       $myTrip->addTour($tour);
-      //determinamos si hay que elegir un trip mas (build your own) y
+      
+      //@todo Check if there are second options 
       $myTripBoat->setNextStep();
       $nextStep = $myTripBoat->nextStep;
       $myTrip->setBoat($myTripBoat);
@@ -68,7 +70,7 @@ class PriceController {
       if ($myTripBoat->boat === FULL_DAY && $tour->mood === '2' && $myTripBoat->mood1 === null) {
         $myTripBoat->mood2 = null;
         $myTrip->setBoat($myTripBoat);
-        $session->setMyTrip($myTrip);
+        // $session->setMyTrip($myTrip);
         echo jsonResponse([
           'valid' => false,
           'messages' => renderMessage(FULL_DAY)
@@ -96,8 +98,8 @@ class PriceController {
       // $session->setMyTrip($myTrip);
       # enviamos response    
       $response['valid'] = true;
-      $response['nextStep'] = home_url().'/'.$nextStep;
-      $response['view'] = renderPriceResult($req, $tour->boat, $calculator);
+      $response['nextStep'] = home_url().'/'.$nextStep.'?'.QueryHelper::myTripToQuery($myTrip, $tour->boat);
+      $response['view'] = renderPriceResult($myTrip, $tour->boat, $calculator, $zohoProduct);
       echo jsonResponse($response);
     } else {    
       http_response_code(500);
@@ -113,12 +115,13 @@ class PriceController {
   * @return response json response with a view or errors
 */
   function summary($req, $session, $zohoProduct, $calculator, $view) {  
-    $myTrip = $session->getMyTrip();
-    $myBoat = $myTrip->lock;
+    //$myTrip = $session->getMyTrip();
+    $myTrip = QueryHelper::queryToMyTrip($req, $zohoProduct);
+    $myBoat = $myTrip->lock ? $myTrip->lock : $myTrip->getBoat($req['duration']);
     $response = [  ];
     if($req['_token'] === $session->id()){
       $myTrip->stage = 'summary';
-      if( isset( $req['pay-on-island'] ) ){
+      if( isset($req['pay-on-island'])){
           $myTrip->payOnIsland = true;
           $response['payOnIsland'] = $myTrip->payOnIsland ;
       }else{
@@ -131,13 +134,13 @@ class PriceController {
       }else{
           $myTrip->car = false;
       }
-
+      $myTrip->lock = $myBoat;
       //guardamos el objeto nuevamente
-      $session->setMyTrip($myTrip);          
-      $response['view'] = $view->summary($session, $calculator);
+      // $session->setMyTrip($myTrip);          
+      $response['view'] = $view->summary($myTrip, $calculator);
       echo jsonResponse($response);
     } else {
-        echo jsonResponse(['valid' => 'no-boat']);
+      echo jsonResponse(['valid' => 'no-boat']);
     }
   } 
 }

@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{$child}}/css/datepicker.min.css">
     <link rel="stylesheet" href="{{$child}}/css/mtt-form.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <meta name="schedule" value="{{$schedule}}"> 
+    <meta name="schedule" value="{{$schedule}}">
     
   </head>
   <body>

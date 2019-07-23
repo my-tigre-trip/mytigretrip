@@ -113,12 +113,12 @@ function renderSummary()
 * @param $calculator
 * @param $productHandler
 */
-function renderPriceResult($req, $boat, $calculator) {
+function renderPriceResult($myTrip, $boat, $calculator, $zohoProduct) {
 
     $blade = new Blade(__DIR__.'/App/Views', __DIR__.'/App/Cache');
-    $myTrip = unserialize($_SESSION['myTrip']);
+    // $myTrip = unserialize($_SESSION['myTrip']);
     
-    // $myTrip = \App\Utils\QueryHelper::toMyTrip($req);
+    // $myTrip = \App\Utils\QueryHelper::queryToMyTrip($req, $zohoProduct);
     # construc myTrip from query
     $currentBoat = $myTrip->getBoat($boat);
   

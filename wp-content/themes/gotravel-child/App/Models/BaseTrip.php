@@ -24,18 +24,15 @@ class BaseTrip
         //silence
     }
 
-    public static function boatName($boat)
-    {
+    public static function boatName($boat) {
         return str_replace(['speedboat','half-day','full-day'], ['Speedboat Trip (no stops)','Half Day Trip','Full Day Trip'], $boat);
     }
 
-    public function addTour(Tour $tour)
-    {
+    public function addTour(Tour $tour) {
         //override me
     }
 
-    public function setNextStep()
-    {
+    public function setNextStep() {
         $this->nextStep = 'my-trip'; // vamos al checkout
         //overrride me en full day
     }

@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
  * @param {boolean} nextStep 
  * 
  */
-function calculatorRequest(nextStep = false) {
+function calculatorRequest_(nextStep = false) {
 	
 	var formElement = document.getElementById("mkdf-tour-booking-form");
 	var formData = new FormData( formElement );
@@ -114,7 +114,7 @@ function calculatorRequest(nextStep = false) {
 	});
 }
 
-function calculatorUpdate(res) {
+function calculatorUpdate_(res) {
 	console.log(res);
 	jQuery('.mtt-loading').hide();	
 	res = res.message;	
@@ -147,12 +147,16 @@ function calculatorUpdate(res) {
 	}
 }
 
-	jQuery("#rev_slider_26_1_wrapper").click(function(e){
-		console.log(jQuery("#plan-your-trip").scrollTop());
-		jQuery('html, body').animate({
-			scrollTop:  jQuery("#plan-your-trip").offset().top
-		}, 1500);
-	});
+function calculatePrice() {
+  
+}
+
+jQuery("#rev_slider_26_1_wrapper").click(function(e){
+	console.log(jQuery("#plan-your-trip").scrollTop());
+	jQuery('html, body').animate({
+		scrollTop:  jQuery("#plan-your-trip").offset().top
+	}, 1500);
+});
 
   const  today = new Date();
   var  tomorrow = new Date();
@@ -190,7 +194,7 @@ function waterSportLimit(){
 }
 
 /**
- * @todo separate the logic of cvalculator from trip search
+ * @todo separate the logic of calculator from trip search
  */
 function validatePassengers() {
   var error = 0;
@@ -208,11 +212,10 @@ function validatePassengers() {
 		error++;
 	}
   console.log("err "+error+ " men "+message);
-	if (error > 0) {
-    
+	if (error > 0) {    
     displayMessage(message); 
-    jQuery('#mtt-large-group-message').append(message);
-		jQuery('#calculate').hide();
+    //jQuery('#mtt-large-group-message').append(message);
+  	jQuery('#calculate').hide();
     erasePriceDetails();
     error = 0;
 	} else {
@@ -255,7 +258,11 @@ function areThereAdults() {
   return i;
 }
 
-
+/**
+ * 
+ * @param {String} message 
+ * for error and validation messages in calculator
+ */
 function displayMessage(message) {
   jQuery('#mtt-validator-messages').empty();
   jQuery('#mtt-validator-messages').html('<p style="color:red">'+message+'</p>');
@@ -270,7 +277,7 @@ function checkAvailability () {
     if (validateRequest()) {
       formElement = document.getElementById("mtt-trip-search-home");
   	  var formData = new FormData( formElement );
-		  standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
+	    standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
     }
   });
   
@@ -304,5 +311,56 @@ function checkAvailability () {
     }
 
     return true;
+  }
+}
+
+/**
+ * Handle the price calculation for tour pages
+ */
+function calculatorRequest(nextStep = false) {
+  var formElement = document.getElementById("mkdf-tour-booking-form");
+	var formData = new FormData( formElement );
+	if (nextStep !== false) {
+		formData.append('nextStep', nextStep);
+	}
+  standardRequest('price-calculator', 'get', formDataToObject(formData), successCb, 15000, errorCb);
+
+  function successCb (res) {
+    console.log(res);
+    jQuery('.mtt-loading').hide();	
+    res = res.message;	
+    var messages= res.messages ;
+    var view = res.view;
+    var nextStep = res.nextStep;
+    var valid = res.valid;
+    var redirect = res.redirect;
+    var nextStepText = res.nextStepText;
+    //console.log('valid '+valid+' -- lockCollision '+lockCollision);
+    jQuery('#mtt-messages').empty();
+    //console.log('MENSAJE:  '+messages);
+    toogleCalculate();
+    if (valid){
+      console.log("next "+res.nextStep);
+      jQuery('#calculate').hide();
+
+      if (nextStep != false && redirect) {
+        window.location.replace(nextStep);
+      } else {			
+        erasePriceDetails();
+        jQuery('#mtt-price-detail').append(view);
+        // agregar input nextStep
+        jQuery('#next-step-button').html(nextStepText);		
+        jQuery('#next-step-button').show();
+      }
+    }else {		
+      jQuery('#mtt-messages').append(messages);
+      jQuery('#calculate').hide();
+      jQuery('select').attr('disabled','disabled');
+    }
+  }
+
+  function errorCb (res) {
+    console.error("response", err);
+    // improve this
   }
 }

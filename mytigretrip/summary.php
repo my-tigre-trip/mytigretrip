@@ -18,4 +18,4 @@ $c = new Calculator($zp);
 $pc = new PriceController();
 $blade = new Blade(dirname(__DIR__, 1).'/wp-content/themes/gotravel-child/App/Views', dirname(__DIR__, 1).'/wp-content/themes/gotravel-child/App/Cache');
 $view = new ViewRenderer($blade, $session);
-$pc->summary($_POST, Session::getInstance(), $zp, $c, $view);
+$pc->summary($_GET, Session::getInstance(), $zp, $c, $view);

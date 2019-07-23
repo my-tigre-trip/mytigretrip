@@ -20,9 +20,8 @@ class ViewRenderer {
 
     }
     
-    public function summary($session, $calculator) {
+    public function summary($myTrip, $calculator) {
       
-      $myTrip = $session->getMyTrip();  
       $myBoat = $myTrip->lock;
       $price = $calculator->calculatePrice($myBoat, $myTrip);
       $notes = $myTrip->getNotes($myBoat, $price['tourDetail']['price']);

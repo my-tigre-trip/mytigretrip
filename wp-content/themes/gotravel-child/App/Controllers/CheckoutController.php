@@ -10,6 +10,7 @@ use App\Models\ZohoHelpers\TripFormmatter;
 use App\Models\ZohoHelpers\Product;
 use App\Helpers\Checkout as CheckoutHelper;
 use App\Controllers\Controller;
+use App\Utils\QueryHelper;
 
 
 class CheckoutController extends Controller {
@@ -17,20 +18,21 @@ class CheckoutController extends Controller {
    * renders the /my-trip view
    * @todo use VieRenderer and blade as dependece
    */
-  public function myTrip($req, $WP, $session, $calculator) {
+  public function myTrip($req, $WP, $session, $calculator, $ZP) {
     
     $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
-    $myTrip = $session->getMyTrip();
+    // $myTrip = $session->getMyTrip();
+    $myTrip = QueryHelper::queryToMyTrip($req, $ZP);
 
     if (isset($req['order'])) {
       $myTrip->generateOrder($req['order'], CheckoutHelper::getInstance());
     } elseif ($myTrip === false || $myTrip->lock === null) {
-        $WP->redirectHome();
-        return false;
+        //$WP->redirectHome();
+        //return false;
         // die();        
     }
-
-    $myBoat = $myTrip->lock;
+    
+    $myBoat = $myTrip->lock ? $myTrip->lock : $myTrip->getBoat($req['duration']);
     $price = $calculator->calculatePrice($myBoat, $myTrip);
 
     return $blade->make('zoho-options-form', ['myTrip' => $myTrip, 'myBoat' => $myBoat]);

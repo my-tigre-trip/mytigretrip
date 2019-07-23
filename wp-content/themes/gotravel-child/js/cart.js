@@ -131,7 +131,7 @@ function checkoutSuccess(res) {
   }
 
 /**
- * *
+ * takes the data from query string
  */ 
 function summaryRequest() {
   var checkboxes = $('#mtt-my-trip-form input[type="checkbox"]')
@@ -146,11 +146,14 @@ function summaryRequest() {
   $('html, body').animate({
         scrollTop:  0
       }, 500);
-
+  formData = formDataToObject(formData);
+  queryData = queryStringToJSON();
+  queryData._token = formData._token;
+  console.log(queryData);
   standardRequest(
     "summary",
-    "post",
-    formDataToObject(formData),
+    "get",
+    queryData,
     summarySuccess
     );
 }

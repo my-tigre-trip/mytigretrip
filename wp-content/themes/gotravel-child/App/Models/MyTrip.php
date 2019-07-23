@@ -9,8 +9,7 @@ use App\Models\Woo;
 
 //use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class MyTrip
-{
+class MyTrip {
     protected $table = 'mtt_trips';
 
   //  protected $primaryId = 'id';
@@ -162,5 +161,50 @@ class MyTrip
         }
 
         return $notes;
+    }
+
+    /**
+     * sets both in boat and tour
+     */
+    public function setPeople($req) {
+      // adults
+      if (isset($req['adults'])) {
+        // full
+        $this->fullDay->adults = $req['adults'];
+        if (isset($this->fullDay->mood1)) {
+          $this->fullDay->mood1->adults = $req['adults'];
+        }
+
+        if (isset($this->fullDay->mood2)) {
+          $this->fullDay->mood2->adults = $req['adults'];
+        }
+        // half
+        $this->halfDay->adults = $req['adults'];
+        if (isset($this->halfDay->mood1)) {
+          $this->halfDay->mood1->adults = $req['adults'];
+        }
+      }
+      
+      // children
+      if (isset($req['children'])) {
+        $this->fullDay->children = $req['children'];
+        if (isset($this->fullDay->mood1)) {
+          $this->fullDay->mood1->children = $req['children'];
+        }
+
+        if (isset($this->fullDay->mood2)) {
+          $this->fullDay->mood2->children = $req['children'];
+        }
+
+        $this->halfDay->children = $req['children'];
+        if (isset($this->halfDay->mood1)) {
+          $this->halfDay->mood1->children = $req['children'];
+        }
+      }
+
+      if (isset($req['specialActivityPeople'])) {
+        $this->fullDay->specialActivityPeople = $req['specialActivityPeople'];
+        $this->halfDay->specialActivityPeople = $req['specialActivityPeople'];
+      }
     }
 }
