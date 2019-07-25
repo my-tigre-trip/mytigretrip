@@ -40,6 +40,9 @@ class MyTrip {
     public $lock; //
     //public $stage;
 
+    public $date; //Y-m-d
+    public $d; // date validation hash
+
     public function __construct($sessionId)
     {
         $this->sessionId = $sessionId;

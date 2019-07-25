@@ -121,7 +121,7 @@ class PriceController {
     $response = [  ];
     if($req['_token'] === $session->id()){
       $myTrip->stage = 'summary';
-      if( isset($req['pay-on-island'])){
+      if( isset($req['payOnIsland'])){
           $myTrip->payOnIsland = true;
           $response['payOnIsland'] = $myTrip->payOnIsland ;
       }else{

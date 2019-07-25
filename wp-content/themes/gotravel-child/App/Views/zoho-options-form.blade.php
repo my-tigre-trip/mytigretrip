@@ -35,7 +35,7 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 		<?php wp_nonce_field('mkdf_tours_booking_form', 'mkdf_tours_booking_form'); ?>
 		@if($myBoat->boat !== 'speedboat')
 			<div class="custom-control custom-checkbox my-2">
-				<input type="checkbox" class="form-control custom-control-input updateSummary" name="pay-on-island" id="pay-on-island" <?php if( $myTrip->payOnIsland ){  ?> checked <?php } ?> value="yes">
+				<input type="checkbox" class="form-control custom-control-input updateSummary" name="payOnIsland" id="pay-on-island" <?php if( $myTrip->payOnIsland ){  ?> checked <?php } ?> value="yes">
 				<label class="custom-control-label " for="pay-on-island">
 				Please do not include my island expenses (lunch / alternative activities) in final price. I´d rather pay them myself the day of my trip.
 				<a class="text-success" data-toggle="modal" data-target="#payOnIslandModal">

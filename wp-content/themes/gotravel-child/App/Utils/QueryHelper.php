@@ -64,6 +64,15 @@ class QueryHelper {
     if (isset($req['payOnIsland'])) {
       $myTrip->payOnIsland = true;
     }
+
+    if (isset($req['date'])) {
+      $myTrip->date = true;
+    }
+
+    if (isset($req['d'])) {
+      $myTrip->d = true;
+    }
+
     return $myTrip;
   }
 
@@ -90,16 +99,49 @@ class QueryHelper {
 
     // car
     if ($myTrip->car) {
-      $query[] = 'car=true';
+      $query[] = 'car=yes';
     }
 
     // poi
     if ($myTrip->payOnIsland) {
-      $query[] = 'payOnIsland=true';
+      $query[] = 'payOnIsland=yes';
     }
 
     $query[] = 'duration='.$boat;
     
+    if ($myTrip->date) {
+      $query[] = "date=$myTrip->date";
+    }
+
+    if ($myTrip->d) {
+      $query[] = "d=$myTrip->d";
+    }
+
     return implode("&", $query);
+  }
+
+  /**
+   * use it only if the date is available
+   * the valid is a pair hex number string with base64
+   */
+  public function encryptValidDate() {    
+    $bytes = random_bytes(20);
+    $codeHex = bin2hex($bytes);
+    $codeDec = hexdec($codeHex);
+    $codeDec = (int) $codeDec;
+
+    // if not pair sum 1
+    if ($codeDec % 2 !== 0) {
+      $codeDec++;
+      $codeHex = dechex($codeDec);
+    }    
+
+    return $codeHex;
+  }
+
+  public function isValidDateHash($hash) {
+    $codeDec = hexdec($codeHex);
+    $codeDec = (int) $codeDec;
+    return $codeDec % 2 === 0;
   }
 }

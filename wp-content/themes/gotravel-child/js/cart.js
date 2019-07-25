@@ -149,6 +149,8 @@ function summaryRequest() {
   formData = formDataToObject(formData);
   queryData = queryStringToJSON();
   queryData._token = formData._token;
+  queryData.payOnIsland = formData.payOnIsland;
+  queryData.car = formData.car;
   console.log(queryData);
   standardRequest(
     "summary",
