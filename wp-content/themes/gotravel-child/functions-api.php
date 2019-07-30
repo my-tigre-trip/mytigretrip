@@ -8,46 +8,46 @@ use App\Models\MyTrip;
 use App\Models\Tour;
 use App\Models\Session;
 use App\Models\ZohoHelpers\Product as ZohoProduct;
+use App\Utils\QueryHelper;
 
 
 /**
 *
 */
-function getTheTrip()
-{
+function getTheTrip() {
     session_start();
-    $myTrip = unserialize($_SESSION['myTrip']);
-    $response = [  ];
+    $myTrip = QueryHelper::queryToMyTrip($_POST, ZohoProduct::getInstance());
+    $response = [];
 
     if ($_POST['_token'] === session_id()) {
-        //  $valid = $myTrip->validateFields();
-        //zoho hace una validacion
-        $valid = true;
-        if ($valid === true) {
-              $myTrip->save();
-              $_SESSION['myTrip'] =  serialize($myTrip);
-              //completada la primera parte pasamos al formulario de contacto
-              $response = ['errors' => false,
-                          // 'redirect' => home_url().'/my-trip-checkout'
-                           'redirect' => home_url().'/my-trip-contact-information'
-              ];
-        } else {
-              $response = ['errors' => $valid ];
-        }
+      //  $valid = $myTrip->validateFields();
+      //zoho hace una validacion
+      $valid = true;
+      if ($valid === true) {
+        $myTrip->save();
+        $_SESSION['myTrip'] =  serialize($myTrip);
+        //completada la primera parte pasamos al formulario de contacto
+        $response = [
+          'errors' => false,
+          // 'redirect' => home_url().'/my-trip-checkout'
+          'redirect' => home_url().'/my-trip-contact-information'
+        ];
+      } else {
+          $response = ['errors' => $valid ];
+      }
     }
-
 
     $json = json_encode($response);
     if ($json === false) {
-        // Avoid echo of empty string (which is invalid JSON), and
-        // JSONify the error message instead:
-        $json = json_encode(array("jsonError", json_last_error_msg()));
-        if ($json === false) {
-            // This should not happen, but we go all the way now:
-            $json = '{"jsonError": "unknown"}';
-        }
-        // Set HTTP response status code to: 500 - Internal Server Error
-        http_response_code(500);
+      // Avoid echo of empty string (which is invalid JSON), and
+      // JSONify the error message instead:
+      $json = json_encode(array("jsonError", json_last_error_msg()));
+      if ($json === false) {
+        // This should not happen, but we go all the way now:
+        $json = '{"jsonError": "unknown"}';
+      }
+      // Set HTTP response status code to: 500 - Internal Server Error
+      http_response_code(500);
     }
     header("Content-Type: application/json;charset=utf-8");
     echo trim($json);

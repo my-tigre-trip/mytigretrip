@@ -14,6 +14,6 @@ if ($myTrip->payOnIsland) {
 @include('calculator.summary-pay-advance')
 @endif
 
-  <div class=" p-0 my-3">
-    @include('calculator.notes')
-  </div>
+<div class=" p-0 my-3">
+  @include('calculator.notes')
+</div>

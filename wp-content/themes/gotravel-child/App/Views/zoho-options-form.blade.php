@@ -31,6 +31,7 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 <hr class="my-5">
 	<form id="mtt-my-trip-form" method="post" >
 		<input type="hidden" name="_token" value="<?php session_start(); echo session_id(); ?>" />
+		@include('snippets.mtt-query-inputs')
 		<h5 class="mtt-form-title"><?php esc_html_e('Observations', 'mtt'); ?></h5>
 		<?php wp_nonce_field('mkdf_tours_booking_form', 'mkdf_tours_booking_form'); ?>
 		@if($myBoat->boat !== 'speedboat')

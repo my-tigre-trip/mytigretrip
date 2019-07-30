@@ -19,3 +19,16 @@
 </div>
 @endif
 @include('calculator.snippets.additional-considerations')
+
+@if(isset($_GET['date']))
+<input type="hidden" name="date" value="{{$_GET['date']}}" >
+@endif
+@if(isset($_GET['d']))
+<input type="hidden" name="d" value="{{$_GET['d']}}" >
+@endif
+@if(isset($_GET['car']))
+<input type="hidden" name="car" value="{{$_GET['car']}}" >
+@endif
+@if(isset($_GET['payOnIsland']))
+<input type="hidden" name="payOnIsland" value="{{$_GET['payOnIsland']}}" >
+@endif
