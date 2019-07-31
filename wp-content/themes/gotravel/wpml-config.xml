@@ -1,0 +1,24 @@
+<wpml-config>
+    <custom-types>
+        <custom-type translate="1">masonry-gallery</custom-type>
+	    <custom-type translate="1">testimonials</custom-type>
+        <custom-type translate="1">carousels</custom-type>
+	    <custom-type translate="1">tour-item</custom-type>
+	    <custom-type translate="1">tour-attributes</custom-type>
+	    <custom-type translate="1">destinations</custom-type>
+    </custom-types>
+    <taxonomies>
+        <taxonomy translate="1">masonry-gallery-category</taxonomy>
+	    <taxonomy translate="1">testimonials_category</taxonomy>
+        <taxonomy translate="1">carousels_category</taxonomy>
+	    <taxonomy translate="1">tour-category</taxonomy>
+	    <taxonomy translate="1">review-criteria</taxonomy>
+        <taxonomy translate="0">publisher</taxonomy>
+    </taxonomies>
+    <admin-texts>
+		<key name="mkd_options_gotravel">
+			<key name="meta_keywords" />
+			<key name="meta_description" />
+		</key>
+	</admin-texts>  
+</wpml-config>

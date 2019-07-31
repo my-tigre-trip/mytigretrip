@@ -1,0 +1,8 @@
+1.1
+- Added WooCommerce 3.1.1 compatibility
+- Updated Revolution Slider to 5.4.5.1
+- Updated Visual Composer to 5.2
+- Updated Mikado Membership plugin to 1.2
+- Updated Mikado Tours plugin to 1.2
+- Updated theme registration form
+- Fixed the issue with YouTube and Vimeo videos on https websites
