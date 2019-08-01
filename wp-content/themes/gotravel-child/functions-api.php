@@ -25,12 +25,14 @@ function getTheTrip() {
       $valid = true;
       if ($valid === true) {
         $myTrip->save();
-        $_SESSION['myTrip'] =  serialize($myTrip);
+        //$_SESSION['myTrip'] =  serialize($myTrip);
+        $boat = QueryHelper::parseDuration($_POST)->duration;
+        $query = QueryHelper::myTripToQuery($myTrip, $boat);
         //completada la primera parte pasamos al formulario de contacto
         $response = [
           'errors' => false,
           // 'redirect' => home_url().'/my-trip-checkout'
-          'redirect' => home_url().'/my-trip-contact-information'
+          'redirect' => home_url().'/my-trip-contact-information/?'.$query
         ];
       } else {
           $response = ['errors' => $valid ];

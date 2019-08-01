@@ -31,3 +31,7 @@
 @if(isset($_GET['payOnIsland']))
 <input type="hidden" name="payOnIsland" value="{{$_GET['payOnIsland']}}" >
 @endif
+
+@if(isset($_GET['duration']))
+<input type="hidden" name="duration" value="{{$_GET['duration']}}" >
+@endif

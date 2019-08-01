@@ -48,7 +48,7 @@ class CheckoutController extends Controller {
    */
   public function myTripContactInformation($req, $WP, $session, $calculator) {
     $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
-    $myTrip = $session->getMyTrip();
+    $myTrip = QueryHelper::queryToMyTrip();
     if ($myTrip === false) {
       $WP->redirectHome();
       //die();
