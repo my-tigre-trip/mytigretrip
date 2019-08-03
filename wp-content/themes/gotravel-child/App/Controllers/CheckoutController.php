@@ -46,14 +46,15 @@ class CheckoutController extends Controller {
    * @todo use new TripCalculator instead of Calculator 
    * @todo use url queries
    */
-  public function myTripContactInformation($req, $WP, $session, $calculator) {
+  public function myTripContactInformation($req, $WP, $session, $calculator, $ZP) {
     $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
-    $myTrip = QueryHelper::queryToMyTrip();
+    $myTrip = QueryHelper::queryToMyTrip($req, $ZP);
     if ($myTrip === false) {
       $WP->redirectHome();
       //die();
     } else {
-      $myBoat = $myTrip->lock;
+      $boat = QueryHelper::parseDuration($req)->duration;
+      $myBoat = $myTrip->getBoat($boat);
       $price = $calculator->calculatePrice($myBoat, $myTrip);
       $notes = $myTrip->getNotes($myBoat, $price['tourDetail']['price']);
       return $blade->make('zoho-form', ['myTrip' => $myTrip,
@@ -159,5 +160,36 @@ class CheckoutController extends Controller {
     }    
     
     echo $this->jsonResponse($response); 
+  }
+
+  /**
+  *
+  */
+  function getTheTrip($req, $ZP) {
+    session_start();
+    $myTrip = QueryHelper::queryToMyTrip($req, $ZP);
+    $response = [];
+
+    if ($req['_token'] === session_id()) {
+      //  $valid = $myTrip->validateFields();
+      //zoho hace una validacion
+      $valid = true;
+      if ($valid === true) {
+        // improve saving mtt
+        $myTrip->save();
+        
+        $boat = QueryHelper::parseDuration($req)->duration;
+        $query = QueryHelper::myTripToQuery($myTrip, $boat);
+        //completada la primera parte pasamos al formulario de contacto
+        $response = [
+          'errors' => false,
+          'redirect' => home_url().'/my-trip-contact-information/?'.$query
+        ];
+      } else {
+          $response = ['errors' => $valid ];
+      }
+
+      echo $this->jsonResponse($response); 
+    }    
   }
 }

@@ -189,7 +189,7 @@ function getTheTripRequest() {
     "post",
     formDataToObject(formData),
     getTheTripSuccess
-    );
+  );
 }
 /**
  * 
@@ -197,8 +197,9 @@ function getTheTripRequest() {
 function getTheTripSuccess(res) {
   // borramos mensajes de validacion existentes
   $('.mtt-validation').remove();
- 
-  if (res.errors == false) {
+  var res = res.data;
+  console.log(res.errors)
+  if (res.errors === false) {
       window.location.replace(res.redirect);
       console.log(res.redirect);
   } else {

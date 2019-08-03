@@ -11,4 +11,7 @@ ZohoHandler::getInstance()->auth();
 
 $c = new CheckoutController();
 //renders the checkout page
-echo $c->myTripContactInformation($_POST, Wordpress::getInstance(), Session::getInstance(), new Calculator(ZohoProduct::getInstance()));
+echo $c->myTripContactInformation($_GET, Wordpress::getInstance(),
+ Session::getInstance(), new Calculator(ZohoProduct::getInstance()),
+ ZohoProduct::getInstance()
+);
