@@ -1,0 +1,1 @@
+this is the blade cache folder. In case the UI doen't refresh try to clean the generated php files here
