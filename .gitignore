@@ -33,6 +33,7 @@ wp-content/plugins/*
 wp-content/themes/*
 !wp-content/themes/gotravel-child/
 !wp-content/themes/gotravel/
+!!wp-content/themes/gotravel/App/Cache/.gitkeep
 
 !mytigretrip/
 !tests/*
