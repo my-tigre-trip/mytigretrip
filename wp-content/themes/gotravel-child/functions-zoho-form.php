@@ -121,16 +121,19 @@ function renderPriceResult($myTrip, $boat, $calculator, $zohoProduct) {
     // $myTrip = \App\Utils\QueryHelper::queryToMyTrip($req, $zohoProduct);
     # construc myTrip from query
     $currentBoat = $myTrip->getBoat($boat);
-  
+    $date = $myTrip->dateFormatted();
     $price = $calculator->calculatePrice($currentBoat);
     $notes = $myTrip->getNotes($currentBoat, $price['tourDetail']['price']);
-    return $blade->make('calculator.price-result', ['currentBoat' => $currentBoat,
-        'boatDetail' => $price['boatDetail'],
-        'tourDetail' => $price['tourDetail'],
-        'finalPrice' => $price['finalPrice'],
-        'price' => $price,
-        'notes' => $notes
-         ]).'';
+    return $blade->make('calculator.price-result', [
+      'currentBoat' => $currentBoat,
+      'boatDetail' => $price['boatDetail'],
+      'tourDetail' => $price['tourDetail'],
+      'finalPrice' => $price['finalPrice'],
+      'price' => $price,
+      'notes' => $notes,
+      'date'  => $date
+      ]
+    ).'';
 }
 
 /**

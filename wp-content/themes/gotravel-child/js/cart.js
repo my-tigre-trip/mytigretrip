@@ -164,7 +164,7 @@ function summaryRequest() {
  * 
  */
 function summarySuccess(res) {  
-  newResponse = res.message;
+  newResponse = res.data;
   var payOnIsland= newResponse.payOnIsland ;
   var view = newResponse.view;
 

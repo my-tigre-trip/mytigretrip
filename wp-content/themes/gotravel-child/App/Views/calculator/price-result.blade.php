@@ -1,6 +1,7 @@
 <div class="mtt-trip-details">
   <h4>Trip details</h4>
   <ul>
+    <li>Date: {{$date}}</li>
     <li>Duration : {{$boatDetail['boat']}}</li>
     @if($tourDetail['mood1'] != '')
     <li>I´m in the Mood for {{$tourDetail['mood1']}}</li>

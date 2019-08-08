@@ -66,7 +66,7 @@ class QueryHelper {
     }
 
     if (isset($req['date'])) {
-      $myTrip->date = true;
+      $myTrip->date = $req['date'];
     }
 
     if (isset($req['d'])) {
@@ -143,5 +143,9 @@ class QueryHelper {
     $codeDec = hexdec($codeHex);
     $codeDec = (int) $codeDec;
     return $codeDec % 2 === 0;
+  }
+
+  public static function formatDate($req) {
+    
   }
 }

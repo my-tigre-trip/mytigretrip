@@ -319,25 +319,25 @@ function checkAvailability () {
  */
 function calculatorRequest(nextStep = false) {
   var formElement = document.getElementById("mkdf-tour-booking-form");
-	var formData = new FormData( formElement );
-	if (nextStep !== false) {
-		formData.append('nextStep', nextStep);
-	}
+  var formData = new FormData( formElement );
+  if (nextStep !== false) {
+    formData.append('nextStep', nextStep);
+  }
   standardRequest('price-calculator', 'get', formDataToObject(formData), successCb, 15000, errorCb);
 
   function successCb (res) {
     console.log(res);
-    jQuery('.mtt-loading').hide();	
-    res = res.message;	
+    jQuery('.mtt-loading').hide();
+    res = res.data;	
     var messages= res.messages ;
     var view = res.view;
     var nextStep = res.nextStep;
     var valid = res.valid;
     var redirect = res.redirect;
     var nextStepText = res.nextStepText;
-    //console.log('valid '+valid+' -- lockCollision '+lockCollision);
+    
     jQuery('#mtt-messages').empty();
-    //console.log('MENSAJE:  '+messages);
+    
     toogleCalculate();
     if (valid){
       console.log("next "+res.nextStep);

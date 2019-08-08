@@ -43,14 +43,13 @@ class MyTrip {
     public $date; //Y-m-d
     public $d; // date validation hash
 
-    public function __construct($sessionId)
-    {
-        $this->sessionId = $sessionId;
-        $this->lock = null;
-        $this->speedboat = new Speedboat();
-        $this->halfDay = new HalfDay();
-        $this->fullDay = new FullDay();
-        //$this->priceCar = Woo::findProduct('car')->price;
+    public function __construct($sessionId) {
+      $this->sessionId = $sessionId;
+      $this->lock = null;
+      $this->speedboat = new Speedboat();
+      $this->halfDay = new HalfDay();
+      $this->fullDay = new FullDay();
+      $this->date = null;
     }
 
     public function addTour(Tour $tour)
@@ -95,16 +94,16 @@ class MyTrip {
 
     /**
     *  saveTrip
-    * guarda en la base de datos
+    * create an id and save?
+    * @todo create a nice and propper table for the trip 
     */
-    public function save()
-    {
-          global $wpdb;
-          //guardo en la DB
-          $trip = $wpdb->insert('mtt_trips', ['trip' => '']);
-          $this->id = str_pad($wpdb->insert_id, 8, '0', STR_PAD_LEFT);
+    public function save() {
+      global $wpdb;
+      //guardo en la DB
+      $trip = $wpdb->insert('mtt_trips', ['trip' => '']);
+      $this->id = str_pad($wpdb->insert_id, 8, '0', STR_PAD_LEFT);
 
-          return $trip;
+      return $trip;
     }
 
     /**
@@ -210,4 +209,8 @@ class MyTrip {
         $this->halfDay->specialActivityPeople = $req['specialActivityPeople'];
       }
     }
+
+  public function dateFormatted() {
+    return $this->date !== null ? date('l j \of F Y', strtotime($this->date)) : '-';
+  }
 }

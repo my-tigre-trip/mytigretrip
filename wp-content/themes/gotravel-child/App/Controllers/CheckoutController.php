@@ -57,7 +57,8 @@ class CheckoutController extends Controller {
       $myBoat = $myTrip->getBoat($boat);
       $price = $calculator->calculatePrice($myBoat, $myTrip);
       $notes = $myTrip->getNotes($myBoat, $price['tourDetail']['price']);
-      return $blade->make('zoho-form', ['myTrip' => $myTrip,
+      return $blade->make('zoho-form', [
+        'myTrip' => $myTrip,
         'myBoat' => $myBoat,
         'boatDetail' => $price['boatDetail'],
         'tourDetail' => $price['tourDetail'],

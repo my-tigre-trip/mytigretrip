@@ -21,7 +21,7 @@
     <link rel="stylesheet" id="mkdf_font_elegant-css" href="{{$templateFolder}}/assets/css/elegant-icons/style.min.css?ver=4.8.6" type="text/css" media="all">
     <link rel="stylesheet" id="mkdf_font_awesome-css" href="{{$templateFolder}}/assets/css/font-awesome/css/font-awesome.min.css?ver=4.8.6" type="text/css" media="all">
     @include('style.font')
-    <link rel="stylesheet" href="{{$child}}/css/datepicker.min.css">
+    {{-- <link rel="stylesheet" href="{{$child}}/css/datepicker.min.css">--}}
     <link rel="stylesheet" href="{{$child}}/css/mtt-form.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta name="schedule" value="{{$schedule}}">
@@ -50,7 +50,7 @@
 
   <div class="row mt-3">
     <div class="w-100 d-inline-block align-right">
-    <a class="clear-confirm text-danger mr-5" href="<?php echo home_url().'/clear-option'?>"><i class="fa fa-window-close text-danger" aria-hidden="true"></i> <small> Clear My Tigre Trip and start again</small></a>
+    <a class="clear-confirm text-danger mr-5" href="<?php echo home_url()?>"><i class="fa fa-window-close text-danger" aria-hidden="true"></i> <small> Clear My Tigre Trip and start again</small></a>
     </div>    
   </div>  
 
@@ -60,7 +60,7 @@
   <script src="{{get_template_directory_uri()}}/assets/js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <!-- <script src="{{$child}}/js/datepicker.min.js" type="text/javascript"> -->
+  {{-- <script src="{{$child}}/js/datepicker.min.js" type="text/javascript"> --}}
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"  type="text/javascript"></script>
   <script type="text/javascript" src="{{$child}}/js/utils.js"></script>
   <script type="text/javascript" src="{{$child}}/js/cart.js"></script>

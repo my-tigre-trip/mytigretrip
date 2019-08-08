@@ -37,7 +37,7 @@ include('functions-jose.php');
 include('functions-info-section.php');
 include('functions-tour-options.php');
 include('functions-zoho-form.php');
-include('functions-api.php');
+// include('functions-api.php');
 
 // products array file
 $folder = __DIR__.'/zoho-products';

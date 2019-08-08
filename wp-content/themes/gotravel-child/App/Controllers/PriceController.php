@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Models\Tour;
 use App\Models\MyTrip;
 use App\Utils\QueryHelper;
+use App\Controllers\Controller;
 
 /**
  * wrapper of pricing functions
  */
-class PriceController {
+class PriceController extends Controller{
   /**
   * handles the calculator requests
   * @param Array $req;
@@ -29,7 +30,7 @@ class PriceController {
       }
       #verificamos si ya esta bloqueado
       if ($myTrip->lock !== null) {
-        echo jsonResponse([
+        echo $this->jsonResponse([
           'valid' => false,
           'messages' => renderMessage('summary-stage')
         ]);
@@ -71,7 +72,7 @@ class PriceController {
         $myTripBoat->mood2 = null;
         $myTrip->setBoat($myTripBoat);
         // $session->setMyTrip($myTrip);
-        echo jsonResponse([
+        echo $this->jsonResponse([
           'valid' => false,
           'messages' => renderMessage(FULL_DAY)
         ]);
@@ -100,7 +101,7 @@ class PriceController {
       $response['valid'] = true;
       $response['nextStep'] = home_url().'/'.$nextStep.'?'.QueryHelper::myTripToQuery($myTrip, $tour->boat);
       $response['view'] = renderPriceResult($myTrip, $tour->boat, $calculator, $zohoProduct);
-      echo jsonResponse($response);
+      echo $this->jsonResponse($response);
     } else {    
       http_response_code(500);
     }
@@ -135,12 +136,11 @@ class PriceController {
           $myTrip->car = false;
       }
       $myTrip->lock = $myBoat;
-      //guardamos el objeto nuevamente
-      // $session->setMyTrip($myTrip);          
+
       $response['view'] = $view->summary($myTrip, $calculator);
-      echo jsonResponse($response);
+      echo $this->jsonResponse($response);
     } else {
-      echo jsonResponse(['valid' => 'no-boat']);
+      echo $this->jsonResponse(['valid' => 'no-boat']);
     }
   } 
 }

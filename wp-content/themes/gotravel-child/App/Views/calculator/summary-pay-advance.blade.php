@@ -9,21 +9,26 @@
   <div class="card-body">
     <table class="table table-hover">
       <tbody>
-          <tr>
-            <th scope="row" class="text-left border-top-0" >Trip duration</th>
-            <td class="border-top-0">{{$myBoat->boatName($myBoat->boat)}}</td>
-          </tr>
-          @if ($myBoat->boat !== 'speedboat' )
-          <tr>
-            <th scope="row" >I'm in a mood for </th><td>{{$myBoat->mood1->name}}</td>
-          </tr>
-          @endif
-          
-          @if ($myBoat->boat === 'full-day' && $myBoat->mood2->category->slug === 'build-your-own-tigre-trip-stop')
-          <tr>
-            <th scope="row" >I'm also in a mood for </th><td>{{$myBoat->mood2->name}}</td>
-          </tr>
-          @endif
+        <tr>
+          <th scope="row" class="text-left border-top-0" >Date</th>
+          <td class="border-top-0">{{$myTrip->dateFormatted()}}</td>
+        </tr>
+        
+        <tr>
+          <th scope="row" class="text-left border-top-0" >Trip duration</th>
+          <td class="border-top-0">{{$myBoat->boatName($myBoat->boat)}}</td>
+        </tr>
+        @if ($myBoat->boat !== 'speedboat' )
+        <tr>
+          <th scope="row" >I'm in a mood for </th><td>{{$myBoat->mood1->name}}</td>
+        </tr>
+        @endif
+        
+        @if ($myBoat->boat === 'full-day' && $myBoat->mood2->category->slug === 'build-your-own-tigre-trip-stop')
+        <tr>
+          <th scope="row" >I'm also in a mood for </th><td>{{$myBoat->mood2->name}}</td>
+        </tr>
+        @endif
 
       </tbody>
     </table>
