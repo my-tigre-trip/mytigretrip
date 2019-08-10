@@ -32,16 +32,16 @@ class FullDay extends BaseTrip
   /**
    * 
    */
-  public function setNextStep()
-  {
-    if ($this->mood1->category === 'pre-built-tours') {
-      $this->nextStep = 'my-trip';
-    } elseif ($this->mood1->mood === '1' && $this->mood2 === null) {
-      $this->nextStep = 'build-you-own-trip-add-stop';
-    } elseif ($this->mood2->mood === '2' && $this->mood1 === null) {
-      $this->nextStep = 'build-your-own-tigre-trip-lunch';
-    } else {
-      $this->nextStep = 'my-trip'; // vamos al checkout
-    }     
-  }
+  // public function setNextStep()
+  // {
+  //   if ($this->mood1->category === 'pre-built-tours') {
+  //     $this->nextStep = 'my-trip';
+  //   } elseif ($this->mood1->mood === '1' && $this->mood2 === null) {
+  //     $this->nextStep = 'build-you-own-trip-add-stop';
+  //   } elseif ($this->mood2->mood === '2' && $this->mood1 === null) {
+  //     $this->nextStep = 'build-your-own-tigre-trip-lunch';
+  //   } else {
+  //     $this->nextStep = 'my-trip'; // vamos al checkout
+  //   }     
+  // }
 }

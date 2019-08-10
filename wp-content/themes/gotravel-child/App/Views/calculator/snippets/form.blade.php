@@ -23,8 +23,11 @@
 @if(isset($_GET['date']))
 <input type="hidden" name="date" value="{{$_GET['date']}}" >
 @endif
-@if(isset($_GET['d']))
-<input type="hidden" name="d" value="{{$_GET['d']}}" >
+@if(isset($_GET['mood1']))
+<input type="hidden" name="mood1" value="{{$_GET['mood1']}}" >
+@endif
+@if(isset($_GET['mood2']))
+<input type="hidden" name="mood2" value="{{$_GET['mood2']}}" >
 @endif
 @if(isset($_GET['car']))
 <input type="hidden" name="car" value="{{$_GET['car']}}" >

@@ -26,7 +26,7 @@ class SearchController {
     if ($this->validateRequest($req)) {
       //$results = $product->findResults($category, 'categoryId');
       
-      if (isset($req['mood1'])) {        
+      if (isset($req['mood1'])) {  
         $results = $this->secondOptions($req['mood1'], $product);
       } else {
         // find products returns array
@@ -173,10 +173,7 @@ class SearchController {
     if (!isset($req['date'])) {
       return false;
     }
-    // day of week
-    if (!isset($req['dow'])) {
-      return false;
-    }
+
     // duration
     if (!isset($req['duration'])) {
       return false;

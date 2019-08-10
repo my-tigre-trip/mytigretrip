@@ -24,7 +24,7 @@
         </tr>
         @endif
         
-        @if ($myBoat->boat === 'full-day' && $myBoat->mood2->category->slug === 'build-your-own-tigre-trip-stop')
+        @if ($myBoat->boat === 'full-day' && $myBoat->mood2 !== null)
         <tr>
           <th scope="row" >I'm also in a mood for </th><td>{{$myBoat->mood2->name}}</td>
         </tr>

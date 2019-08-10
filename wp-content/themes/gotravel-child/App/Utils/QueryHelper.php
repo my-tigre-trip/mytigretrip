@@ -43,13 +43,15 @@ class QueryHelper {
     if (isset($req['mood1'])) {
       $tour1 = new Tour($req['mood1'], $ZP);
       // people
-
+      if ($req['duration'] === FULL_DAY) {
+        $tour1->boat = FULL_DAY;
+      }
       $myTrip->addTour($tour1);      
     }
 
     if (isset($req['mood2'])) {
       // should convert to full day
-      $tour2 = new Tour($req['mood1'], $ZP);
+      $tour2 = new Tour($req['mood2'], $ZP);
       // people
       $myTrip->addTour($tour2);
     }
@@ -96,6 +98,9 @@ class QueryHelper {
 
     
     $query[] = 'mood1='.$myBoat->mood1->slug;
+    if ($myBoat->mood2 !== null) {
+      $query[] = 'mood2='.$myBoat->mood2->slug;
+    }
 
     // car
     if ($myTrip->car) {

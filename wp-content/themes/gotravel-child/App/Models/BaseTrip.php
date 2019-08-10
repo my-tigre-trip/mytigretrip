@@ -15,7 +15,8 @@ class BaseTrip
     public $options;
 
     public $mood1;
-    //  private $mood2;
+    // public $mood2;
+
     public $payOnIsland = false;
     public $nextStep;
 
@@ -33,7 +34,11 @@ class BaseTrip
     }
 
     public function setNextStep() {
+      if ($this->mood1 !== null && $this->mood2 === null) {
+        $this->nextStep = 'add-stop';
+      } else {
         $this->nextStep = 'my-trip'; // vamos al checkout
-        //overrride me en full day
+      //overrride me en full day
+      }
     }
 }

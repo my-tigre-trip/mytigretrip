@@ -19,7 +19,12 @@ class PriceController extends Controller{
   * @param App\Models\Calculator $calculator
   */
   function calculatePrice($req, $session, $zohoProduct, $calculator) {
-    $response = [  ];
+    $response = [];
+    $adults = 0;
+    $children = 0;
+    $optional = false;
+    $specialActivity = 0;
+
     if ($req['_token'] === $session->id()) {
       $tour = new Tour($req['tourSlug'], $zohoProduct);
       //$myTrip = $session->getMyTrip();
@@ -42,24 +47,52 @@ class PriceController extends Controller{
       if ( isset($req['adults'])) {
         $myTripBoat->adults = $req['adults'];
         $tour->adults = $req['adults'];
+        $adults = $req['adults'];
       }
       
       if ( isset($req['children'])) {
-        $myTripBoat->children = $req['children'];
-        $tour->children = $req['children'];
+        $children = intval($req['children']);
+        $myTripBoat->children = $children;
+        $tour->children = $children;
+        
       }
 
       if (isset($req['specialActivityPeople']) && $req['specialActivityPeople'] > 0) {
         $myTripBoat->specialActivityPeople = $req['specialActivityPeople'];
         $tour->specialActivityPeople = $req['specialActivityPeople'];
+        $specialActivity = $req['specialActivityPeople'];
       }
 
       if (isset($req['optional']) && $req['optional'] === 'yes') {
         $tour->optionalSelected = true;
+        $optional = true;
       } else {
         $tour->optionalSelected = false;
       }
       #evaluamos el tipo de bote correspondiente al tour y lo asignamos
+      // if two stops has optional or special activity will be error
+      if (isset($req['mood1'])) {
+        $mood1 = new Tour($req['mood1'], $zohoProduct);
+        $mood1->adults = $adults;
+        $mood1->children = intval($children);
+        $mood1->optionalSelected = $optional;
+        $mood1->specialActivityPeople = $specialActivity;
+        // override the boat
+        $mood1->boat = FULL_DAY;
+        $myTrip->addTour($mood1);
+      }
+
+      if (isset($req['mood2'])) {
+        $mood2 = new Tour($req['mood2'], $zohoProduct);
+        $mood2->adults = $adults;
+        $mood2->children = intval($children);
+        $mood2->optionalSelected = $optional;
+        $mood2->specialActivityPeople = $specialActivity;
+        // override the boat
+        $mood2->boat = FULL_DAY;
+        $myTrip->addTour($mood2);
+      }
+
       $myTrip->addTour($tour);
       
       //@todo Check if there are second options 
@@ -68,16 +101,16 @@ class PriceController extends Controller{
       $myTrip->setBoat($myTripBoat);
       
       #check de mood2
-      if ($myTripBoat->boat === FULL_DAY && $tour->mood === '2' && $myTripBoat->mood1 === null) {
-        $myTripBoat->mood2 = null;
-        $myTrip->setBoat($myTripBoat);
-        // $session->setMyTrip($myTrip);
-        echo $this->jsonResponse([
-          'valid' => false,
-          'messages' => renderMessage(FULL_DAY)
-        ]);
-        die();
-      }
+      // if ($myTripBoat->boat === FULL_DAY && $tour->mood === '2' && $myTripBoat->mood1 === null) {
+      //   $myTripBoat->mood2 = null;
+      //   $myTrip->setBoat($myTripBoat);
+      //   // $session->setMyTrip($myTrip);
+      //   echo $this->jsonResponse([
+      //     'valid' => false,
+      //     'messages' => renderMessage(FULL_DAY)
+      //   ]);
+      //   die();
+      // }
       #evaluamos el goto
       $lockCollision = false;
 
