@@ -10,7 +10,7 @@ abstract class Validator {
    * validates the reques
    * @param Array $req $_POST request
    */
-  abstract public function validate($req, $session);
+  abstract public function validate($req);
 
   /**
    * returns false if some required field is missing in request
@@ -60,13 +60,13 @@ abstract class Validator {
   /**
    * the pickup address is only required when the car is selected or in full day trip
    */
-  public function validateAddress($req, $myTrip) {
+  public function validateAddress($req) {
     if (!isset($req['pickupAddress'])) {
       //$this->sessionError();
       //return false;
     }
     $myBoat = $myTrip->lock;
-    if(($myTrip->car || $myBoat->boat === 'full-day') && empty($req['pickupAddress'])) {
+    if(($req['car'] === INCLUDED || $req['duration'] === 'full-day') && empty($req['pickupAddress'])) {
       $this->addressError();
       return false;
     }

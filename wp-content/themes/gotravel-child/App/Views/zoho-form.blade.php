@@ -30,7 +30,7 @@ $t = new Translation('contact-form-en');
   <p>Please complete the following information</p>
   <form id="mtt-checkout-form" action="/mytigretrip/checkout.php" method='POST' onSubmit='javascript:document.charset="UTF-8"; return checkMandatory()' accept-charset="UTF-8">
   <input type="hidden" name="_token" value="{{session_id()}}"  />
-  @include('zoho-form.zoho-fields')
+  @include('snippets.mtt-query-inputs-checkout')
   <div class="form-row mt-4">
     @include('zoho-form.personal-data')
   </div>

@@ -7,7 +7,7 @@ use App\Controllers\CheckoutController;
 use App\Models\ZohoHelpers\Product as ZohoProduct;
 use App\Models\ZohoHelpers\ZohoHandler;
 
-ZohoHandler::getInstance()->auth();
+// ZohoHandler::getInstance()->auth();
 
 $c = new CheckoutController();
 //renders the checkout page

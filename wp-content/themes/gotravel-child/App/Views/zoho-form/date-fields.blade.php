@@ -6,6 +6,7 @@
         <tr>
           <th scope="row" class="text-left border-top-0" >Your Date</th>
           <td class="border-top-0">{{$myTrip->dateFormatted()}}</td>
+          <input type="hidden" name="date" value="{{$myTrip->date}}" />
         </tr>
       </tbody>
     </table>

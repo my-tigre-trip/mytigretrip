@@ -11,7 +11,7 @@ use Jenssegers\Blade\Blade;
 use App\Utils\ViewRenderer;
 use App\Models\ZohoHelpers\ZohoHandler;
 
-ZohoHandler::getInstance()->auth(); // requesting authorization
+// ZohoHandler::getInstance()->auth(); // requesting authorization
 
 $zp = ZohoProduct::getInstance();
 $c = new Calculator($zp);

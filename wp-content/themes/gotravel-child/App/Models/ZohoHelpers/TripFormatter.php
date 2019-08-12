@@ -139,10 +139,11 @@ abstract class TripFormatter {
   }
 
   public function setGoogleDate() {
-    $date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
-    $date->setDate(intval($this->req->year), intval($this->req->month), intval($this->req->day));
-    $date->setTime(0,0); 
-    return $date->format('Y-m-d');
+    // $date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
+    // $date->setDate(intval($this->req->year), intval($this->req->month), intval($this->req->day));
+    // $date->setTime(0,0); 
+    // return $date->format('Y-m-d');
+    return $this->req->date;
   }
 
   public function findRequiredDeposit() {

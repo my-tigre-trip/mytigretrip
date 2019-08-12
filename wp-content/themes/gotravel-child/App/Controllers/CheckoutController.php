@@ -111,7 +111,7 @@ class CheckoutController extends Controller {
    */
   public function checkout($req, $WP, $session, $zohoHandler, $validator, $translator, $formatter) {
     $response = [];
-    if ($validator->validate($req, $session)) {
+    if ($validator->validate($req)) {
       $formatter->setup();
       $recordDeal = $formatter->getZohoDealRecordFormat();
       $dealArray [] = $recordDeal;

@@ -141,6 +141,7 @@ class PrivateFormatter extends TripFormatter{
   }
 
   public function calculatePrice() {
+    
     $this->priceDetail = $this->calculator->calculatePrice($this->myTrip->lock, $this->myTrip);
   }
 
