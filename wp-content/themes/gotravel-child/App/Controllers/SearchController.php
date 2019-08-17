@@ -28,6 +28,7 @@ class SearchController {
       
       if (isset($req['mood1'])) {  
         $results = $this->secondOptions($req['mood1'], $product);
+        $results = $this->filterByDayAndMonth($req, $results);        
       } else {
         // find products returns array
         $results = $product->find('half-day', 'validIn', true);
@@ -121,6 +122,64 @@ class SearchController {
     return $filteredResults;
   }
 
+  /**
+   * the second option only filter day & month
+   */
+  public function filterByDayAndMonth($req, $results) {
+    $filteredResults = [];
+    $dayOfWeek = [
+      'sunday' => 'Domingo',
+      'monday' => 'Lunes',
+      'tuesday' => 'Martes',
+      'wednesday' => 'Miércoles',
+      'thursday' => 'Jueves',
+      'friday' => 'Viernes',
+      'saturday' => 'Sábado'
+    ];
+
+    $months = [
+      'January' => 'Enero',
+      'February' => 'Febrero',
+      'March' => 'Marzo',
+      'April' => 'Abril',
+      'May' => 'Mayo',
+      'June' => 'Junio',
+      'July' => 'Julio',
+      'August' => 'Agosto',
+      'September' => 'Septiembre',
+      'October' => 'Octubre',
+      'November' => 'Noviembre',
+      'December' => 'Diciembre'
+    ];
+
+    // filters by date
+    $time = strtotime($req['date']);
+    $dow = date("l", $time);
+    $month = date("F", $time);
+    
+    foreach ($results as $result) {
+      $isValid = true;
+      if ($isValid && (count($result['month']) === 0 || in_array($months[$month], $result['month']))) {
+        $isValid = true;
+      } else {
+        $isValid = false;
+      }
+
+      // day of week
+      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$req['dow']], $result['dow']))) {
+        $isValid = true;
+      } else {
+        $isValid = false;
+      }
+
+      if ($isValid) {
+        $filteredResults[] = $result;
+      }
+    }
+
+    return $filteredResults;
+  }
+
   public function secondOptions($mood1, $product) {
     $tour = $product->find($mood1);
     
@@ -129,8 +188,7 @@ class SearchController {
       $results [] = $product->find($option);
     }
     
-    $secondOptions = count($results) > 0;
-    return $secondOptions ? $results: false;
+    return $results;
   }
 
   public function search($query, $products) {

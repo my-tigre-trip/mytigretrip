@@ -55,6 +55,7 @@ class QueryHelper {
       // people
       $myTrip->addTour($tour2);
     }
+    
     // people
     $myTrip->setPeople($req);
     

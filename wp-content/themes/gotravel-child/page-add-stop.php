@@ -5,7 +5,7 @@ use App\Controllers\SearchController;
 use App\Models\ZohoHelpers\Product as ZohoProduct;
 use App\Models\ZohoHelpers\ZohoHandler;
 
-ZohoHandler::getInstance()->auth();
+// ZohoHandler::getInstance()->auth();
 $c = new SearchController();
 //renders the trip seach page
 
@@ -14,12 +14,10 @@ $section = 'tour-item/';
 $column = 6;
 $results = $c->tripSearchPage($_GET, ZohoProduct::getInstance());
 // aslo we should check if the trip is valid with a single stop
-if (!$results) {
+if (count($results) === 0) {
   Wordpress::redirectCheckout();
 }
-// foreach ($results as $r) {
-//     echo "$r[name]<br>";
-// }
+
 // this query should not have mood1
 $query = '';
 ?>
