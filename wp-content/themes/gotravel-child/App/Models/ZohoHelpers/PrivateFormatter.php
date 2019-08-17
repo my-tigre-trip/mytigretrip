@@ -140,9 +140,8 @@ class PrivateFormatter extends TripFormatter{
     $this->CompleteContact['value'] = NONE;
   }
 
-  public function calculatePrice() {
-    
-    $this->priceDetail = $this->calculator->calculatePrice($this->myTrip->lock, $this->myTrip);
+  public function calculatePrice() {    
+    $this->priceDetail = $this->calculator->calculatePrice($this->myBoat, $this->myTrip);
   }
 
   public function applyPriceTransformations() {

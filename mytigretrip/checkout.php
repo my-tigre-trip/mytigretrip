@@ -27,7 +27,9 @@ $zohoHandler->auth();
 
 
 $calculator = new Calculator($product);
-$formatter = new PrivateFormatter($_POST, $zohoHandler, $T, $product, $calculator, $myTrip);
+$duration = QueryHelper::parseDuration($_POST['checkout']);
+$myBoat = $myTrip->getBoat($duration->duration);
+$formatter = new PrivateFormatter($_POST, $zohoHandler, $T, $product, $calculator, $myTrip, $myBoat);
 # Get JSON as a string
 //$json_str = file_get_contents('php://input');
 # Get as an object

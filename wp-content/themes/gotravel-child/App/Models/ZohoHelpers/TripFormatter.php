@@ -60,8 +60,9 @@ abstract class TripFormatter {
    * @param \App\Models\ZohoHelpers\Product $product
    * @param \App\Models\Calculator $calculator
    * @param \App\Models\MyTrip $myTrip
+   * @param \App\Models\Boat $myBoat
    */
-  public function __construct($req, $zohoHandler, $translator, $product, $calculator, $myTrip) {
+  public function __construct($req, $zohoHandler, $translator, $product, $calculator, $myTrip, $myBoat) {
     $this->req = json_decode(json_encode($req), FALSE);
     $this->zohoHandler = $zohoHandler;
     $this->translator = $translator;
@@ -69,6 +70,7 @@ abstract class TripFormatter {
     #we need price logic here not in form rendering
     $this->calculator = $calculator;
     $this->myTrip = $myTrip;
+    $this->myBoat = $myBoat;
   }
 
   public function setup() {
