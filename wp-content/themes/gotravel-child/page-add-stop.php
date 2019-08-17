@@ -13,7 +13,10 @@ $home = home_url().'/';
 $section = 'tour-item/';
 $column = 6;
 $results = $c->tripSearchPage($_GET, ZohoProduct::getInstance());
-
+// aslo we should check if the trip is valid with a single stop
+if (!$results) {
+  Wordpress::redirectCheckout();
+}
 // foreach ($results as $r) {
 //     echo "$r[name]<br>";
 // }

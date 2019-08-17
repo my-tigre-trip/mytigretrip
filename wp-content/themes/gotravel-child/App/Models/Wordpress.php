@@ -14,4 +14,8 @@ class Wordpress {
   public function redirectHome() {
     wp_redirect(home_url());
   }
+
+  public function redirectCheckout() {
+    wp_redirect( 'my-trip?'.$_SERVER['QUERY_STRING']);
+  }
 }
