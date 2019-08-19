@@ -274,16 +274,19 @@ function displayMessage(message) {
 function checkAvailability () {
 	jQuery('#mtt-trip-search-home').on('submit', function(e) {
 		e.preventDefault();
+		
     if (validateRequest()) {
       formElement = document.getElementById("mtt-trip-search-home");
-  	  var formData = new FormData( formElement );
+			var formData = new FormData( formElement );
+			jQuery(".mtt-loading").show();
 	    standardRequest('checkAvailability', 'get', formDataToObject(formData), successCb, 15000, errorCb);
     }
   });
   
-  var successCb = function (response) {
+  var successCb = function (response) {		
 	var data = response.data;
 	console.log('response', data);
+	jQuery(".mtt-loading").hide();
     if (data.available) {
       // redirect if available is true
 	  displayMessage('Redirecting');
@@ -295,6 +298,7 @@ function checkAvailability () {
   }
 
   var errorCb = function (err) {
+		jQuery(".mtt-loading").hide();
     console.error('error', err);
     displayMessage('An error ocurred during search. Please try again')
   }  

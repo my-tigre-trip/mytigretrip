@@ -62,6 +62,7 @@ function checkoutSuccess(res) {
 
   /**
   * Handles the request to calendar in the cloud
+  * not used
   */
   function calendarRequest(schedule = '', datepicker = "#datepicker") {   
     var cal = false;
@@ -75,7 +76,7 @@ function checkoutSuccess(res) {
   
   /**
   * render the datepicker calendar 
-  *
+  * not used
   */
   function calendarUpdate (res, datepicker) {
     //console.log(res);

@@ -1,4 +1,4 @@
-<div class="vc_col-md-4  vc_col-sm-12" >
+<div class="vc_col-md-6  vc_col-sm-12" >
 <label for="adults">Adults </label>
   <select name="adults" id="adults" class="form-control" required>
     <option > </option>
@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="vc_col-md-4  vc_col-sm-12" >
+<div class="vc_col-md-6  vc_col-sm-12" >
 <label for="children"><div class="tooltip">Children<span class="tooltiptext">Paying children are more than 2 and under 10 years of age.</span></div></label>
 <select name="children" id="children" class="form-control" required >
     <option value="0" <?php echo $req['children'] == '0'? 'selected':'';?> >0</option>
@@ -20,7 +20,8 @@
   </select>
 </div>
 
-<div class="vc_col-md-4  vc_col-sm-12" >
+
+<div class="vc_col-md-12  vc_col-sm-12 clearfix" >
 <label for="duration"><div class="tooltip">Trip Duration<span class="tooltiptext">Full day is about 7 hs // Half Day is about 5 hs </span></div></label>
 <select name="duration" id="duration" class="form-control" required>
     <option value="full-day" <?php echo $req['duration'] == 'full-day'? 'selected':'';?> >Full Day</option>
@@ -29,7 +30,7 @@
   </select>
 </div>
 
-<div class="vc_col-md-4  vc_col-sm-12" >
+<div class="vc_col-md-12  vc_col-sm-12" >
   <label for="datepicker">Date</label>
   <input id="datepicker" class="form-control" name="datepicker" required autocomplete="off">
   <input id="date" type="hidden" name="date">

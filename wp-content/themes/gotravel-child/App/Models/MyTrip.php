@@ -106,6 +106,12 @@ class MyTrip {
       return $trip;
     }
 
+    public function setId() {
+      global $wpdb;
+      $count = $wpdb->get_var('SELECT COUNT(*) FROM mtt_trips where 1');
+      $this->id = $count + 1;
+    }
+
     /**
     * array de notes
     */

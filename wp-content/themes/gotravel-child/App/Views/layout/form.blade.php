@@ -6,13 +6,7 @@
     <title>My Tigre Trip | Checkout</title>
     @php
     $templateFolder = get_template_directory_uri();
-    $child = get_stylesheet_directory_uri();
-    $schedule = '';
-    if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
-      $schedule = 'full-day';
-    } else {
-      $schedule = $myBoat->mood1->schedule;
-    }
+    $child = get_stylesheet_directory_uri();    
     
     @endphp
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

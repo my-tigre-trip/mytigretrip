@@ -60,36 +60,19 @@ $t = new Translation('contact-form-en');
 
 @push('javascript')
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function() {
   $("#mtt-book-my-trip").click(function(e){
     e.preventDefault();
     checkoutRequest();
   });
-  
-  @if($myBoat->boat === 'speedboat')
-    //$(".multiDatePicker").hide();
-    
-    calendarRequest("morning", "#datepickerMorning");
-    calendarRequest("afternoon","#datepickerAfternoon");   
-
-    toogleCalendars($('input[name="schedule"]').val());        
-    //multi calendar handler
-    $("select[name=mttTimeSelector]").change(function(e) {  
-      var val = $(this).val();  
-      toogleCalendars(val);     
-    });
-    
-  @else
-    calendarRequest($('meta[name="schedule"]').attr("value"));
-  @endif
 
   // evento pick con scoll
 
-if ($("#mttTimeSelector").length > 0) {
- // $(".mttTimeDependent").hide()
-}
+  if ($("#mttTimeSelector").length > 0) {
+  // $(".mttTimeDependent").hide()
+  }
 
-$('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 @endpush

@@ -57,6 +57,20 @@ class CheckoutController extends Controller {
       $myBoat = $myTrip->getBoat($boat);
       $price = $calculator->calculatePrice($myBoat, $myTrip);
       $notes = $myTrip->getNotes($myBoat, $price['tourDetail']['price']);
+      $myTrip->setId();
+
+      $schedule = '';
+      if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
+        $schedule = 'full-day';
+      } else {
+        $schedule = $myBoat->mood1->schedule;
+        if ($schedule === MORNING_ES) {
+          $schedule = MORNING_CLASS;
+        } else {
+          $schedule = AFTERNOON_CLASS;
+        }
+      }
+
       return $blade->make('zoho-form', [
         'myTrip' => $myTrip,
         'myBoat' => $myBoat,
@@ -64,7 +78,8 @@ class CheckoutController extends Controller {
         'tourDetail' => $price['tourDetail'],
         'finalPrice' => $price['finalPrice'],
         'price' => $price,
-        'notes' => $notes
+        'notes' => $notes,
+        'schedule' => $schedule
       ]);
     }
   }

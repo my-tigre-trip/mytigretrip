@@ -1,4 +1,4 @@
-@if($myBoat->boat === FULL_DAY ||  $myBoat->mood1->schedule === 'morning')
+@if($myBoat->boat === FULL_DAY ||  $myBoat->mood1->schedule === MORNING_ES)
   @include('zoho-form.snippets.morning-schedule')
 @else
   @include('zoho-form.snippets.not-morning-schedule')
@@ -66,7 +66,7 @@ function setBoatDepartureTime() {
 $(document).ready(function(){
   if ($('meta[name="schedule"]').attr("value") === 'morning')
   {
-    console.log("mor");
+    
     setBoatDepartureTime();
     $('select[name="carPickupTime"]').change(function(){
       setBoatDepartureTime();

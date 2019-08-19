@@ -156,11 +156,17 @@ class Tour
   }
 
   public function isMorning() {
-    return empty($this->schedule) || strpos(strtolower($this->schedule), 'morning') !== false;
+    return empty($this->schedule) 
+      || strpos(strtolower($this->schedule), 'morning') !== false 
+      || $this->schedule === MORNING_ES
+      ;
   }
 
   public function isAfternoon() {
-    return ( empty($this->schedule)) || strpos(strtolower($this->schedule), 'afternoon') !== false;
+    return ( empty($this->schedule))
+      || strpos(strtolower($this->schedule), 'afternoon') !== false
+      || $this->schedule === AFTERNOON_ES
+      ;
   }
 
   public function areChildrenAllowed() {
