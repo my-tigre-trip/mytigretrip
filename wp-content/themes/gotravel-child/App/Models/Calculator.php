@@ -163,8 +163,8 @@ class Calculator {
         $finalPrice = $boatPrice['price'];
         $priceAdults = $boatPrice['priceAdults'];
         $priceChildren = $boatPrice['priceChildren'];
-        $priceSpecialActivity = 0;
-        $estimatedIslandExpenses = $tourPrice['price'];;
+        $priceSpecialActivity = $tourPrice['specialActivityPrice'];
+        $estimatedIslandExpenses = $tourPrice['price'];
 
         $payAdvance = $myTrip !== null? !$myTrip->payOnIsland: true;
         if ($payAdvance) {

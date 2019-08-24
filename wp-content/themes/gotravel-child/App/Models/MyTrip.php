@@ -43,6 +43,10 @@ class MyTrip {
     public $date; //Y-m-d
     public $d; // date validation hash
 
+    // to follow the selection
+    public $duration;
+    public $schedule;
+
     public function __construct($sessionId) {
       $this->sessionId = $sessionId;
       $this->lock = null;
@@ -63,8 +67,8 @@ class MyTrip {
         }
     }
 
-    public function getBoat($boat)
-    {
+    public function getBoat() {
+      $boat = $this->duration;
         $b = null;
         if ($boat === 'speedboat') {
             $b = $this->speedboat;

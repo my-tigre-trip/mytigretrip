@@ -23,15 +23,23 @@
 <?php if(isset($_GET['date'])): ?>
 <input type="hidden" name="date" value="<?php echo e($_GET['date']); ?>" >
 <?php endif; ?>
+
 <?php if(isset($_GET['mood1'])): ?>
 <input type="hidden" name="mood1" value="<?php echo e($_GET['mood1']); ?>" >
 <?php endif; ?>
+
 <?php if(isset($_GET['mood2'])): ?>
 <input type="hidden" name="mood2" value="<?php echo e($_GET['mood2']); ?>" >
 <?php endif; ?>
+
 <?php if(isset($_GET['car'])): ?>
 <input type="hidden" name="car" value="<?php echo e($_GET['car']); ?>" >
 <?php endif; ?>
+
 <?php if(isset($_GET['payOnIsland'])): ?>
 <input type="hidden" name="payOnIsland" value="<?php echo e($_GET['payOnIsland']); ?>" >
+<?php endif; ?>
+
+<?php if(isset($_GET['duration'])): ?>
+<input type="hidden" name="duration" value="<?php echo e($_GET['duration']); ?>" >
 <?php endif; ?>

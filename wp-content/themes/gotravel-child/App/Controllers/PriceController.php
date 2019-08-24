@@ -24,6 +24,7 @@ class PriceController extends Controller{
     $children = 0;
     $optional = false;
     $specialActivity = 0;
+    $mood1 = null;
 
     if ($req['_token'] === $session->id()) {
       $tour = new Tour($req['tourSlug'], $zohoProduct);
@@ -42,7 +43,18 @@ class PriceController extends Controller{
         die();
       }
       #transferimos todos los campos
-      $myTripBoat = $myTrip->getBoat($tour->boat);
+      $myTripBoat = $myTrip->getBoat();
+      if (!isset($req['mood1'])) {
+        $myTripBoat->mood1 = $tour;
+      } elseif (isset($req['mood1']) && !isset($req['mood2'])) {
+        // validar si es segunda opcion
+        $myTripBoat->mood2 = $tour;
+        if ($myTrip->duration === HALF_DAY) {
+          $myTrip->duration = FULL_DAY;
+          $myTrip->schedule = '';
+          $myTripBoat = $myTrip->getBoat();
+        }
+      }
       
       if ( isset($req['adults'])) {
         $myTripBoat->adults = $req['adults'];
@@ -79,7 +91,7 @@ class PriceController extends Controller{
         $mood1->specialActivityPeople = $specialActivity;
         // override the boat
         $mood1->boat = FULL_DAY;
-        $myTrip->addTour($mood1);
+        $myTripBoat->mood1 = $mood1;
       }
 
       if (isset($req['mood2'])) {
@@ -90,10 +102,13 @@ class PriceController extends Controller{
         $mood2->specialActivityPeople = $specialActivity;
         // override the boat
         $mood2->boat = FULL_DAY;
-        $myTrip->addTour($mood2);
+        //$myTrip->addTour($mood2);
+        $myTripBoat->mood2 = $mood2;
       }
 
-      $myTrip->addTour($tour);
+      
+
+      //$myTrip->addTour($tour);
       
       //@todo Check if there are second options 
       $myTripBoat->setNextStep();
@@ -133,7 +148,7 @@ class PriceController extends Controller{
       # enviamos response    
       $response['valid'] = true;
       $response['nextStep'] = home_url().'/'.$nextStep.'?'.QueryHelper::myTripToQuery($myTrip, $tour->boat);
-      $response['view'] = renderPriceResult($myTrip, $tour->boat, $calculator, $zohoProduct);
+      $response['view'] = renderPriceResult($myTrip, $myTrip->duration, $calculator, $zohoProduct);
       echo $this->jsonResponse($response);
     } else {    
       http_response_code(500);

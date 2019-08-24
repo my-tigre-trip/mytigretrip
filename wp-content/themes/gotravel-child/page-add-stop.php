@@ -29,7 +29,10 @@ $query = '';
 
 		<div class="mkdf-container-inner clearfix">
       <div><?php the_content(); ?></div>
-
+      <div class="vc_col-sm-12 ">
+        <p>Do you want to add a stop see the options below</p>
+        <p>No, <a href="<?php echo $home.'/my-trip/?'.$_SERVER['QUERY_STRING']; ?>"> continue with checkout</p>
+      </div>
       <div class="wpb_wrapper ">
       <?php  foreach ($results as  $t) :  ?>
         <div class="vc_col-sm-12 vc_col-md-<?php echo $column; ?> mtt-tour-item">

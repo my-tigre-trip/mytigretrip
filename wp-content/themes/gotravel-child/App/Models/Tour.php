@@ -35,12 +35,7 @@ class Tour
   {
     $this->P = $P;
     
-    if ($sku !== null) {
-            //$this->product = $this->find($sku);
-          
-            // $this->category = Woo::getCategory($this->product);#
-            // $this->boat = Woo::getTourBoat($this->category);#
-            // $this->mood = Woo::getMood($this->category);#
+    if ($sku !== null) {     
       $this->optionalSelected = false; // luxury & ranch
       
       $this->product = $this->P->find($sku);
@@ -60,22 +55,8 @@ class Tour
     }
   }
 
-    public function find($sku)
-    {
-        return Woo::findProduct($sku);
-    }
-
     /**
-    *
-    * @return string
-    */
-    public function getTourBoat()
-    {
-        return Woo::getCategory($this->product);
-    }
-
-    /**
-    * 
+    * get the tour price
     *
     */
     public function getPrice() {

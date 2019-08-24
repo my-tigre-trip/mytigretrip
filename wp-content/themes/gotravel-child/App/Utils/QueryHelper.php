@@ -37,7 +37,9 @@ class QueryHelper {
     }
 
     if (isset($req['duration'])) {
-
+      $duration = self::parseDuration($req);
+      $myTrip->duration = $duration->duration;
+      $myTrip->schedule = $duration->schedule;
     }
     
     if (isset($req['mood1'])) {
@@ -113,7 +115,7 @@ class QueryHelper {
       $query[] = 'payOnIsland=yes';
     }
 
-    $query[] = 'duration='.$boat;
+    $query[] = 'duration='.$myTrip->duration.'_'.$myTrip->schedule;
     
     if ($myTrip->date) {
       $query[] = "date=$myTrip->date";
