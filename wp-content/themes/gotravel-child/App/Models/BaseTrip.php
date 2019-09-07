@@ -29,7 +29,7 @@ class BaseTrip
         return str_replace(['speedboat','half-day','full-day'], ['Speedboat Trip (no stops)','Half Day Trip','Full Day Trip'], $boat);
     }
 
-    public function addTour(Tour $tour) {
+    public function addTour(Tour $tour, $mood = 1) {
         //override me
     }
 

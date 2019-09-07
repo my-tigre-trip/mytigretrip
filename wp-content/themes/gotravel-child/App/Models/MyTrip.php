@@ -56,14 +56,14 @@ class MyTrip {
       $this->date = null;
     }
 
-    public function addTour(Tour $tour)
+    public function addTour(Tour $tour, $mood = 1)
     {
         if ($tour->boat === 'speedboat') {
            //
         } elseif ($tour->boat === 'half-day') {
-            $this->halfDay->addTour($tour);
+            $this->halfDay->addTour($tour, 1);
         } elseif ($tour->boat === 'full-day') {
-            $this->fullDay->addTour($tour);
+            $this->fullDay->addTour($tour, $mood);
         }
     }
 
@@ -216,11 +216,40 @@ class MyTrip {
 
       if (isset($req['specialActivityPeople'])) {
         $this->fullDay->specialActivityPeople = $req['specialActivityPeople'];
+        if (isset($this->fullDay->mood1)) {
+          $this->fullDay->mood1->specialActivityPeople = $req['specialActivityPeople'];
+        }
+
+        if (isset($this->fullDay->mood2)) {
+          $this->fullDay->mood2->specialActivityPeople = $req['specialActivityPeople'];
+        }
+        // half day
         $this->halfDay->specialActivityPeople = $req['specialActivityPeople'];
+        if (isset($this->halfDay->mood1)) {
+          $this->halfDay->mood1->specialActivityPeople = $req['specialActivityPeople'];
+        }
       }
     }
 
   public function dateFormatted() {
     return $this->date !== null ? date('l j \of F Y', strtotime($this->date)) : '-';
+  }
+
+  public function setOptional($req) {
+    
+    if (isset($req['optional'])) {
+      $myBoat = $this->getBoat();
+      $o1 = $myBoat->mood1->hasOptional();
+      if ($o1) {
+        $myBoat->mood1->optionalSelected = true;
+      }
+
+      $o2 = isset($myBoat->mood2) && $myBoat->mood2->hasOptional();
+      if ($o2) {
+        $myBoat->mood2->optionalSelected = true;
+      }
+      
+      $this->setBoat($myBoat);
+    }
   }
 }

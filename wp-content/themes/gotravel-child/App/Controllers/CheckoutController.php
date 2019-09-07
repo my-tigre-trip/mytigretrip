@@ -31,8 +31,8 @@ class CheckoutController extends Controller {
         //return false;
         // die();        
     }
-    
-    $myBoat = $myTrip->lock ? $myTrip->lock : $myTrip->getBoat($req['duration']);
+    $duration = QueryHelper::parseDuration($req['duration']);
+    $myBoat = $myTrip->lock ? $myTrip->lock : $myTrip->getBoat($duration->duration);
     $price = $calculator->calculatePrice($myBoat, $myTrip);
 
     return $blade->make('zoho-options-form', ['myTrip' => $myTrip, 'myBoat' => $myBoat]);

@@ -30,12 +30,14 @@ class QueryHelper {
   public function queryToMyTrip($req, $ZP) {
     session_start();
     $myTrip = new MyTrip(session_id());
+
     #buscar el tour
     if (isset($req['tourSlug'])) {
       $tourSlug = new Tour($req['tourSlug'], $ZP);
       $myTrip->addTour($tourSlug);
     }
 
+    $duration = '';
     if (isset($req['duration'])) {
       $duration = self::parseDuration($req);
       $myTrip->duration = $duration->duration;
@@ -45,19 +47,20 @@ class QueryHelper {
     if (isset($req['mood1'])) {
       $tour1 = new Tour($req['mood1'], $ZP);
       // people
-      if ($req['duration'] === FULL_DAY) {
+      if ($myTrip->duration === FULL_DAY) {
         $tour1->boat = FULL_DAY;
       }
-      $myTrip->addTour($tour1);      
+      $myTrip->addTour($tour1, 1);      
     }
 
     if (isset($req['mood2'])) {
       // should convert to full day
       $tour2 = new Tour($req['mood2'], $ZP);
       // people
-      $myTrip->addTour($tour2);
+      $myTrip->addTour($tour2, 2);
     }
     
+    $myTrip->setOptional($req);
     // people
     $myTrip->setPeople($req);
     
@@ -95,14 +98,20 @@ class QueryHelper {
       $query[] = "children=$myBoat->children";
     }
 
-    if ($myBoat->specialActivity > 0) {
-      $query[] = "specialActivity=$myBoat->specialActivity";
+    if ($myBoat->specialActivityPeople > 0) {
+      $query[] = "specialActivityPeople=$myBoat->specialActivityPeople";
     }
 
-    
     $query[] = 'mood1='.$myBoat->mood1->slug;
     if ($myBoat->mood2 !== null) {
       $query[] = 'mood2='.$myBoat->mood2->slug;
+    }
+
+    // optional
+    $o1 = $myBoat->mood1->hasOptional() && $myBoat->mood1->optionalSelected;
+    $o2 = isset($myBoat->mood2) && $myBoat->mood2->hasOptional() && $myBoat->mood2->optionalSelected;
+    if ($o1 || $o2) {
+      $query[] = 'optional=yes';
     }
 
     // car

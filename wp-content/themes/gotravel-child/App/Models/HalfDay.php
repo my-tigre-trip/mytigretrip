@@ -18,9 +18,9 @@ class HalfDay extends BaseTrip
     * si es half day y mood 1 la agrega como tour y sobreescribe lo anterior
     * @param Tour $tour
     */
-    public function addTour(Tour $tour)
+    public function addTour(Tour $tour, $mood = 1)
     {
-        if ($tour->boat === HALF_DAY && $tour->mood === '1') {
+        if ($tour->boat === HALF_DAY) {
             $this->mood1 = $tour;
         }
     }  

@@ -20,11 +20,11 @@ class FullDay extends BaseTrip
   * si es half day y mood 1 la agrega como tour y sobreescribe lo anterior
   * @param Tour $tour
   */
-  public function addTour(Tour $tour)
+  public function addTour(Tour $tour, $mood = 1)
   {
-      if ($tour->boat === 'full-day' && $tour->mood === '1') {
+      if ($tour->boat === 'full-day' && $mood === 1) {
           $this->mood1 = $tour;
-      } elseif ($tour->boat === 'full-day' && $tour->mood === '2') {
+      } elseif ($tour->boat === 'full-day' && $mood === 2) {
           $this->mood2 = $tour;
       }
   }

@@ -31,7 +31,8 @@ class SearchController {
         $results = $this->filterByDayAndMonth($req, $results);        
       } else {
         // find products returns array
-        $results = $product->find('half-day', 'validIn', true);
+        $duration = QueryHelper::parseDuration($req);        
+        $results = $product->find($duration->duration, 'validIn', true);
         $results = $this->filterResults($req, $results);       
       }
       
@@ -49,13 +50,13 @@ class SearchController {
   public function filterResults($req, $results) {
     $filteredResults = [];
     $dayOfWeek = [
-      'sunday' => 'Domingo',
-      'monday' => 'Lunes',
-      'tuesday' => 'Martes',
-      'wednesday' => 'Miércoles',
-      'thursday' => 'Jueves',
-      'friday' => 'Viernes',
-      'saturday' => 'Sábado'
+      'Sunday' => 'Domingo',
+      'Monday' => 'Lunes',
+      'Tuesday' => 'Martes',
+      'Wednesday' => 'Miércoles',
+      'Thursday' => 'Jueves',
+      'Friday' => 'Viernes',
+      'Saturday' => 'Sábado'
     ];
 
     $months = [
@@ -94,9 +95,11 @@ class SearchController {
       $isValid = true;      
 
       // schedule in half day
-      if ($isValid && $duration !== 'full-day' && $result['schedule'] === $schedule) {
+      if ($isValid && $duration !== FULL_DAY && $result['schedule'] === $schedule) {
         $isValid = true;
-      } else {
+      } elseif($duration === FULL_DAY && $result['schedule'] !== AFTERNOON_ES) {
+        $isValid = true; // full day first option is only morning or full day 
+      }else {
         $isValid = false;
       }
 
@@ -128,13 +131,13 @@ class SearchController {
   public function filterByDayAndMonth($req, $results) {
     $filteredResults = [];
     $dayOfWeek = [
-      'sunday' => 'Domingo',
-      'monday' => 'Lunes',
-      'tuesday' => 'Martes',
-      'wednesday' => 'Miércoles',
-      'thursday' => 'Jueves',
-      'friday' => 'Viernes',
-      'saturday' => 'Sábado'
+      'Sunday' => 'Domingo',
+      'Monday' => 'Lunes',
+      'Tuesday' => 'Martes',
+      'Wednesday' => 'Miércoles',
+      'Thursday' => 'Jueves',
+      'Friday' => 'Viernes',
+      'Saturday' => 'Sábado'
     ];
 
     $months = [
@@ -166,7 +169,7 @@ class SearchController {
       }
 
       // day of week
-      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$req['dow']], $result['dow']))) {
+      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$dow], $result['dow']))) {
         $isValid = true;
       } else {
         $isValid = false;
@@ -185,7 +188,7 @@ class SearchController {
     
     $results = [];
     foreach ($tour['secondOption'] as $option) {
-      $results [] = $product->find($option);
+      $results [] = $product->find($option, 'internal_name');
     }
     
     return $results;
