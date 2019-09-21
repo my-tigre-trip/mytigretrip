@@ -73,6 +73,12 @@ class SearchController {
       'November' => 'Noviembre',
       'December' => 'Diciembre'
     ];
+
+    // temporal
+    $monthsEn = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'
+    ];
  
     // obtain filters
     $_duration = QueryHelper::parseDuration($req);
@@ -104,7 +110,7 @@ class SearchController {
       }
 
       // Month
-      if ($isValid && (count($result['month']) === 0 || in_array($months[$month], $result['month']))) {
+      if ($isValid && (count($result['month']) === 0 || in_array($month, $result['month']))) {
         $isValid = true;
       } else {
         $isValid = false;
@@ -155,6 +161,12 @@ class SearchController {
       'December' => 'Diciembre'
     ];
 
+    // temporal
+    $monthsEn = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+      'September', 'October', 'November', 'December'
+    ];
+
     // filters by date
     $time = strtotime($req['date']);
     $dow = date("l", $time);
@@ -162,7 +174,7 @@ class SearchController {
     
     foreach ($results as $result) {
       $isValid = true;
-      if ($isValid && (count($result['month']) === 0 || in_array($months[$month], $result['month']))) {
+      if ($isValid && (count($result['month']) === 0 || in_array($month, $result['month']))) {
         $isValid = true;
       } else {
         $isValid = false;

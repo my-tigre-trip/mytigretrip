@@ -125,8 +125,13 @@ class CheckoutController extends Controller {
    * @param $formatter PrivateFormatter
    */
   public function checkout($req, $WP, $session, $zohoHandler, $validator, $translator, $formatter) {
+    
     $response = [];
     if ($validator->validate($req)) {
+      // store in db
+      $r = $WP->saveTrip($req);
+
+      // prepare for Zoho CRM saving
       $formatter->setup();
       $recordDeal = $formatter->getZohoDealRecordFormat();
       $dealArray [] = $recordDeal;
@@ -138,8 +143,10 @@ class CheckoutController extends Controller {
       $responseData = $entityResponsesDeal[0]; //the created record
       $responseData;
       $response['status'] = $responseData->getStatus();
-      $response['redirect'] = $WP->getHomeUrl().'/my-trip-checkout';
+      $response['redirect'] = $WP->getHomeUrl().'/my-trip-checkout/status='.$session::id();
       # log
+
+      #if coudn't save to zoho we should log and create an status field in db
     } else {
       $response = $validator->getMessages();
     }    
