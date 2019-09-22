@@ -38,23 +38,27 @@ class CalendarController extends Controller{
     $events = $ZC->getEvents();
     $message = '';
     $available = true;
+    $availability = '';
     // if the frontend receives a available true should redirect
     // otherwise should print a message
     switch($req['duration']) {
       case FULL_DAY:
         $date = $ZC->checkAvailabilityFullDay($req['date']);
         $message = $date['message'];
-        $available = $date['available'];      
+        $available = $date['available'];
+        $availability = $date['availability'];
         break;
       case 'half-day_morning':
         $date = $ZC->checkAvailabilityHalfDayMorning($req['date']);
         $message = $date['message'];
         $available = $date['available'];
+        $availability = $date['availability'];
         break;
       case 'half-day_afternoon':
         $date = $ZC->checkAvailabilityHalfDayAfternoon($req['date']);
         $message = $date['message'];
         $available = $date['available'];
+        $availability = $date['availability'];
         break;
       default:
         $available = false;
@@ -68,7 +72,7 @@ class CalendarController extends Controller{
       $dow = date("l", strtotime($req['date']));
       $query = [
         'date' => $req['date'],
-        'dow' => $dow,
+        'd' => $availability,
         'duration' => $req['duration'],
         'adults' => $req['adults'],
         'children' => $req['children']
@@ -79,6 +83,7 @@ class CalendarController extends Controller{
     return $this->jsonResponse([
       'message' => $message,
       'available' => $available,
+      'availability' => $availability,
       'redirect' => $redirect
     ]);
   }

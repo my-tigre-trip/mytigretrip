@@ -109,3 +109,7 @@ define('STOP_FLYBOARD', 'Flyboard');
 define('STOP_SKI', 'Esquí');
 define('STOP_JUNCAL', 'Juncal');
 
+#hashed definitions
+define('H_MORNING', '75631f399043213a36602cc670faef71');
+define('H_AFTERNOON', 'c7c3169c21f1d92e9577871831d067c8');
+define('H_FULL_DAY', '8ea590fc263f6fdff47dc24cdf3d380e');

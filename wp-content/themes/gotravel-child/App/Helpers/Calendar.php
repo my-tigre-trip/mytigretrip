@@ -121,9 +121,9 @@ class Calendar {
 
       [
         'Id' => '6',
-        'Schedule' => MORNING_ES,
+        'Schedule' => AFTERNOON_ES,
         'Type' => GROUP_TRIP_ES,
-        'Start_DateTime' => $tomorrowPlusFour.$morning,
+        'Start_DateTime' => $tomorrowPlusFour.$afternoon,
         'People' => '5',
         'Advance_Status' => ADVANCE_PAYED_ES
       ],

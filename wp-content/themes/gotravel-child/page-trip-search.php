@@ -14,6 +14,8 @@ $section = 'tour-item/';
 $column = 6;
 $results = $c->tripSearchPage($_GET, ZohoProduct::getInstance());
 
+
+
 // foreach ($results as $r) {
 //     echo "$r[name]<br>";
 // }

@@ -26,9 +26,12 @@ class SearchController {
     if ($this->validateRequest($req)) {
       //$results = $product->findResults($category, 'categoryId');
       
-      if (isset($req['mood1'])) {  
-        $results = $this->secondOptions($req['mood1'], $product);
-        $results = $this->filterByDayAndMonth($req, $results);        
+      if (isset($req['mood1'])) {
+        if ($this->isSecondOptionAvailable($req)) {
+          $results = $this->secondOptions($req['mood1'], $product);
+          $results = $this->filterByDayAndMonth($req, $results);
+        }   
+             
       } else {
         // find products returns array
         $duration = QueryHelper::parseDuration($req);        
@@ -117,7 +120,7 @@ class SearchController {
       }
 
       // day of week
-      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$req['dow']], $result['dow']))) {
+      if ($isValid && (count($result['dow']) === 0 || in_array($dayOfWeek[$dow], $result['dow']))) {
         $isValid = true;
       } else {
         $isValid = false;
@@ -206,29 +209,6 @@ class SearchController {
     return $results;
   }
 
-  public function search($query, $products) {
-    if(isset($query['stops'])) {
-      $trip = null;
-      // build the trip
-      if ($trip->hasAvailableStop) {
-        $results = $this->findStops();
-        $this->calculatePrices($results, $query, $trip);	
-      } else {
-        // go to checkout
-      }
-    } else {
-      $results = $this->findStops();
-      $this->calculatePrices($results, $query);
-    }
-  }
-  
-  public function findStops($duration) {
-    // find by duration
-    // filter month 
-    // filter day
-    // filter children
-    // response the results
-  }
 
   public function calculatePrices($products, $query, $trip) {
 
@@ -254,4 +234,33 @@ class SearchController {
 
     return true;
   }
+
+  /**
+   * according the d hash in req evaluates if there is availability for another trip option in day
+   */
+  public function isSecondOptionAvailable($req) {
+    $duration = QueryHelper::parseDuration($req);
+    // the hashes;
+    $afternoon = md5(AFTERNOON_CLASS);
+    $morning = md5(MORNING_CLASS);
+    $fullDay = md5(FULL_DAY);
+
+    if ($duration->duration === FULL_DAY && $req['d'] === $fullDay) {
+      return true;
+    } else if($duration->schedule === MORNING_CLASS) {
+      // if afternoon or full day are available
+      if($req['d'] === $afternoon || $req['d'] === $fullDay) {
+        return true;
+      }
+
+    } else if($duration->schedule === AFTERNOON_CLASS) {
+      // if afternoon or full day are available
+      if($req['d'] === $morning || $req['d'] === $fullDay) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 }

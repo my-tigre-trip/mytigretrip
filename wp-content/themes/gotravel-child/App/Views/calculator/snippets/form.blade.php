@@ -24,6 +24,10 @@
 <input type="hidden" name="date" value="{{$_GET['date']}}" >
 @endif
 
+@if(isset($_GET['d']))
+<input type="hidden" name="d" value="{{$_GET['d']}}" >
+@endif
+
 @if(isset($_GET['mood1']))
 <input type="hidden" name="mood1" value="{{$_GET['mood1']}}" >
 @endif

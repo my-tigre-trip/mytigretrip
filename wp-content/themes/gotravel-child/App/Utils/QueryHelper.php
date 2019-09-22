@@ -78,7 +78,7 @@ class QueryHelper {
     }
 
     if (isset($req['d'])) {
-      $myTrip->d = true;
+      $myTrip->d = $req['d'];
     }
 
     return $myTrip;

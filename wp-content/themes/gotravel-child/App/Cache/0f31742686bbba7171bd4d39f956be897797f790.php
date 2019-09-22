@@ -24,6 +24,10 @@
 <input type="hidden" name="date" value="<?php echo e($_GET['date']); ?>" >
 <?php endif; ?>
 
+<?php if(isset($_GET['d'])): ?>
+<input type="hidden" name="d" value="<?php echo e($_GET['d']); ?>" >
+<?php endif; ?>
+
 <?php if(isset($_GET['mood1'])): ?>
 <input type="hidden" name="mood1" value="<?php echo e($_GET['mood1']); ?>" >
 <?php endif; ?>
