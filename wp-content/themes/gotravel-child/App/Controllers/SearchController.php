@@ -100,8 +100,20 @@ class SearchController {
       $schedule = AFTERNOON_ES;
     }
 
+    // only matters if it's a group trip
+    $typeGroup = isset($req['type']) && $req['type']; 
+
     foreach ($results as $result) {
       $isValid = true;      
+      // check group or private
+      if ($typeGroup) {
+        if($result['Tipo_de_Salida'] === GROUP_TRIP_ES) {
+          $isValid = true;
+        } else {
+          $isValid = false;
+        }
+      }
+      
 
       // schedule in half day
       if ($isValid && $duration !== FULL_DAY && $result['schedule'] === $schedule) {

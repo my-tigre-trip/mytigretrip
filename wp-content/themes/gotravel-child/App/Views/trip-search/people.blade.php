@@ -21,19 +21,30 @@
 </div>
 
 
-<div class="vc_col-md-12  vc_col-sm-12 clearfix" >
-<label for="duration"><div class="tooltip">Trip Duration<span class="tooltiptext">Full day is about 7 hs // Half Day is about 5 hs </span></div></label>
-<select name="duration" id="duration" class="form-control" required>
+<div class="vc_col-md-6  vc_col-sm-12 clearfix" >
+  <label for="duration"><div class="tooltip">Trip Duration<span class="tooltiptext">Full day is about 7 hs // Half Day is about 5 hs </span></div></label>
+  <select name="duration" id="duration" class="form-control" required>
     <option value="full-day" <?php echo $req['duration'] == 'full-day'? 'selected':'';?> >Full Day</option>
     <option value="half-day_morning" <?php echo $req['duration'] == 'half-day_morning'? 'selected':'';?> >Half Day Morning</option>
     <option value="half-day_afternoon" <?php echo $req['duration'] == 'half-day_afternoon'? 'selected':'';?> >Half Day Afternoon</option>    
   </select>
 </div>
 
-<div class="vc_col-md-12  vc_col-sm-12" >
+<div class="vc_col-md-6  vc_col-sm-12 clearfix" >
+  <label for="group">Type</label>
+  <select name="type" id="group" class="form-control" required>
+    <option value="private" <?php echo $req['group'] == 'private'? 'selected':'';?> >Private trip</option>
+    <option value="group" <?php echo $req['group'] == 'group'? 'selected':'';?> >Shared trip</option>    
+  </select>
+</div>
+
+{{-- <div class="vc_col-md-12  vc_col-sm-12" >
   <label for="datepicker">Date</label>
   <input id="datepicker" class="form-control" name="datepicker" required autocomplete="off">
   <input id="date" type="hidden" name="date">
+</div> --}}
+
+<div class="ll-skin-cangas">
+  <div class="datepicker" id="datepicker"></div>
+  <input id="date" type="hidden" name="date">
 </div>
-
-

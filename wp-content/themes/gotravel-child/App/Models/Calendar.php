@@ -3,6 +3,7 @@ namespace App\Models;
 
 use DateTime;
 use DateTimeZone;
+use App\Utils\QueryHelper;
 use App\Helpers\Calendar as CalendarMockData;
 
 class Calendar {
@@ -238,6 +239,63 @@ class Calendar {
       ];
     }
 
+    # Groupal trips 
+    /**
+     * if no availability in morning check if afternoon has and return a message
+     */
+    public function checkAvailabilityGroupMorning($req) {
+      $date = $req['date'];
+      $people = QueryHelper::getPeople($req);
+      $dateEvents = $this->getEventsForDate($date);
+      $available = true;
+      // at this step we don't have idea for afternoon availability
+      $availability = '';
+      if (!$this->isEmptyEventArray($dateEvents) && $dateEvents['morning'] !== null) {
+        // if it isn't  group and has no capacity
+        if (!$this->groupAvailability($dateEvents['morning'], $people)) {          
+          return [
+            'message' => NOT_AVAILABLE_EN,
+            'available' => false,
+            'availability' => ''
+          ];
+        }
+      }
+      // there is a place (or two)
+      return [
+        'message' => '',
+        'available' => $available,
+        'availability' => $availability
+      ];
+    }
+
+      /**
+     * if no availability in afterno check if afternoon has and return a message
+     */
+    public function checkAvailabilityGroupAfternoon($req) {
+      $date = $req['date'];
+      $people = QueryHelper::getPeople($req);
+      $dateEvents = $this->getEventsForDate($date);
+      $available = true;
+      // at this step we don't have idea for afternoon availability
+      $availability = '';
+      if (!$this->isEmptyEventArray($dateEvents) && $dateEvents['afternoon'] !== null) {
+        // if it isn't  group and has no capacity
+        if (!$this->groupAvailability($dateEvents['afternoon'], $people)) {          
+          return [
+            'message' => NOT_AVAILABLE_EN,
+            'available' => false,
+            'availability' => ''
+          ];
+        }
+      }
+      // there is a place (or two)
+      return [
+        'message' => '',
+        'available' => $available,
+        'availability' => $availability
+      ];
+    }
+
     /**
      * for half days. returns an array with the events for the required date.
      * sort by schedule
@@ -303,7 +361,13 @@ class Calendar {
       return $eventsArray['full-day'] !== null && $eventsArray['full-day']['Advance_Status'] === ADVANCE_ON_HOLD_ES;
     }
 
-    
+    public function groupAvailability($event, $people) {
+      if ($event['Trip_Type'] === GROUP_TRIP_ES && ($people + $event['People'] <= 5) ) {
+        return true;
+      }
+
+      return false;
+    }
 
 
 }

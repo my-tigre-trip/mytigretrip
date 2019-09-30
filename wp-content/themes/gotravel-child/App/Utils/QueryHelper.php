@@ -165,4 +165,8 @@ class QueryHelper {
   public static function formatDate($req) {
     
   }
+
+  public function getPeople($req) {
+    return $req['adults'] + $req['children'];
+  }
 }

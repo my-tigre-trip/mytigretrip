@@ -67,8 +67,10 @@ define('WITH_GUIDE', 'with guide');
 define('YACTH_TRIP', 'yacth');
 
 define('PRIVATE_TRIP_ES', 'Privada');
-define('GROUP_TRIP_ES', 'Compartida');
+define('GROUP_TRIP_ES', 'Grupo');
 define('WITH_GUIDE_ES', 'Con Guía');
+
+define('GROUP_CLASS', 'group');
 
 define('BLOCK', 'block');
 
@@ -113,3 +115,12 @@ define('STOP_JUNCAL', 'Juncal');
 define('H_MORNING', '75631f399043213a36602cc670faef71');
 define('H_AFTERNOON', 'c7c3169c21f1d92e9577871831d067c8');
 define('H_FULL_DAY', '8ea590fc263f6fdff47dc24cdf3d380e');
+
+#availability messages
+define('ON_HOLD_EN', 'There is a noy yet confirmed trip for this day.
+Please send an email to agus@mytigretrip.com.');
+
+define('NOT_AVAILABLE_MORNING_BUT_AFTERNOON_EN', 'There is no availability for this day
+ in thye morning but there is in the afternoon');
+
+ define('NOT_AVAILABLE_EN', 'There is no availability for this day');

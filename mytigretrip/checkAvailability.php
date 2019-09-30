@@ -12,6 +12,14 @@ ZohoHandler::getInstance()->auth();
 $ZC = new CalendarHandler(); // fetch zoho
 $calendar = new Calendar($ZC); // calendar worker
 $calendarController = new CalendarController(); // controller
-$response = $calendarController->availability($calendar, $_GET);
+
+$isGroup = isset($_GET['type']) && $_GET['type'] === GROUP_CLASS;
+if($isGroup) {
+  $response = $calendarController->availabilityGroup($calendar, $_GET);
+} else {
+  $response = $calendarController->availability($calendar, $_GET);
+}
+
+
 echo $response;
 die();

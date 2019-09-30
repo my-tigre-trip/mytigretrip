@@ -162,6 +162,7 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
   var  tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1); 
 	jQuery("#datepicker").datepicker({
+			inline: true,
       defaultDate: null,
       minDate: tomorrow,
       maxDate: "+1y +1m",

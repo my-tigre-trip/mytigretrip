@@ -34,7 +34,8 @@ class CalendarController extends Controller{
    * @param String $duration [full-day, half-day_morning, half-day_afternoon]
    */
   public function availability($ZC, $req) {
-    $ZC->fetchMockEvents();
+    //$ZC->fetchMockEvents();
+    $ZC->fetchEvents();
     $events = $ZC->getEvents();
     $message = '';
     $available = true;
@@ -80,6 +81,57 @@ class CalendarController extends Controller{
       $redirect = home_url().'/trip-search/?'.http_build_query($query);
     }
     
+    return $this->jsonResponse([
+      'message' => $message,
+      'available' => $available,
+      'availability' => $availability,
+      'redirect' => $redirect
+    ]);
+  }
+
+  /**
+   * 
+   */
+  public function availabilityGroup($ZC, $req) {
+    $ZC->fetchEvents();
+    $events = $ZC->getEvents();
+    $message = '';
+    $available = true;
+    $availability = '';
+
+    switch($req['duration']) {
+      case 'half-day_morning':
+        $date = $ZC->checkAvailabilityGroupMorning($req);
+        $message = $date['message'];
+        $available = $date['available'];
+        $availability = $date['availability'];
+        break;
+      case 'half-day_afternoon':
+        $date = $ZC->checkAvailabilityGroupAfternoon($req);
+        $message = $date['message'];
+        $available = $date['available'];
+        $availability = $date['availability'];
+        break;
+      default:
+        $available = false;
+        $message = 'Wrong Data';
+    }
+
+    $redirect = null;
+    if ($available) {
+      //Convert the date string into a unix timestamp
+      //Get the day of the week using PHP's date function.      
+      $dow = date("l", strtotime($req['date']));
+      $query = [
+        'date' => $req['date'],
+        'd' => $availability,
+        'duration' => $req['duration'],
+        'adults' => $req['adults'],
+        'children' => $req['children']
+      ];
+      $redirect = home_url().'/trip-search/?'.http_build_query($query);
+    }
+
     return $this->jsonResponse([
       'message' => $message,
       'available' => $available,
