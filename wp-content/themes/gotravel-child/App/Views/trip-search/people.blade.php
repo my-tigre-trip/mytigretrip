@@ -43,8 +43,11 @@
   <input id="datepicker" class="form-control" name="datepicker" required autocomplete="off">
   <input id="date" type="hidden" name="date">
 </div> --}}
-
-<div class="ll-skin-cangas">
-  <div class="datepicker" id="datepicker"></div>
-  <input id="date" type="hidden" name="date">
+<div class="vc_col-md-12  vc_col-sm-12" >
+  
+  
+  <div class="">
+    <div class="datepicker-container openemr-calendar" id="datepicker-div" ></div>
+    <input id="date" type="hidden" name="date">
+  </div>
 </div>

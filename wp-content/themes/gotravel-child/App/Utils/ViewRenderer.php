@@ -34,4 +34,8 @@ class ViewRenderer {
         'notes' => $notes
         ]).'';
     }
+
+    public function agencyLogin($message) {
+      return $this->blade->make('agency.login', $message);
+    }
 }

@@ -161,7 +161,7 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
   const  today = new Date();
   var  tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1); 
-	jQuery("#datepicker").datepicker({
+	jQuery("#datepicker-div").datepicker({
 			inline: true,
       defaultDate: null,
       minDate: tomorrow,
@@ -170,7 +170,7 @@ jQuery("#rev_slider_26_1_wrapper").click(function(e){
       altField: "#date"
   });
   // autocomplete off
-  $('#datepicker').on('click', function(e) {
+  $('#datepicker-div').on('click', function(e) {
     e.preventDefault();
     $(this).attr("autocomplete", "off");  
  });

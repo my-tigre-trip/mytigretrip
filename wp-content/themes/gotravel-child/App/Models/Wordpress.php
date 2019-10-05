@@ -11,8 +11,11 @@ class Wordpress {
     return home_url();
   }
 
-  public function redirectHome() {
-    wp_redirect(home_url());
+  /**
+   * @param $query optional query params
+   */
+  public function redirectHome($query = '') {
+    wp_redirect(home_url().$query);
   }
 
   public function redirectCheckout() {
