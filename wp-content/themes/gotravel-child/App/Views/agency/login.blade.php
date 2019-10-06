@@ -1,7 +1,3 @@
-@php
-use MyTigreTrip\Translation;
-$t = new Translation('contact-form-en');
-@endphp
 @extends('layout.form')
 @section('content')
 <div class="col-md-8 offset-md-1">
@@ -15,6 +11,7 @@ $t = new Translation('contact-form-en');
   <p>Por favor complete los datos de acceso</p>
   <form id="mtt-checkout-form" action="/agencias-login" method='POST' accept-charset="UTF-8">
   <input type="hidden" name="_token" value="{{session_id()}}"  />
+  <input type="hidden" name="agencyContext" value="true"  />
 
   <div class="form-row mt-4">
     <div class="col-sm-6 pb-3">

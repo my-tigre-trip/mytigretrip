@@ -12,4 +12,4 @@ $blade = new Blade(__DIR__.'/App/Views', __DIR__.'/App/Cache');
 $view = new ViewRenderer($blade, $session);
 $WP = Wordpress::getInstance();
 //renders the agency login or realize the auth
-echo $c->login($view, $WP);
+echo $c->login($_REQUEST, $view, $WP, ZohoAgency::getInstance(), Session::getInstance());

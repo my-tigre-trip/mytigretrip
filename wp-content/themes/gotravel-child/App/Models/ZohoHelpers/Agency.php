@@ -9,64 +9,35 @@ class Agency {
   }  
 
   /**
-   * fetch one or more products
+   * fetch one agency/tour using agencys array $zohoAgenciesArray
    * @param $value String identifier of the agency
-   * @todo improve the foreach transforming all data only if match
-   */
-  public function findResults($value, $criteria = 'sku') {
-    //$date = new DateTime('', new DateTimeZone('America/Argentina/Buenos_Aires'));
-    $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
-    $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
-    $recordsArray = $bulkAPIResponse->getData();
-    //$data = $recordsArray->getData();
-    $tours = [];
-    foreach  ($recordsArray as $d) {
-      $data = $d->getData();
-      if ($data[$criteria] === $value) {
-        $tours[] = $data;        
-      }
-    }
-    return $tours;                                            
-  }
-
-  public function findMockResults() {
-    return \App\Helpers\Product::products();
-  }
-
-
-  /**
-   * fetch one product/tour using products array $zohoProductsArray
-   * @param $value String identifier of the product
    * @param $criteria sku by default
    * @param $multi if true return an array of occuerrences else return the firs occurence
    */
-  public function find($value, $criteria = 'sku', $multi = false) {    
-    // $zcrmModuleIns = ZohoHandler::getModuleInstance('Products');
-    // $bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($criteria:equals:$value)");
-    // $recordsArray = $bulkAPIResponse->getData();    
-    $tour = null;    
-    $zohoProductsArray = $GLOBALS['zohoProductsArray']; // improve this
-    //$zohoProductsArray = getZohoProductsArray();
-    foreach ($zohoProductsArray as $product) {
+  public function find($value, $criteria = 'username', $multi = false) {       
+    $ag = null;    
+    $zohoAgenciesArray = $GLOBALS['zohoAgenciesArray']; // improve this
+    
+    foreach ($zohoAgenciesArray as $agency) {
       // $data = $d->getData();
-      if ($product[$criteria] === $value) {
+      if ($agency[$criteria] === $value) {
         if($multi) {
-          $tour[] = $product;
+          $ag[] = $agency;
         } else {          
-          $tour = $product;
+          $ag = $agency;
           break;
         }        
       }
     }
-    return $tour;                                       
+    return $ag;                                       
   }
 
   public function findBoatPrices($boat) {
 
     $boatPrices = [];    
-    $zohoProductsArray = $GLOBALS['zohoProductsArray'];
+    $zohoAgenciesArray = $GLOBALS['zohoAgenciesArray'];
     
-    foreach($zohoProductsArray as $p) {
+    foreach($zohoAgenciesArray as $p) {
       if (strpos($p['sku'], $boat) !== false) {
         $boatPrices[] = $p;
       }      

@@ -16,7 +16,9 @@ $recordsArray = $bulkAPIResponse->getData();
 
 $records = [];
 foreach($recordsArray as $r) {
-  $records[] = $r->getData();  
+  $ag = $r->getData();
+  $ag['ID'] = $r->getEntityId();
+  $records[] = $ag;
 }
 
 // hash the pass

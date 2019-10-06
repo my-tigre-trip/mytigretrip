@@ -3,12 +3,10 @@
 namespace App\Controllers;
 
 use Jenssegers\Blade\Blade;
-use App\Models\Calculator;
+use App\Models\Session;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\ArrayLoader;
-use App\Models\ZohoHelpers\TripFormmatter;
-use App\Models\ZohoHelpers\Product;
-use App\Helpers\Checkout as CheckoutHelper;
+
 use App\Controllers\Controller;
 use App\Utils\QueryHelper;
 
@@ -19,13 +17,24 @@ class AgencyController extends Controller {
    * @param $Blade a blade template engine instance
    * @param $AgencyHandler for manage agencies data
    */
-  public function login($view, $WP) {
+  public function login($req, $view, $WP, $AgencyHandler, $session) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $reject = true;
+      $agency = null;
+      # check session id
+      
+      if(isset($req['username']) && isset($req['password'])) {
+        $agency = $AgencyHandler->find($req['username']);
+        
+        if(isset($agency) &&  $agency['secret'] == $req['password'] ) {
+          $reject = false;
+        }
+      }      
+
       if($reject) {
         echo $view->agencyLogin(['error' => 'Datos de ingreso incorrectos']);
       } else {
-        $WP->redirectHome();
+        $WP->redirectHome('?agency='.$agency['ID']);
       }
 
     } else if($_SERVER['REQUEST_METHOD'] === 'GET') {
