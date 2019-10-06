@@ -32,3 +32,15 @@
 @if(isset($_GET['duration']))
 <input type="hidden" name="checkout[duration]" value="{{$_GET['duration']}}" >
 @endif
+
+@if(isset($_GET['agency']))
+<input type="hidden" name="agency" value="{{$_GET['agency']}}" >
+@endif
+
+@if(isset($_GET['agencyContext']))
+<input type="hidden" name="agencyContext" value="{{$_GET['agencyContext']}}" >
+@endif
+
+@if(isset($_GET['type']))
+<input type="hidden" name="type" value="{{$_GET['type']}}" >
+@endif

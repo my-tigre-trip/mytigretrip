@@ -81,6 +81,23 @@ class QueryHelper {
       $myTrip->d = $req['d'];
     }
 
+    #todo check valid types
+    if (isset($req['type'])) {
+      $myTrip->type = $req['type'];
+    }
+
+    # agency
+    if (isset($req['agencyContext']) && $req['agencyContext'] === 'true') {
+      $myTrip->agencyContext = true;
+    } else {
+      $myTrip->agencyContext = false;
+    }
+
+    // agency zoho id
+    if (isset($req['agency'])) {
+      $myTrip->agency = $req['agency'];
+    }
+
     return $myTrip;
   }
 
@@ -132,6 +149,16 @@ class QueryHelper {
 
     if ($myTrip->d) {
       $query[] = "d=$myTrip->d";
+    }
+    // private or grupal
+    if ($myTrip->type) {
+      $query[] = "type=$myTrip->type";
+    }
+
+    // agency
+    if ($myTrip->agencyContext) {
+      $query[] = "agencyContext=true";
+      $query[] = "agency=$myTrip->agency";
     }
 
     return implode("&", $query);

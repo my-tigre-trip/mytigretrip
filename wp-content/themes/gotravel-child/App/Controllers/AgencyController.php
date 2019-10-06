@@ -16,6 +16,7 @@ class AgencyController extends Controller {
   /**
    * @param $Blade a blade template engine instance
    * @param $AgencyHandler for manage agencies data
+   * @todo add a validator hash for agencies
    */
   public function login($req, $view, $WP, $AgencyHandler, $session) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,7 +35,7 @@ class AgencyController extends Controller {
       if($reject) {
         echo $view->agencyLogin(['error' => 'Datos de ingreso incorrectos']);
       } else {
-        $WP->redirectHome('?agency='.$agency['ID']);
+        $WP->redirectHome('?agencyContext=true&agency='.$agency['ID']);
       }
 
     } else if($_SERVER['REQUEST_METHOD'] === 'GET') {

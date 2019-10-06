@@ -78,6 +78,11 @@ class CalendarController extends Controller{
         'adults' => $req['adults'],
         'children' => $req['children']
       ];
+      // agency
+      if (isset($req['agencyContext']) && isset($req['agency'])) {
+        $query['agencyContext'] = 'true';
+        $query['agency'] = $req['agency'];
+      }
       $redirect = home_url().'/trip-search/?'.http_build_query($query);
     }
     
@@ -122,13 +127,21 @@ class CalendarController extends Controller{
       //Convert the date string into a unix timestamp
       //Get the day of the week using PHP's date function.      
       $dow = date("l", strtotime($req['date']));
+      
       $query = [
         'date' => $req['date'],
         'd' => $availability,
         'duration' => $req['duration'],
         'adults' => $req['adults'],
-        'children' => $req['children']
+        'children' => $req['children']     
       ];
+
+      // agency
+      if (isset($req['agencyContext']) && isset($req['agency'])) {
+        $query['agencyContext'] = 'true';
+        $query['agency'] = $req['agency'];
+      }
+
       $redirect = home_url().'/trip-search/?'.http_build_query($query);
     }
 

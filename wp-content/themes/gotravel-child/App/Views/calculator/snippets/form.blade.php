@@ -47,3 +47,11 @@
 @if(isset($_GET['duration']))
 <input type="hidden" name="duration" value="{{$_GET['duration']}}" >
 @endif
+
+@if(isset($_GET['agency']))
+<input type="hidden" name="agency" value="{{$_GET['agency']}}" >
+@endif
+
+@if(isset($_GET['agencyContext']))
+<input type="hidden" name="agencyContext" value="{{$_GET['agencyContext']}}" >
+@endif

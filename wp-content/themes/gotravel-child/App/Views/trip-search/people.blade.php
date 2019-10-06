@@ -44,10 +44,16 @@
   <input id="date" type="hidden" name="date">
 </div> --}}
 <div class="vc_col-md-12  vc_col-sm-12" >
-  
-  
   <div class="">
     <div class="datepicker-container openemr-calendar" id="datepicker-div" ></div>
     <input id="date" type="hidden" name="date">
   </div>
 </div>
+
+@if(isset($_GET['agency']))
+<input type="hidden" name="agency" value="{{$_GET['agency']}}" >
+@endif
+
+@if(isset($_GET['agencyContext']))
+<input type="hidden" name="agencyContext" value="{{$_GET['agencyContext']}}" >
+@endif

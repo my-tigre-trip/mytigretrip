@@ -47,3 +47,11 @@
 <?php if(isset($_GET['duration'])): ?>
 <input type="hidden" name="duration" value="<?php echo e($_GET['duration']); ?>" >
 <?php endif; ?>
+
+<?php if(isset($_GET['agency'])): ?>
+<input type="hidden" name="agency" value="<?php echo e($_GET['agency']); ?>" >
+<?php endif; ?>
+
+<?php if(isset($_GET['agencyContext'])): ?>
+<input type="hidden" name="agencyContext" value="<?php echo e($_GET['agencyContext']); ?>" >
+<?php endif; ?>

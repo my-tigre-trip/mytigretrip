@@ -47,6 +47,12 @@ class MyTrip {
     public $duration;
     public $schedule;
 
+    // agency
+    public $agencyContext;
+    public $agency;
+
+    public $type;
+
     public function __construct($sessionId) {
       $this->sessionId = $sessionId;
       $this->lock = null;
