@@ -50,6 +50,7 @@ class MyTrip {
     // agency
     public $agencyContext;
     public $agency;
+    public $guide;
 
     public $type;
 
@@ -96,11 +97,6 @@ class MyTrip {
             $this->fullDay = $boat;
         }
     }
-
-    public function calculatePrice($boat)
-    {
-      //  return $this->price($boat, 2, 3, []);
-    } 
 
     /**
     *  saveTrip

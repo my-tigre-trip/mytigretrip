@@ -55,3 +55,7 @@
 <?php if(isset($_GET['agencyContext'])): ?>
 <input type="hidden" name="agencyContext" value="<?php echo e($_GET['agencyContext']); ?>" >
 <?php endif; ?>
+
+<?php if(isset($_GET['guide'])): ?>
+<input type="hidden" name="guide" value="<?php echo e($_GET['guide']); ?>" >
+<?php endif; ?>

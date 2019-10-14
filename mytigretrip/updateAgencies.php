@@ -10,7 +10,7 @@ if(!is_user_logged_in() || !current_user_can('administrator')) {
 
 # zoho login and get records
 ZohoHandler::auth();
-$zcrmModuleIns = ZohoHandler::getModuleInstance('Agencias');
+$zcrmModuleIns = ZohoHandler::getModuleInstance('Accounts');
 $bulkAPIResponse = $zcrmModuleIns->getRecords();
 $recordsArray = $bulkAPIResponse->getData();
 
@@ -18,13 +18,8 @@ $records = [];
 foreach($recordsArray as $r) {
   $ag = $r->getData();
   $ag['ID'] = $r->getEntityId();
-  $records[] = $ag;
+  $records[$ag['ID']] = $ag;
 }
-
-// hash the pass
-// foreach ($records as $r) {
-
-// }
 
 $fileContent = '<?php $zohoAgenciesArray = ' . var_export($records, true) . ';';
 

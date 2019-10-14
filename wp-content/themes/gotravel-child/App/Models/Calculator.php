@@ -1,14 +1,14 @@
 <?php
 namespace App\Models;
 //use Illuminate\Database\Eloquent\Model as Eloquent;
-use App\Models\Woo;
 use App\Models\ZohoHelpers\Product as ProductHelper;
 
 class Calculator {
   
     private $P;
-    public function __construct(ProductHelper $P) {      
+    public function __construct(ProductHelper $P, $A = null) {      
       $this->P = $P;
+      $this->A = $A;
     }
 
     public static function boatName($boat)
@@ -23,8 +23,14 @@ class Calculator {
     * @return array
     */
 
-    public function boatPrice($boat) {
-      $prices = $this->P->findBoatPrices($boat->boat); 
+    public function boatPrice($boat, $myTrip) {
+      if ($this->A !== null) {
+        // if it is agency contex use the agency helper
+        $prices = $this->A->findBoatPrices($boat->boat, $myTrip->agency, $myTrip->guide);
+      } else {
+        $prices = $this->P->findBoatPrices($boat->boat);
+      }
+      
       
       $people = $boat->adults + $boat->children;
       $basePrice = $this->boatBasePrice($boat->boat, $prices);
@@ -152,7 +158,8 @@ class Calculator {
     *
     */
     public function calculatePrice($boat, $myTrip = null) {
-        $boatPrice = $this->boatPrice($boat);
+      
+        $boatPrice = $this->boatPrice($boat, $myTrip);
         // if has stops
         if ($boat->boat === HALF_DAY) {
           $tourPrice = $this->tourPrice($boat->mood1);

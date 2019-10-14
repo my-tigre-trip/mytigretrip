@@ -122,7 +122,7 @@ function renderPriceResult($myTrip, $boat, $calculator, $zohoProduct) {
     # construc myTrip from query
     $currentBoat = $myTrip->getBoat($boat);
     $date = $myTrip->dateFormatted();
-    $price = $calculator->calculatePrice($currentBoat);
+    $price = $calculator->calculatePrice($currentBoat, $myTrip);
     $notes = $myTrip->getNotes($currentBoat, $price['tourDetail']['price']);
     return $blade->make('calculator.price-result', [
       'currentBoat' => $currentBoat,

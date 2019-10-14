@@ -98,6 +98,13 @@ class QueryHelper {
       $myTrip->agency = $req['agency'];
     }
 
+     # guide
+     if (isset($req['guide']) && $req['guide'] === 'true') {
+      $myTrip->guide = true;
+    } else {
+      $myTrip->guide = false;
+    }
+
     return $myTrip;
   }
 
@@ -159,6 +166,10 @@ class QueryHelper {
     if ($myTrip->agencyContext) {
       $query[] = "agencyContext=true";
       $query[] = "agency=$myTrip->agency";
+      
+      if($myTrip->guide) {
+        $query[] = "guide=true";
+      }      
     }
 
     return implode("&", $query);
