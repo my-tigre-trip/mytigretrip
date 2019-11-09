@@ -39,3 +39,4 @@ wp-content/themes/*
 !composer.json
 
 tests/secrets.php
+!new-release.sh
