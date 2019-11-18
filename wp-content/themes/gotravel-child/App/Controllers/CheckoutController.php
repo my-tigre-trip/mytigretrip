@@ -53,8 +53,12 @@ class CheckoutController extends Controller {
       $WP->redirectHome();
       //die();
     } else {
-      $boat = QueryHelper::parseDuration($req)->duration;
-      $myBoat = $myTrip->getBoat($boat);
+      // $boat = QueryHelper::parseDuration($req)->duration;
+      // $myBoat = $myTrip->getBoat($boat);
+      // $price = $calculator->calculatePrice($myBoat, $myTrip);
+
+      $duration = QueryHelper::parseDuration($req['duration']);
+      $myBoat = $myTrip->lock ? $myTrip->lock : $myTrip->getBoat($duration->duration);
       $price = $calculator->calculatePrice($myBoat, $myTrip);
       $notes = $myTrip->getNotes($myBoat, $price['tourDetail']['price']);
       $myTrip->setId();

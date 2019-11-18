@@ -1,6 +1,5 @@
 <?php
 use App\Models\Wordpress;
-use App\Models\Woo;
 use App\Models\Session;
 use App\Models\Calculator;
 use App\Controllers\CheckoutController;

@@ -42,7 +42,7 @@ class Calculator {
         $priceChildrenDiscount = $this->boatChildrenPrice($boat->boat, $boat->children, $prices);
       }
       
-      $price = $priceAdultsDiscount+$priceChildrenDiscount;
+      $price = $priceAdultsDiscount + $priceChildrenDiscount;
 
       $priceBeforeDiscount = $basePrice * $people;
       $groupDiscount = $priceBeforeDiscount-$price;

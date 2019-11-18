@@ -20,9 +20,15 @@ class CalendarHandler {
     $zh = ZohoHandler::getInstance();
     // $zh->auth();
     $zcrmModuleIns = $zh->getModuleInstance('Events');
-    $bulkAPIResponse = $zcrmModuleIns->getRecords();
+    try {
+      $bulkAPIResponse = $zcrmModuleIns->getRecords();
+      $recordsArray = $bulkAPIResponse->getData();
+    } catch (\Exception $z) {
+      //throw $th;
+      return [];
+    }
+    
     //$bulkAPIResponse = $zcrmModuleIns->searchRecordsByCriteria("($previous:equals:$following)");
-    $recordsArray = $bulkAPIResponse->getData();
     return $recordsArray; 
   }
 

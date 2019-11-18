@@ -6,12 +6,20 @@ use App\Models\Calculator;
 use App\Controllers\CheckoutController;
 use App\Models\ZohoHelpers\Product as ZohoProduct;
 use App\Models\ZohoHelpers\ZohoHandler;
+use App\Models\ZohoHelpers\Agency;
 
 // ZohoHandler::getInstance()->auth();
 
 $c = new CheckoutController();
 //renders the checkout page
-echo $c->myTripContactInformation($_GET, Wordpress::getInstance(),
- Session::getInstance(), new Calculator(ZohoProduct::getInstance()),
+
+$agency = null;
+if( isset($_GET['agencyContext']) && $_GET['agencyContext'] === "true") {
+  $agency = Agency::getInstance();
+}
+
+$calculator = new Calculator(ZohoProduct::getInstance(), $agency);
+
+echo $c->myTripContactInformation($_GET, Wordpress::getInstance(), Session::getInstance(), $calculator,
  ZohoProduct::getInstance()
 );
