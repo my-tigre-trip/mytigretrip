@@ -14,12 +14,14 @@ $c = new CheckoutController();
 //renders the checkout page
 
 $agency = null;
+$foundAgency = null;
 if( isset($_GET['agencyContext']) && $_GET['agencyContext'] === "true") {
   $agency = Agency::getInstance();
+  $foundAgency = $agency->find($_GET['agency'], 'ID');
 }
 
 $calculator = new Calculator(ZohoProduct::getInstance(), $agency);
 
 echo $c->myTripContactInformation($_GET, Wordpress::getInstance(), Session::getInstance(), $calculator,
- ZohoProduct::getInstance()
+ ZohoProduct::getInstance(), $foundAgency
 );

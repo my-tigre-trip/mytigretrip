@@ -183,6 +183,14 @@ class PriceController extends Controller{
       }else{
           $myTrip->car = false;
       }
+
+      if( isset($req['guide']) && $req['guide'] === 'true'){
+        $myTrip->guide = true;
+        $response['guide'] = $myTrip->guide ;
+      }else{
+        $myTrip->guide = false;
+      }
+
       $myTrip->lock = $myBoat;
 
       $response['view'] = $view->summary($myTrip, $calculator);

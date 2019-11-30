@@ -46,7 +46,7 @@ class CheckoutController extends Controller {
    * @todo use new TripCalculator instead of Calculator 
    * @todo use url queries
    */
-  public function myTripContactInformation($req, $WP, $session, $calculator, $ZP) {
+  public function myTripContactInformation($req, $WP, $session, $calculator, $ZP, $agency = null) {
     $blade = new Blade(dirname(__DIR__, 1).'/Views', dirname(__DIR__, 1).'/Cache');
     $myTrip = QueryHelper::queryToMyTrip($req, $ZP);
     if ($myTrip === false) {
@@ -83,7 +83,8 @@ class CheckoutController extends Controller {
         'finalPrice' => $price['finalPrice'],
         'price' => $price,
         'notes' => $notes,
-        'schedule' => $schedule
+        'schedule' => $schedule,
+        'agency' => $agency
       ]);
     }
   }

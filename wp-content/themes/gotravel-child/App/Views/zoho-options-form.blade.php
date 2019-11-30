@@ -34,6 +34,20 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 		@include('snippets.mtt-query-inputs')
 		<h5 class="mtt-form-title"><?php esc_html_e('Observations', 'mtt'); ?></h5>
 		<?php wp_nonce_field('mkdf_tours_booking_form', 'mkdf_tours_booking_form'); ?>
+
+		@if(isset($_GET['agencyContext']) && $_GET['agencyContext'] == 'true')
+			<div class="custom-control custom-checkbox my-2">
+				<input type="checkbox" class="form-control custom-control-input updateSummary" name="guide" id="guide" <?php if( $myTrip->guide ){  ?> checked <?php } ?> value="true">
+				<label class="custom-control-label " for="guide">
+				Include a guide (For agencies)
+				<a class="text-success" data-toggle="modal" data-target="#guide">
+				More info
+				</a>  
+				</label>
+				<!-- Button trigger modal -->				
+			</div>
+		@endif
+
 		@if($myBoat->boat !== 'speedboat')
 			<div class="custom-control custom-checkbox my-2">
 				<input type="checkbox" class="form-control custom-control-input updateSummary" name="payOnIsland" id="pay-on-island" <?php if( $myTrip->payOnIsland ){  ?> checked <?php } ?> value="yes">
@@ -43,10 +57,9 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 				More info
 				</a>  
 				</label>
-				<!-- Button trigger modal -->
-				
+				<!-- Button trigger modal -->				
 			</div>
-		@endif
+		@endif		
 
 		<div class="custom-control custom-checkbox my-2">		
 			<input class="form-control custom-control-input updateSummary @if( $myBoat->boat == FULL_DAY ) d-none @endif"
@@ -70,9 +83,8 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 		  	@endif
 			<div class="mtt-optional-text">
 			  	@if( $myTrip->boat !== FULL_DAY )
-				<p class="mtt-show-with-car"><?php // echo __(' If you want to discover mainland Tigre, we will arrange different car and boat timetables') ?></p>
-
-				<p class="mtt-hide-with-car" ><?php // echo __('Meet us at Tigre´s Public Pier -2 blocks from the Train Station. We´ll send directions shortly') ?></p>
+				<p class="mtt-show-with-car"></p>
+				<p class="mtt-hide-with-car" ></p>
 				@endif
 			</div>
 		</div>

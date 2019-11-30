@@ -12,5 +12,15 @@
     <!--<input type="hidden" id="hidden_first_name"   name="firsName" >-->
   </div>
 </div>
+@if(!empty($agency['operators']))
+<div class="form-row my-4">
+<label for="operator">Operator</label>
+<select id="operator" name="operator" class="form-control" >
+  @foreach (explode(',', $agency['operators']) as $o)
+      <option value="">{{$o}}</option>
+  @endforeach
+</select>
+</div>
+@endif
 <p>Passenger Data:</p>
 @endif
