@@ -9,7 +9,9 @@ use App\Models\Calculator;
 use App\Models\Wordpress;
 use App\Models\ZohoHelpers\ZohoHandler;
 use App\Models\ZohoHelpers\Product;
+use App\Models\ZohoHelpers\Agency;
 use App\Models\ZohoHelpers\PrivateFormatter;
+use App\Models\ZohoHelpers\AgencyFormatter;
 use App\Controllers\CheckoutController;
 use App\Validators\Checkout as CheckoutValidator;
 use App\Utils\QueryHelper;
@@ -29,7 +31,23 @@ $zohoHandler->auth();
 $calculator = new Calculator($product);
 $duration = QueryHelper::parseDuration($_POST['checkout']);
 $myBoat = $myTrip->getBoat($duration->duration);
-$formatter = new PrivateFormatter($_POST, $zohoHandler, $T, $product, $calculator, $myTrip, $myBoat);
+
+// in case of agency
+$agency = null;
+$foundAgency = null;
+if($myTrip->agencyContext) {
+  $agency = Agency::getInstance();
+  $foundAgency = $agency->find($_POST['agency'], 'ID');
+}
+
+$calculator = new Calculator($product, $agency);
+
+if ($agency !== null) {
+  $formatter = new AgencyFormatter($_POST, $zohoHandler, $T, $product, $calculator, $myTrip, $myBoat);
+} else {
+  $formatter = new PrivateFormatter($_POST, $zohoHandler, $T, $product, $calculator, $myTrip, $myBoat);
+}
+
 # Get JSON as a string
 //$json_str = file_get_contents('php://input');
 # Get as an object

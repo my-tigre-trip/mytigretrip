@@ -34,13 +34,17 @@
 @endif
 
 @if(isset($_GET['agency']))
-<input type="hidden" name="agency" value="{{$_GET['agency']}}" >
+<input type="hidden" name="checkout[agency]" value="{{$_GET['agency']}}" >
 @endif
 
 @if(isset($_GET['agencyContext']))
-<input type="hidden" name="agencyContext" value="{{$_GET['agencyContext']}}" >
+<input type="hidden" name="checkout[agencyContext]" value="{{$_GET['agencyContext']}}" >
+@endif
+
+@if(isset($_GET['guide']))
+<input type="hidden" name="checkout[guide]" value="{{$_GET['guide']}}" >
 @endif
 
 @if(isset($_GET['type']))
-<input type="hidden" name="type" value="{{$_GET['type']}}" >
+<input type="hidden" name="checkout[type]" value="{{$_GET['type']}}" >
 @endif

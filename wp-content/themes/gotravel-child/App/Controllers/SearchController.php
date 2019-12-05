@@ -43,6 +43,8 @@ class SearchController {
       // render error page
     }
 
+    $results = $this->orderResults($results);
+
     return $results;
     //return $blade->make('trip-search.main', ['results' => $results]);
   }
@@ -103,6 +105,8 @@ class SearchController {
     // only matters if it's a group trip
     $typeGroup = isset($req['type']) && $req['type']; 
 
+    $children = isset($req['children']) && intval($req['children']) > 0;
+
     foreach ($results as $result) {
       $isValid = true;      
       // check group or private
@@ -114,6 +118,10 @@ class SearchController {
         }
       }
       
+      // filter not allowed children
+      if ($children && $result['allowChildren'] === false ) {
+        $isValid = false;
+      }
 
       // schedule in half day
       if ($isValid && $duration !== FULL_DAY && $result['schedule'] === $schedule) {
@@ -273,6 +281,18 @@ class SearchController {
     }
 
     return false;
+  }
+
+  /**
+   * uses the order field to order. ascending -> min to max.
+   * the updateProducts script assigns 1000 to order null
+   */
+  public function orderResults($results) {
+    usort($results, function($a, $b) {
+      return $a['order'] > $b['order'];
+    });
+
+    return $results;
   }
 
 }

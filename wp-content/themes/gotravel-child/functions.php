@@ -48,7 +48,7 @@ global $zohoProductsArray;
 $zohoProductsArray = $zohoProductsArray;
 
 // agencies array file
-if (isset($_REQUEST['agencyContext'])) {
+if (isset($_REQUEST['agencyContext']) || isset($_REQUEST['checkout']['agencyContext'])) {
 	$folder = __DIR__.'/zoho-agencies';
 	$files = scandir($folder, SCANDIR_SORT_DESCENDING);
 	$newest_file = $folder.'/'.$files[1]; // example.php is the first. improve me

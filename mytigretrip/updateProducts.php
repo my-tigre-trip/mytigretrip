@@ -19,7 +19,14 @@ foreach($recordsArray as $r) {
   $records[] = $r->getData();  
 }
 
-$fileContent = '<?php $zohoProductsArray = ' . var_export($records, true) . ';';
+// normalize and transform values}
+$_records = [];
+foreach ($records as $rec) {
+  $rec['order'] = formatOrder($rec['order']);
+  $_records [] = $rec;
+}
+
+$fileContent = '<?php $zohoProductsArray = ' . var_export($_records, true) . ';';
 
 try {
   $status = file_put_contents(dirname(__DIR__, 1).'/wp-content/themes/gotravel-child/zoho-products/'.date('Y-m-d-h-I-s').'-example.php', $fileContent);
@@ -32,4 +39,12 @@ try {
   echo 'ERROR: Exception not handled';
 }
 
+function formatOrder($o) {
+  if ($o === null) {
+    $o = 1000;
+  } else {
+    $o = intval($o);
+  }
 
+  return $o;
+}
