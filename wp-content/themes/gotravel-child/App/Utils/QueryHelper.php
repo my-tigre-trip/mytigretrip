@@ -33,8 +33,14 @@ class QueryHelper {
 
     #buscar el tour
     if (isset($req['tourSlug'])) {
-      $tourSlug = new Tour($req['tourSlug'], $ZP);
-      $myTrip->addTour($tourSlug);
+      //$tourSlug = new Tour($req['tourSlug'], $ZP);
+      if (isset($req['action']) && $req['action'] === 'add') {
+        //$myTrip->addTour($tourSlug, 2);
+        $req['mood2'] = $req['tourSlug'];
+      } else {
+        //$myTrip->addTour($tourSlug, 1);
+        $req['mood1'] = $req['tourSlug'];
+      }      
     }
 
     $duration = '';

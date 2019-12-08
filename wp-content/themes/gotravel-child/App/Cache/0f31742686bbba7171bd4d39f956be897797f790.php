@@ -20,6 +20,15 @@
 <?php endif; ?>
 <?php echo $__env->make('calculator.snippets.additional-considerations', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
+<?php 
+$action = '';
+if (isset($_GET['action'])) {
+  $action = 'add';
+}
+ ?>
+<input type="hidden" name="action" value="<?php echo e($action); ?>" >
+
+
 <?php if(isset($_GET['date'])): ?>
 <input type="hidden" name="date" value="<?php echo e($_GET['date']); ?>" >
 <?php endif; ?>

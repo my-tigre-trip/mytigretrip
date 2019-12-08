@@ -70,7 +70,7 @@ class CalendarController extends Controller{
     if ($available) {
       //Convert the date string into a unix timestamp
       //Get the day of the week using PHP's date function.      
-      $dow = date("l", strtotime($req['date']));
+      // $dow = date("l", strtotime($req['date']));
       $query = [
         'date' => $req['date'],
         'd' => $availability,

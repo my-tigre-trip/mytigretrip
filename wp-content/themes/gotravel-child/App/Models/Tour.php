@@ -79,7 +79,7 @@ class Tour
             $priceChildren = ($price + $priceOptional) * $this->children;
         } else {
             $priceAdults = $price * $this->adults;
-            $priceChildren = $price * $this->children;
+            $priceChildren = $price * intval($this->children);
         }
         return [
             'priceAdults' => $priceAdults,

@@ -223,7 +223,7 @@ class SearchController {
     
     $results = [];
     foreach ($tour['secondOption'] as $option) {
-      $results [] = $product->find($option, 'internal_name');
+      $results [] = $product->find($option, 'internalName');
     }
     
     return $results;
@@ -261,9 +261,9 @@ class SearchController {
   public function isSecondOptionAvailable($req) {
     $duration = QueryHelper::parseDuration($req);
     // the hashes;
-    $afternoon = md5(AFTERNOON_CLASS);
-    $morning = md5(MORNING_CLASS);
-    $fullDay = md5(FULL_DAY);
+    $afternoon = H_AFTERNOON; // md5(AFTERNOON_CLASS);
+    $morning = H_MORNING; // md5(MORNING_CLASS);
+    $fullDay = H_FULLDAY; // md5(FULL_DAY);
 
     if ($duration->duration === FULL_DAY && $req['d'] === $fullDay) {
       return true;

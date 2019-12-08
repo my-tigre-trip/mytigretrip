@@ -63,8 +63,7 @@ class MyTrip {
       $this->date = null;
     }
 
-    public function addTour(Tour $tour, $mood = 1)
-    {
+    public function addTour(Tour $tour, $mood = 1)  {
         if ($tour->boat === 'speedboat') {
            //
         } elseif ($tour->boat === 'half-day') {

@@ -36,7 +36,7 @@ $query = '';
       <div class="wpb_wrapper ">
       <?php  foreach ($results as  $t) :  ?>
         <div class="vc_col-sm-12 vc_col-md-<?php echo $column; ?> mtt-tour-item">
-        <a href="<?php echo $home.$section.$t['sku'].'?'.$_SERVER['QUERY_STRING']; ?>">
+        <a href="<?php echo $home.$section.$t['sku'].'?'.$_SERVER['QUERY_STRING'].'&action=add'; ?>">
           <div class="mtt-tour-container">
             <div class="mtt-tour-wrapper">
 

@@ -20,6 +20,15 @@
 @endif
 @include('calculator.snippets.additional-considerations')
 
+@php
+$action = '';
+if (isset($_GET['action'])) {
+  $action = 'add';
+}
+@endphp
+<input type="hidden" name="action" value="{{$action}}" >
+
+
 @if(isset($_GET['date']))
 <input type="hidden" name="date" value="{{$_GET['date']}}" >
 @endif
