@@ -18,6 +18,10 @@ if (count($results) === 0) {
   Wordpress::redirectCheckout();
 }
 
+$isAdmin = false; // the admin need quick access to options
+if(is_user_logged_in() && current_user_can('administrator')) {
+  $isAdmin = true;
+}
 // this query should not have mood1
 $query = '';
 ?>
@@ -35,31 +39,41 @@ $query = '';
       </div>
       <div class="wpb_wrapper ">
       <?php  foreach ($results as  $t) :  ?>
+        <?php 
+        if ($isAdmin) {
+          $adminTitle = $t['name_en'];
+          $adminLink = $home.'my-trip/?mood2='.$t['sku'].'&'.$_SERVER['QUERY_STRING'];
+        }          
+        ?>
+        <?php if(!$isAdmin): // // show/hide mtt-tour-container ?> 
         <div class="vc_col-sm-12 vc_col-md-<?php echo $column; ?> mtt-tour-item">
         <a href="<?php echo $home.$section.$t['sku'].'?'.$_SERVER['QUERY_STRING'].'&action=add'; ?>">
           <div class="mtt-tour-container">
             <div class="mtt-tour-wrapper">
+              <div class="mtt-tour-thumbnail">
+                <img src="<?php echo get_the_post_thumbnail_url($t['thumbnail']);  ?>" >
+              </div>
 
-            <div class="mtt-tour-thumbnail">
-              <img src="<?php echo get_the_post_thumbnail_url($t['thumbnail']);  ?>" >
+              <h3>
+              <?php echo $t['name_en'];?>
+              <?php if($t['promoted']): ?>
+              <span><i class="fa fa-star" style="color:#fbdd55"></i></span>
+              <?php  endif; ?>
+              <?php //if ( strpos($t['link'], 'build-your-own-trip-lunch' ) !== false ) : ?>
+              <!-- <br>- 2 island stops -->
+              <?php //endif; ?>
+              </h3>
             </div>
-
-            <h3>
-            <?php echo $t['name_en'];?>
-            <?php if($t['promoted']): ?>
-            <span><i class="fa fa-star" style="color:#fbdd55"></i></span>
-            <?php  endif; ?>
-            <?php //if ( strpos($t['link'], 'build-your-own-trip-lunch' ) !== false ) : ?>
-            <!-- <br>- 2 island stops -->
-            <?php //endif; ?>
-            </h3>
-
-            </div>
-
           </div>
-
         </a>
         </div>
+        <?php else: ?>
+          <div>
+            <a href="<?php echo $adminLink ?>">
+             <p><?php echo $adminTitle ?></p>
+            </a>
+        </div>
+        <?php endif; ?> 
       <?php endforeach; ?>
       </div>
       <div class="mtt-goback vc_col-12">

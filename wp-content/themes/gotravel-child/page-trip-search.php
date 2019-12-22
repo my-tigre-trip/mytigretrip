@@ -14,7 +14,10 @@ $section = 'tour-item/';
 $column = 6;
 $results = $c->tripSearchPage($_GET, ZohoProduct::getInstance());
 
-
+$isAdmin = false; // the admin need quick access to option
+if(is_user_logged_in() && current_user_can('administrator')) {
+  $isAdmin = true;
+}
 
 // foreach ($results as $r) {
 //     echo "$r[name]<br>";
@@ -33,14 +36,21 @@ $query = '';
 
       <div class="wpb_wrapper ">
       <?php  foreach ($results as  $t) :  ?>
-        <div class="vc_col-sm-12 vc_col-md-<?php echo $column; ?> mtt-tour-item">
-        <a href="<?php echo $home.$section.$t['sku'].'?'.$_SERVER['QUERY_STRING']; ?>">
+        <?php 
+        if ($isAdmin) {
+          $adminTitle = $t['name_en'];
+          $adminLink = $home.'add-stop/?mood1='.$t['sku'].'&'.$_SERVER['QUERY_STRING'];
+        }          
+        ?>
+        <?php if(!$isAdmin): // // show/hide mtt-tour-container ?>  
+        <div class="vc_col-sm-12 vc_col-md-<?php echo $column; ?> mtt-tour-item">       
+          <a href="<?php echo $home.$section.$t['sku'].'?'.$_SERVER['QUERY_STRING']; ?>">       
           <div class="mtt-tour-container">
             <div class="mtt-tour-wrapper">
-
+            
             <div class="mtt-tour-thumbnail">
-              <img src="<?php echo get_the_post_thumbnail_url($t['thumbnail']);  ?>" >
-            </div>
+              <img src="<?php echo $t['picUrl']  ?>" >
+            </div>           
 
             <h3>
             <?php echo $t['name_en'];?>
@@ -51,13 +61,17 @@ $query = '';
             <!-- <br>- 2 island stops -->
             <?php //endif; ?>
             </h3>
-
             </div>
-
-          </div>
-
+          </div>        
         </a>
         </div>
+        <?php else: ?>          
+        <div>
+          <a href="<?php echo $adminLink ?>">
+          <p><?php echo $adminTitle ?></p>
+          </a>
+        </div>
+        <?php endif; // show/hide mtt-tour-container  ?>    
       <?php endforeach; ?>
       </div>
       <div class="mtt-goback vc_col-12">

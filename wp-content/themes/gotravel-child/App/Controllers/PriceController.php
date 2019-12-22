@@ -191,6 +191,8 @@ class PriceController extends Controller{
         $myTrip->guide = false;
       }
 
+      $myTrip->setOptional($req);  
+
       $myTrip->lock = $myBoat;
 
       $response['view'] = $view->summary($myTrip, $calculator);

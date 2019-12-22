@@ -41,4 +41,28 @@ class BaseTrip
       //overrride me en full day
       }
     }
+
+    public function hasOptional() {
+      if ($this->mood1->hasOptional()) {
+        return $this->mood1->product['optionLabel_en'];
+      } 
+      
+      if ($this->mood2 !== null && $this->mood2->hasOptional()) {
+        return $this->mood2->product['optionLabel_en'];
+      }
+      
+      return false;
+    }
+
+    public function hasActivity() {
+      if ($this->mood1->hasActivity()) {
+        return $this->mood1->product['Special_Activity_Name'];
+      } 
+      
+      if ($this->mood2 !== null && $this->mood2->hasActivity()) {
+        return $this->mood2->product['Special_Activity_Name'];
+      }
+      
+      return false;
+    }
 }

@@ -136,6 +136,10 @@ class Tour
     return $this->product['hasActivity'];
   }
 
+  public function hasActivity() {
+    return $this->product['hasActivity'];
+  }
+
   public function isMorning() {
     return empty($this->schedule) 
       || strpos(strtolower($this->schedule), 'morning') !== false 

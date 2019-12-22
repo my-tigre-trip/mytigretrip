@@ -10,6 +10,11 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 } else {
 	$schedule = $myBoat->mood1->schedule;
 }//is not extending variables
+
+$isAdmin = false;
+if(is_user_logged_in() && current_user_can('administrator')) {
+  $isAdmin = true;
+}
 @endphp
 @section('content')
 <div class="col-md-8 offset-md-1">
@@ -46,6 +51,28 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 				</label>
 				<!-- Button trigger modal -->				
 			</div>
+		@endif
+
+		@if($isAdmin && $myBoat->hasOptional() !== false)
+			<div class="custom-control custom-checkbox my-2">
+				<input class="form-control custom-control-input updateSummary" id="optional" name="optional" value="yes" type="checkbox"  >
+				<label class="custom-control-label" for="optional" >{{$myBoat->hasOptional()}}</label>
+			</div>
+		@endif
+
+		@if($isAdmin && $myBoat->hasActivity() !== false)
+		<br>
+		<div class="" >
+		<label for="special-activity">People {{$myBoat->hasActivity()}}</label>
+			<select name="specialActivityPeople" id="special-activity" required class="form-control updateSummary">
+				<option value="0">-</option>
+				<option value="1" >1</option>
+				<option value="2" >2</option>
+				<option value="3" >3</option>
+				<option value="4" >4</option>
+				<option value="5" >5</option>
+			</select>
+		</div>
 		@endif
 
 		@if($myBoat->boat !== 'speedboat')
@@ -90,7 +117,7 @@ if ($myBoat->boat === SPEEDBOAT || $myBoat->boat === FULL_DAY) {
 		</div>
 
 		<div class="custom-control custom-checkbox my-2">
-			<input class="custom-control-input" id="terms" name="terms" value="yes" type="checkbox"  >
+			<input class="custom-control-input" id="terms" name="terms" value="yes" type="checkbox" @if($isAdmin) checked @endif >
 			<label class="custom-control-label" for="terms" >I accept the <a target="_blank" href="https://drive.google.com/open?id=1JuWXf0kvkrYssC4aFreelO4vYDDKZOHq" >Terms & Conditions</a></label>
 		</div>
 

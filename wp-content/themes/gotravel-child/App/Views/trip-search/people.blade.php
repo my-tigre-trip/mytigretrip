@@ -25,7 +25,7 @@
   <div class="clearfix" >
     <label for="duration"><div class="tooltip">Trip Duration<span class="tooltiptext">Full day is about 7 hs // Half Day is about 5 hs </span></div></label>
     <select name="duration" id="duration" class="form-control" required>
-      <option value="full-day" <?php echo $req['duration'] == 'full-day'? 'selected':'';?> >Full Day</option>
+      <option id="option_full_day" value="full-day" <?php echo $req['duration'] == 'full-day'? 'selected':'';?> >Full Day</option>
       <option value="half-day_morning" <?php echo $req['duration'] == 'half-day_morning'? 'selected':'';?> >Half Day Morning</option>
       <option value="half-day_afternoon" <?php echo $req['duration'] == 'half-day_afternoon'? 'selected':'';?> >Half Day Afternoon</option>    
     </select>

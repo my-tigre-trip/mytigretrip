@@ -45,6 +45,11 @@ $(document).ready(function(){
       }
     });
   }
+
+  $('select[name="specialActivityPeople"]').change(function(e) {
+    summaryRequest();
+  });
+
   checkboxActionUpdate();  
 });
 

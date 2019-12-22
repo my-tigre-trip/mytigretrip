@@ -369,3 +369,18 @@ function calculatorRequest(nextStep = false) {
     // improve this
   }
 }
+
+// behaviour of form
+jQuery('#mtt-trip-search-home select[name="type"]').on('change', function(e) {
+	var option = '<option id="single_adult" name="adults" value="1">1</option>';
+	var fullDay = '<option id="option_full_day" value="full-day">Full Day</option>'
+	// alert(jQuery(this).val());
+	if (jQuery(this).val() === "group") {
+		jQuery('select[name="adults"] option:eq(0)').after(option);
+		jQuery("#option_full_day").remove();
+	} else {
+		jQuery("#single_adult").remove();
+		jQuery('select[name="duration"]').prepend(fullDay);
+	}
+	
+});

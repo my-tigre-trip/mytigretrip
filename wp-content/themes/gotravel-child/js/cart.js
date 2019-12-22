@@ -153,6 +153,8 @@ function summaryRequest() {
   queryData.payOnIsland = formData.payOnIsland;
   queryData.guide = formData.guide;
   queryData.car = formData.car;
+  queryData.optional = formData.optional;
+  queryData.specialActivityPeople = formData.specialActivityPeople;
   console.log(queryData);
   standardRequest(
     "summary",
