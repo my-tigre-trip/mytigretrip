@@ -23,35 +23,113 @@ abstract class TripFormatter {
 
   protected $priceDetail;
   
-  #zoho
-  protected $dealName;
-  protected $emailStatus;
-  protected $stage;
+  #reorganization
+  #confirmar salida
+  protected $confirmedTrip;
 
-  #reservation & contact  
-  protected $ticketNumber;
-  protected $firstName;
-  protected $lastName;
-  protected $phone;
-  protected $alternativeContact;
-
-  #pricing
-  protected $requiredDepositUsd;
-  protected $payCurrency;
-
-  #date
-  protected $dateCalendar;
-  protected $alternativeDate;
-
-  #trip
-  protected $schedule;
-  protected $tripDuration;
+  # seguimiento
+  protected $dealTag;
   protected $tripType;
   protected $salesChannel;
+  protected $tripDuration;
+  protected $schedule;
+  protected $ticketNumber;
+  protected $language;
+
+  # calendario y tipo de salida
+  #trip
+  protected $tripType;
+  protected $salesChannel;
+  protected $tripDuration;
+  protected $schedule;
+  protected $googleCalDate;
+  protected $googleCalDateCopy;
+  protected $alternativeDates;
+
+  #agency
+  protected $agency;
+  protected $agencyCopy;
+  protected $preconfirmedTrip;
+  protected $operator;
+  protected $newOperator;
+  protected $paxFullName;
+  protected $paxMobilePhone;
+  protected $guideName;
+  protected $newGuide;
+  protected $guideNameCopy;
+  protected $guideMobilePhone;
+  protected $invoiceAfip;
+  protected $invoiceUser;
+  protected $invoiceData;
+
+  # pedidos
+  protected $notesAndComments;
+  protected $showNotesAndComments;
+
+  #info pax
+  protected $firstName;
+  protected $lastName;
+  // protected $Contact_Name;
+  protected $emailPax;
+  protected $phone;
+  protected $altContact;
+
+  #Data paradas
+  protected $adults;
+  protected $children;
+  protected $menu;
+  protected $mood1;
+  protected $mood2;
+  protected $additionals;
+  protected $mood2Copy;
+
+  # gastos en isla
+  protected $payOnIsland;
+  protected $guideLunch;
+
+  # Auto y punto de encuentro
+  protected $isFullDay;
+  protected $car;
+  protected $carLeg;
+  protected $addCar;
+  protected $pickupTime;
+  protected $pickupAddress;
+  protected $departureTime;
+  protected $tigreAddress;
 
 
-  #price logic should be moved internaly
-  
+  # precio
+  protected $finalPrice;
+  protected $feeMoney;
+  protected $extraPrice;
+  protected $carPrice;
+  protected $islandExpenses;
+  protected $guideExpenses;
+
+  #gastos estimados
+  protected $islandExpensesCopy;
+  protected $guideExpensesCopy;
+
+  # detalle precios y descuento
+  protected $boatPrice;
+  protected $adultPrice;
+  protected $childrenPrice;
+  protected $priceBeforeDiscount;
+  protected $groupDiscount;
+
+  # gastos de la salida
+  protected $oil;
+
+  # zoho
+  protected $start;
+  protected $end;
+  protected $Amount;
+
+  # mail automaticos
+  protected $Deal_Name;
+  protected $email;
+  protected $Stage
+ 
 
   /**
    * @param Array $req $_POST request from checkout form
@@ -81,10 +159,6 @@ abstract class TripFormatter {
     $this->applyPriceTransformations();
   }
 
-  /**
-   * add a property name for zoho
-   */
-  abstract protected function setZohoApiNames();
   /**
    * Assign the post value. no transformations applied
    */
@@ -185,5 +259,14 @@ abstract class TripFormatter {
       $address = SARTHOU;
     }
     return $address;
+  }
+
+    /**
+   * add a property name for zoho
+   */
+  public function setZohoApiNames() {
+
+
+    
   }
 }
